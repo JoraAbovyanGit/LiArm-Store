@@ -1,0 +1,45 @@
+{
+  "apps": [
+    {
+      "id": "1",
+      "app_name": "Yandex Navigator",
+      "app_description": "Navigation and maps app with voice guidance",
+      "app_version": "1.0.0",
+      "app_icon": "https://via.placeholder.com/64x64/4CAF50/white?text=YN",
+      "package_name": "ru.yandex.yandexnavi",
+      "download_url": "https://github.com/JoraAbovyanGit/LiArm-Store/releases/download/v1.0/ru.yandex.yandexnavi_26.1.1-738590860_2arch_7dpi_efc36b2b1f2e4d5c73c7b13b0e97e06d_apkmirror.com.apkm",
+      "category": "Navigation",
+      "size": "175MB",
+      "rating": 4.5,
+      "downloads": "1M+"
+    },
+    {
+      "id": "2",
+      "app_name": "Yandex Maps",
+      "app_description": "Maps and location services",
+      "app_version": "2.1.0",
+      "app_icon": "https://via.placeholder.com/64x64/2196F3/white?text=YM",
+      "package_name": "ru.yandex.yandexmaps",
+      "download_url": "https://github.com/JoraAbovyanGit/LiArm-Store/releases/download/v1.0/yandex-maps.apk",
+      "category": "Maps",
+      "size": "45MB",
+      "rating": 4.3,
+      "downloads": "5M+"
+    },
+    {
+      "id": "3",
+      "app_name": "Telegram",
+      "app_description": "Fast and secure messaging app",
+      "app_version": "10.0.0",
+      "app_icon": "https://via.placeholder.com/64x64/0088cc/white?text=TG",
+      "package_name": "org.telegram.messenger",
+      "download_url": "https://github.com/JoraAbovyanGit/LiArm-Store/releases/download/v1.0/org.telegram.messenger_12.1.1-62112_minAPI23(arm64-v8a,armeabi-v7a,x86,x86_64)(nodpi)_apkmirror.com.apk",
+      "category": "Communication",
+      "size": "145MB",
+      "rating": 4.7,
+      "downloads": "10M+"
+    }
+  ],
+  "total": 3,
+  "last_updated": "2024-01-15T10:30:00Z"
+}

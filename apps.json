@@ -6,14 +6,27 @@
       "app_description": "Telegramm messengrt",
       "app_version": "1.0.0",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Ftelegram.png?alt=media&token=3ba2809c-7a0c-4853-8b36-c128877705bb",
-      "package_name": "ru.yandex.yandexnavi",
+      "package_name": "org.telegram.messenger",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FTelegram.apk?alt=media&token=ebbf7148-f106-42e7-88cc-b91d40763e36",
       "category": "Messenger",
       "size": "175MB",
       "rating": 4.5,
       "downloads": "1M+"
+    },
+     {
+      "id": "2",
+      "app_name": "EcoCars",
+      "app_description": "Charging stations along the map",
+      "app_version": "1.0.0",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Feco.png?alt=media&token=97f084eb-98c7-4110-bd27-71a6680ffd66",
+      "package_name": "unknown",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FEcoCars_2.2.56_APKPure.xapk?alt=media&token=e43426f6-94b8-44d3-a40e-98df1183fceb",
+      "category": "Charging",
+      "size": "175MB",
+      "rating": 4.5,
+      "downloads": "1M+"
     }
   ],
-  "total": 1,
-  "last_updated": "2024-01-15T11:00:00Z"
+  "total": 2,
+  "last_updated": "2025-10-25T12:59:00Z"
 }

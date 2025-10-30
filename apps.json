@@ -1,5 +1,5 @@
 {
-  "apps": [
+  "apps":
     {
       "id": "1",
       "app_name": "Yandex Navigator",
@@ -16,3 +16,4 @@
   "total": 1,
   "last_updated": "2024-01-15T11:00:00Z"
 }
+

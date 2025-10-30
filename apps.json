@@ -1,5 +1,5 @@
 {
-  "apps":
+  "apps": [
     {
       "id": "1",
       "app_name": "Yandex Navigator",
@@ -12,8 +12,8 @@
       "size": "175MB",
       "rating": 4.5,
       "downloads": "1M+"
-    },
+    }
+  ],
   "total": 1,
   "last_updated": "2024-01-15T11:00:00Z"
 }
-

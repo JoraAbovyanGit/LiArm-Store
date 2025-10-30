@@ -2,13 +2,13 @@
   "apps": [
     {
       "id": "1",
-      "app_name": "Yandex Navigator",
-      "app_description": "Navigation and maps app with voice guidance",
+      "app_name": "Telegram",
+      "app_description": "Telegramm messengrt",
       "app_version": "1.0.0",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fnavig.png?alt=media&token=9a80c622-da9c-4173-ac4c-4a0408f8c24c",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Ftelegram.png?alt=media&token=3ba2809c-7a0c-4853-8b36-c128877705bb",
       "package_name": "ru.yandex.yandexnavi",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FTelegram.apk?alt=media&token=ebbf7148-f106-42e7-88cc-b91d40763e36",
-      "category": "Navigation",
+      "category": "Messenger",
       "size": "175MB",
       "rating": 4.5,
       "downloads": "1M+"

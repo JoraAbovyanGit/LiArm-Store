@@ -25,8 +25,20 @@
       "size": "175MB",
       "rating": 4.5,
       "downloads": "1M+"
+    },{
+      "id": "3",
+      "app_name": "Spotify",
+      "app_description": "Favorite music evertwhere",
+      "app_version": "1.0.0",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FSpotify.png?alt=media&token=07ea8719-97ca-4a92-9c27-a430abec0d69",
+      "package_name": "com.spotify.music",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fspotify-9-0-92-1259.apk?alt=media&token=4659684d-1d7f-42a1-baf7-e0b87013ae17",
+      "category": "Music",
+      "size": "175MB",
+      "rating": 4.5,
+      "downloads": "1M+"
     }
   ],
-  "total": 2,
-  "last_updated": "2025-10-25T12:59:00Z"
+  "total": 3,
+  "last_updated": "2025-10-31T12:59:00Z"
 }

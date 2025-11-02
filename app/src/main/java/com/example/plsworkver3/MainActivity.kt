@@ -18,6 +18,7 @@ import com.example.plsworkver3.data.AppInfo
 import com.example.plsworkver3.data.AppListResponse
 import com.example.plsworkver3.network.NetworkClient
 import com.example.plsworkver3.ui.DynamicLayoutManager
+import com.example.plsworkver3.ui.AppGridAdapter
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appContainer: GridView
     private lateinit var dynamicLayoutManager: DynamicLayoutManager
     private var appList: List<AppInfo> = emptyList()
-    private var appViews: MutableList<View> = mutableListOf()
+    private var appAdapter: AppGridAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -363,33 +364,12 @@ class MainActivity : AppCompatActivity() {
     
     private fun displayDynamicApps() {
         try {
-            appContainer.removeAllViews()
-            appViews.clear()
-            
-            appList.forEach { appInfo ->
-                println("🧩 Rendering card for: ${appInfo.appName} (${appInfo.packageName})")
-                try {
-                    val cardView = dynamicLayoutManager.createAppCard(
-                        appContainer,
-                        appInfo
-                    ) { app ->
-                        handleAppButtonClick(app.packageName, app.appName)
-                    }
-                    
-                    // Update button state safely
-                    val button = cardView.findViewById<Button>(R.id.actionButton)
-                    if (button != null) {
-                        val isInstalled = AppManager.isAppInstalled(this@MainActivity, appInfo.packageName)
-                        dynamicLayoutManager.updateButtonState(button, isInstalled)
-                    }
-                    
-                    // Store reference for later updates
-                    appViews.add(cardView)
-                    appContainer.addView(cardView)
-                } catch (e: Exception) {
-                    println("❌ Error creating card for ${appInfo.appName}: ${e.message}")
-                }
+            println("🧩 Displaying ${appList.size} apps in grid")
+            appAdapter = AppGridAdapter(this, appList) { app ->
+                handleAppButtonClick(app.packageName, app.appName)
             }
+            appContainer.adapter = appAdapter
+            println("✅ Grid adapter set")
         } catch (e: Exception) {
             println("❌ Error in displayDynamicApps: ${e.message}")
             Toast.makeText(this, "Error displaying apps: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -397,12 +377,9 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun refreshDynamicApps() {
-        if (appList.isNotEmpty() && appViews.isNotEmpty()) {
-            // Update button states without recreating views
-            dynamicLayoutManager.updateAllButtonStates(appViews, appList)
-        } else if (appList.isNotEmpty()) {
-
-            displayDynamicApps()
+        if (appList.isNotEmpty()) {
+            // Notify adapter that data changed so it refreshes button states
+            appAdapter?.notifyDataSetChanged()
         }
     }
 

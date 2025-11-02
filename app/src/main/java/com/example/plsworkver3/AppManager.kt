@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -137,6 +138,7 @@ object AppManager {
             setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
             // Show completion notification from DownloadManager
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            @Suppress("DEPRECATION")
             setVisibleInDownloadsUi(true)
             // Set MIME type based on extension
             val isXapk = apkUrl.lowercase().endsWith(".xapk")
@@ -463,39 +465,28 @@ object AppManager {
     }
 
     fun uninstallApp(context: Context, packageName: String) {
-        // Prefer modern uninstall action
+        println("🗑️ Attempting to uninstall: $packageName")
         val pkgUri = "package:$packageName".toUri()
-        try {
-            val uninstall = Intent(Intent.ACTION_UNINSTALL_PACKAGE).apply {
-                data = pkgUri
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            context.startActivity(uninstall)
-            Toast.makeText(context, "Opening uninstall screen...", Toast.LENGTH_SHORT).show()
+        
+        // Check if package is actually installed first
+        if (!isAppInstalled(context, packageName)) {
+            Toast.makeText(context, "App not installed: $packageName", Toast.LENGTH_SHORT).show()
             return
-        } catch (_: Exception) { }
-
-        // Fallback to ACTION_DELETE
-        try {
-            val delete = Intent(Intent.ACTION_DELETE).apply {
-                data = pkgUri
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            context.startActivity(delete)
-            Toast.makeText(context, "Opening uninstall screen...", Toast.LENGTH_SHORT).show()
-            return
-        } catch (_: Exception) { }
-
-        // Final fallback: open app details settings
+        }
+        
+        // Directly open app details settings - most reliable method
+        // ACTION_DELETE/ACTION_UNINSTALL_PACKAGE can silently fail on some devices
         try {
             val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                 data = pkgUri
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
+            println("🗑️ Opening app details settings for $packageName")
             context.startActivity(settingsIntent)
-            Toast.makeText(context, "Open app details to uninstall", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Tap 'Uninstall' in the app details screen", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
-            Toast.makeText(context, "Unable to open uninstall screen", Toast.LENGTH_SHORT).show()
+            println("❌ Failed to open app details: ${e.message}")
+            Toast.makeText(context, "Unable to open uninstall screen: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 }

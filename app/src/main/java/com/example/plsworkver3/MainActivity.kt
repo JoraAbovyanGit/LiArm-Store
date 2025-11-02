@@ -343,13 +343,17 @@ class MainActivity : AppCompatActivity() {
                     appName = "Yandex Navigator",
                     appIcon = "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fnavig.png?alt=media",
                     packageName = "ru.yandex.yandexnavi",
-                    downloadUrl = "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fru.yandex.yandexnavi.apk?alt=media"
+                    downloadUrl = "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fru.yandex.yandexnavi.apk?alt=media",
+                    appDescription = "Navigation and maps app",
+                    appVersion = "1.0.0"
                 ),
                 AppInfo(
                     appName = "Telegram",
                     appIcon = "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Ftelegram.png?alt=media",
                     packageName = "org.telegram.messenger",
-                    downloadUrl = "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Ftelegram.apk?alt=media"
+                    downloadUrl = "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Ftelegram.apk?alt=media",
+                    appDescription = "Fast and secure messaging",
+                    appVersion = "12.1.1"
                 )
             )
             
@@ -362,6 +366,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
+    private fun getNumColumns(): Int {
+        // Always use 2 columns regardless of orientation
+        return 2
+    }
+    
     private fun displayDynamicApps() {
         try {
             println("🧩 Displaying ${appList.size} apps in grid")
@@ -369,6 +378,44 @@ class MainActivity : AppCompatActivity() {
                 handleAppButtonClick(app.packageName, app.appName)
             }
             appContainer.adapter = appAdapter
+            
+            // Update number of columns based on orientation
+            val numColumns = getNumColumns()
+            appContainer.numColumns = numColumns
+            
+            // Fix GridView height issue inside ScrollView
+            // GridView with wrap_content inside ScrollView only shows first row
+            // We need to calculate and set explicit height
+            appContainer.post {
+                try {
+                    val numRows = (appList.size + numColumns - 1) / numColumns // Ceiling division
+                    
+                    // Estimate item height based on card layout:
+                    // - Icon: 56dp
+                    // - Padding: 12dp top + 12dp bottom = 24dp
+                    // - Version text: ~20dp
+                    // - Total: ~100-110dp per item
+                    val itemHeightDp = 110
+                    val itemHeightPx = (itemHeightDp * resources.displayMetrics.density).toInt()
+                    
+                    // Vertical spacing (8dp from layout)
+                    val verticalSpacingPx = (8 * resources.displayMetrics.density).toInt()
+                    
+                    // Calculate total height
+                    val calculatedHeight = (numRows * itemHeightPx) + 
+                                          ((numRows - 1) * verticalSpacingPx) + 
+                                          (appContainer.paddingTop + appContainer.paddingBottom)
+                    
+                    val layoutParams = appContainer.layoutParams
+                    layoutParams.height = calculatedHeight
+                    appContainer.layoutParams = layoutParams
+                    
+                    println("✅ Grid height set: ${appList.size} items, $numColumns columns, $numRows rows, height=${calculatedHeight}px")
+                } catch (e: Exception) {
+                    println("⚠️ Error calculating GridView height: ${e.message}")
+                    e.printStackTrace()
+                }
+            }
             println("✅ Grid adapter set")
         } catch (e: Exception) {
             println("❌ Error in displayDynamicApps: ${e.message}")
@@ -380,6 +427,36 @@ class MainActivity : AppCompatActivity() {
         if (appList.isNotEmpty()) {
             // Notify adapter that data changed so it refreshes button states
             appAdapter?.notifyDataSetChanged()
+            
+            // Update number of columns based on orientation
+            val numColumns = getNumColumns()
+            appContainer.numColumns = numColumns
+            
+            // Recalculate GridView height after data change
+            appContainer.post {
+                try {
+                    val numRows = (appList.size + numColumns - 1) / numColumns
+                    val itemHeightPx = (110 * resources.displayMetrics.density).toInt()
+                    val verticalSpacingPx = (8 * resources.displayMetrics.density).toInt()
+                    val calculatedHeight = (numRows * itemHeightPx) + 
+                                          ((numRows - 1) * verticalSpacingPx) + 
+                                          (appContainer.paddingTop + appContainer.paddingBottom)
+                    
+                    val layoutParams = appContainer.layoutParams
+                    layoutParams.height = calculatedHeight
+                    appContainer.layoutParams = layoutParams
+                } catch (e: Exception) {
+                    println("⚠️ Error recalculating GridView height: ${e.message}")
+                }
+            }
+        }
+    }
+    
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // Refresh the grid layout when orientation changes
+        if (appList.isNotEmpty()) {
+            displayDynamicApps()
         }
     }
 

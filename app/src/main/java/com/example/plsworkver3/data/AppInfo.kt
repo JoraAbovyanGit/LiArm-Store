@@ -13,7 +13,13 @@ data class AppInfo(
     val packageName: String,
     
     @SerializedName("download_url")
-    val downloadUrl: String
+    val downloadUrl: String,
+    
+    @SerializedName("app_description")
+    val appDescription: String? = null,
+    
+    @SerializedName("app_version")
+    val appVersion: String? = null
 )
 
 data class AppListResponse(

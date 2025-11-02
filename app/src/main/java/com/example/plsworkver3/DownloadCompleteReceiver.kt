@@ -32,12 +32,7 @@ class DownloadCompleteReceiver : BroadcastReceiver() {
                     val pkg = prefs.getString("requestedPackage", "") ?: ""
                     val file = resolveDownloadedFile(context, localUri, fallbackPath)
                     if (file != null) {
-                        val isXapk = file.name.lowercase().endsWith(".xapk")
-                        if (isXapk) {
-                            AppManager.installXapk(context, file, pkg)
-                        } else {
-                            AppManager.installApk(context, file, pkg)
-                        }
+                        AppManager.installApk(context, file, pkg)
                     } else {
                         Toast.makeText(context, "Downloaded file missing", Toast.LENGTH_SHORT).show()
                     }

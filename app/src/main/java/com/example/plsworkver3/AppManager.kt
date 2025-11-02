@@ -8,7 +8,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -18,7 +17,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import java.io.File
 import androidx.core.net.toUri
-import com.example.plsworkver3.installation.XapkInstaller
 import java.io.IOException
 
 object AppManager {
@@ -140,9 +138,8 @@ object AppManager {
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             @Suppress("DEPRECATION")
             setVisibleInDownloadsUi(true)
-            // Set MIME type based on extension
-            val isXapk = apkUrl.lowercase().endsWith(".xapk")
-            setMimeType(if (isXapk) "application/octet-stream" else "application/vnd.android.package-archive")
+            // Set MIME type for APK files
+            setMimeType("application/vnd.android.package-archive")
         }
         
         // Start download
@@ -187,44 +184,36 @@ object AppManager {
                             if (status == DownloadManager.STATUS_SUCCESSFUL) {
                                 // Resolve to a real file (handles file:// and content://)
                                 val downloadedFile = resolveDownloadedFile(ctx, localUri, lastDownloadedApkFile ?: apkFile)
-                                val isXapk = downloadedFile.name.lowercase().endsWith(".xapk")
-                                if (isXapk) {
-                                    println("📦 Detected XAPK, starting extraction and split install")
-                                    installXapk(ctx, downloadedFile, packageName)
-                                } else {
-                                    // Try to detect real package name from the downloaded APK
-                                    val detectedPkg = extractPackageNameFromApk(ctx, downloadedFile)
-                                    if (!detectedPkg.isNullOrBlank() && detectedPkg != packageName) {
-                                        println("📦 Detected package from APK: $detectedPkg (requested: $packageName)")
-                                        Toast.makeText(ctx, "Detected package: $detectedPkg", Toast.LENGTH_SHORT).show()
-                                        // If our data map used a placeholder or wrong package, remap it
-                                        getAppInfo(packageName)?.let { info ->
-                                            appData.remove(packageName)
-                                            appData[detectedPkg] = info.copy(packageName = detectedPkg)
-                                        }
-                                        // Notify UI layer to update any app list entries using old package
-                                        try {
-                                            val updateIntent = Intent("com.example.plsworkver3.PACKAGE_DETECTED").apply {
-                                                putExtra("oldPackage", packageName)
-                                                putExtra("newPackage", detectedPkg)
-                                            }
-                                            ctx.sendBroadcast(updateIntent)
-                                        } catch (e: Exception) { }
+                                // Try to detect real package name from the downloaded APK
+                                val detectedPkg = extractPackageNameFromApk(ctx, downloadedFile)
+                                if (!detectedPkg.isNullOrBlank() && detectedPkg != packageName) {
+                                    println("📦 Detected package from APK: $detectedPkg (requested: $packageName)")
+                                    Toast.makeText(ctx, "Detected package: $detectedPkg", Toast.LENGTH_SHORT).show()
+                                    // If our data map used a placeholder or wrong package, remap it
+                                    getAppInfo(packageName)?.let { info ->
+                                        appData.remove(packageName)
+                                        appData[detectedPkg] = info.copy(packageName = detectedPkg)
                                     }
-                                    installApk(ctx, downloadedFile, packageName)
+                                    // Notify UI layer to update any app list entries using old package
+                                    try {
+                                        val updateIntent = Intent("com.example.plsworkver3.PACKAGE_DETECTED").apply {
+                                            putExtra("oldPackage", packageName)
+                                            putExtra("newPackage", detectedPkg)
+                                        }
+                                        ctx.sendBroadcast(updateIntent)
+                                    } catch (e: Exception) { }
                                 }
+                                installApk(ctx, downloadedFile, packageName)
                             } else {
                                 Toast.makeText(ctx, "Download failed", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            val isXapk = apkFile.name.lowercase().endsWith(".xapk")
-                            if (isXapk) installXapk(ctx, apkFile, packageName) else installApk(ctx, apkFile, packageName)
+                            installApk(ctx, apkFile, packageName)
                         }
                         cursor?.close()
                     } catch (e: Exception) {
                         println("❌ Error handling download complete: ${e.message}")
-                        val isXapk = apkFile.name.lowercase().endsWith(".xapk")
-                        if (isXapk) installXapk(ctx, apkFile, packageName) else installApk(ctx, apkFile, packageName)
+                        installApk(ctx, apkFile, packageName)
                     }
                 }
             }
@@ -325,126 +314,6 @@ object AppManager {
         }
     }
 
-    fun installXapk(context: Context, xapkFile: File, requestedPackage: String) {
-        println("📦 Starting XAPK install from: ${xapkFile.absolutePath}")
-        println("📦 File exists: ${xapkFile.exists()}, size: ${xapkFile.length()}")
-        try {
-            val extractDir = XapkInstaller.extractXapk(context, xapkFile) ?: run {
-                println("❌ Failed to extract XAPK")
-                Toast.makeText(context, "Failed to extract XAPK", Toast.LENGTH_SHORT).show()
-                return
-            }
-            println("✅ XAPK extracted to: ${extractDir.absolutePath}")
-            val parts = XapkInstaller.findApkParts(extractDir)
-            println("📦 Found ${parts.size} APK parts: ${parts.map { it.name }}")
-            if (parts.isEmpty()) {
-                Toast.makeText(context, "No APK files found in XAPK", Toast.LENGTH_SHORT).show()
-                return
-            }
-
-            // Detect package from base.apk if possible
-            val baseApk = parts.firstOrNull { it.name.contains("base", ignoreCase = true) } ?: parts.first()
-            val detectedPkg = extractPackageNameFromApk(context, baseApk)
-            if (!detectedPkg.isNullOrBlank() && detectedPkg != requestedPackage) {
-                println("📦 XAPK package: $detectedPkg (requested: $requestedPackage)")
-                getAppInfo(requestedPackage)?.let { info ->
-                    appData.remove(requestedPackage)
-                    appData[detectedPkg] = info.copy(packageName = detectedPkg)
-                }
-                try {
-                    val updateIntent = Intent("com.example.plsworkver3.PACKAGE_DETECTED").apply {
-                        putExtra("oldPackage", requestedPackage)
-                        putExtra("newPackage", detectedPkg)
-                    }
-                    context.sendBroadcast(updateIntent)
-                } catch (_: Exception) { }
-            }
-
-            // Filter splits to device ABI and display density to avoid parse errors
-            val supportedAbis = android.os.Build.SUPPORTED_ABIS.map { it.lowercase() }
-            val displayMetrics = context.resources.displayMetrics
-            val densityDpi = displayMetrics.densityDpi
-            fun matchesAbi(name: String): Boolean {
-                val lower = name.lowercase()
-                val hasAbiTag = listOf("armeabi-v7a", "arm64_v8a", "arm64-v8a", "x86", "x86_64").any { lower.contains(it) }
-                if (!hasAbiTag) return true // language or base or config not tied to ABI
-                return supportedAbis.any { abi -> lower.contains(abi.replace('-', '_')) || lower.contains(abi) }
-            }
-            fun matchesDensity(name: String): Boolean {
-                val lower = name.lowercase()
-                // If no density tag present, accept
-                val hasDensityTag = listOf("ldpi","mdpi","hdpi","xhdpi","xxhdpi","xxxhdpi").any { lower.contains(it) }
-                if (!hasDensityTag) return true
-                val wanted = when (densityDpi) {
-                    in 0..160 -> "mdpi"
-                    in 161..240 -> "hdpi"
-                    in 241..320 -> "xhdpi"
-                    in 321..480 -> "xxhdpi"
-                    else -> "xxxhdpi"
-                }
-                return lower.contains(wanted)
-            }
-
-            val filteredParts = parts.filter { file ->
-                val okAbi = matchesAbi(file.name)
-                val okDpi = matchesDensity(file.name)
-                if (!okAbi) println("⛔ Skipping split due to ABI mismatch: ${file.name} (device=${supportedAbis})")
-                if (!okDpi) println("⛔ Skipping split due to density mismatch: ${file.name} (device=${densityDpi})")
-                okAbi && okDpi
-            }
-            println("📦 After filtering: ${filteredParts.size} APKs will be installed: ${filteredParts.map { it.name }}")
-            if (filteredParts.isEmpty()) {
-                Toast.makeText(context, "No compatible APK splits for this device", Toast.LENGTH_LONG).show()
-                return
-            }
-
-            // Install multiple APKs via PackageInstaller session (user confirmation required)
-            println("📦 Creating PackageInstaller session...")
-            val pm = context.packageManager
-            val installer = pm.packageInstaller
-            val params = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL)
-            // If we detected a package, hint it to installer for better parsing
-            detectedPkg?.let { 
-                params.setAppPackageName(it)
-                println("📦 Set package hint: $it")
-            }
-            val sessionId = installer.createSession(params)
-            println("📦 Session ID: $sessionId")
-            val session = installer.openSession(sessionId)
-            try {
-                filteredParts.forEachIndexed { index, file ->
-                    val name = "split_${index}_${file.name}"
-                    println("📦 Writing split $index: $name")
-                    file.inputStream().use { input ->
-                        session.openWrite(name, 0, file.length()).use { out ->
-                            input.copyTo(out)
-                            session.fsync(out)
-                        }
-                    }
-                    println("✅ Wrote split $index")
-                }
-                println("📦 All splits written, committing session...")
-                val intent = Intent("com.example.plsworkver3.INSTALL_RESULT")
-                val pi = PendingIntent.getBroadcast(
-                    context,
-                    sessionId,
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT or (if (android.os.Build.VERSION.SDK_INT >= 23) PendingIntent.FLAG_IMMUTABLE else 0)
-                )
-                session.commit(pi.intentSender)
-                println("✅ Session committed, installer should appear")
-                Toast.makeText(context, "Opening installer...", Toast.LENGTH_LONG).show()
-            } finally {
-                session.close()
-            }
-        } catch (e: Exception) {
-            println("❌ XAPK install exception: ${e.message}")
-            e.printStackTrace()
-            Toast.makeText(context, "XAPK install failed: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-
     fun openPlayStore(context: Context, packageName: String) {
         try {
             val intent = Intent(Intent.ACTION_VIEW).apply {
@@ -474,8 +343,72 @@ object AppManager {
             return
         }
         
-        // Directly open app details settings - most reliable method
-        // ACTION_DELETE/ACTION_UNINSTALL_PACKAGE can silently fail on some devices
+        // Try ACTION_UNINSTALL_PACKAGE first (Android 8+) - shows the nice dialog
+        // Note: Some Android versions/devices block programmatic uninstall dialogs
+        // for security. If dialog doesn't appear, it's likely a device restriction.
+        try {
+            @Suppress("DEPRECATION")
+            val uninstall = Intent(Intent.ACTION_UNINSTALL_PACKAGE).apply {
+                data = pkgUri
+                // Don't add FLAG_ACTIVITY_NEW_TASK for Activity context - may block dialog
+            }
+            println("🗑️ Trying ACTION_UNINSTALL_PACKAGE for $packageName")
+            if (uninstall.resolveActivity(context.packageManager) != null) {
+                println("✅ ACTION_UNINSTALL_PACKAGE is resolvable")
+                try {
+                    if (context is android.app.Activity) {
+                        // Direct call from Activity - no flags needed
+                        (context as android.app.Activity).startActivity(uninstall)
+                    } else {
+                        uninstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        context.startActivity(uninstall)
+                    }
+                    println("✅ ACTION_UNINSTALL_PACKAGE started")
+                    return
+                } catch (e: SecurityException) {
+                    println("❌ SecurityException: ${e.message} - Device may block uninstall dialog")
+                } catch (e: Exception) {
+                    println("❌ Exception: ${e.message}")
+                    e.printStackTrace()
+                }
+            } else {
+                println("❌ ACTION_UNINSTALL_PACKAGE not resolvable")
+            }
+        } catch (e: Exception) {
+            println("❌ ACTION_UNINSTALL_PACKAGE failed: ${e.message}")
+            e.printStackTrace()
+        }
+        
+        // Fallback to ACTION_DELETE
+        try {
+            val delete = Intent(Intent.ACTION_DELETE).apply {
+                data = pkgUri
+            }
+            println("🗑️ Trying ACTION_DELETE for $packageName")
+            if (delete.resolveActivity(context.packageManager) != null) {
+                println("✅ ACTION_DELETE is resolvable")
+                try {
+                    if (context is android.app.Activity) {
+                        (context as android.app.Activity).startActivity(delete)
+                    } else {
+                        delete.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        context.startActivity(delete)
+                    }
+                    println("✅ ACTION_DELETE started")
+                    return
+                } catch (e: SecurityException) {
+                    println("❌ SecurityException: ${e.message} - Device may block uninstall dialog")
+                } catch (e: Exception) {
+                    println("❌ Exception: ${e.message}")
+                }
+            } else {
+                println("❌ ACTION_DELETE not resolvable")
+            }
+        } catch (e: Exception) {
+            println("❌ ACTION_DELETE failed: ${e.message}")
+        }
+        
+        // Final fallback: open app details settings
         try {
             val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                 data = pkgUri
@@ -483,7 +416,7 @@ object AppManager {
             }
             println("🗑️ Opening app details settings for $packageName")
             context.startActivity(settingsIntent)
-            Toast.makeText(context, "Tap 'Uninstall' in the app details screen", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Tap 'Uninstall' in app details", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             println("❌ Failed to open app details: ${e.message}")
             Toast.makeText(context, "Unable to open uninstall screen: ${e.message}", Toast.LENGTH_SHORT).show()

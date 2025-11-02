@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.plsworkver3.R
 import com.example.plsworkver3.data.AppInfo
@@ -29,10 +30,14 @@ class DynamicLayoutManager(private val context: Context) {
             // Find views safely
             val appIcon = cardView.findViewById<ImageView>(R.id.appIcon)
             val appName = cardView.findViewById<TextView>(R.id.appName)
+            val appDescription = cardView.findViewById<TextView>(R.id.appDescription)
+            val appVersion = cardView.findViewById<TextView>(R.id.appVersion)
             val actionButton = cardView.findViewById<Button>(R.id.actionButton)
 
             // Set app data safely
             appName?.text = appInfo.appName ?: "Unknown App"
+            appDescription?.text = appInfo.appDescription ?: "No description available"
+            appVersion?.text = if (!appInfo.appVersion.isNullOrBlank()) "v${appInfo.appVersion}" else ""
 
             // Load app icon with Firebase Storage
             loadAppIconFromFirebase(appIcon, appInfo.appIcon, appInfo.appName)
@@ -78,9 +83,13 @@ class DynamicLayoutManager(private val context: Context) {
 
         try {
             val appName = cardView.findViewById<TextView>(R.id.appName)
+            val appDescription = cardView.findViewById<TextView>(R.id.appDescription)
+            val appVersion = cardView.findViewById<TextView>(R.id.appVersion)
             val actionButton = cardView.findViewById<Button>(R.id.actionButton)
 
             appName?.text = appInfo.appName ?: "Unknown App"
+            appDescription?.text = appInfo.appDescription ?: ""
+            appVersion?.text = if (!appInfo.appVersion.isNullOrBlank()) "v${appInfo.appVersion}" else ""
             actionButton?.text = "DOWNLOAD"
             actionButton?.setOnClickListener { onButtonClick(appInfo) }
         } catch (e: Exception) {
@@ -94,10 +103,10 @@ class DynamicLayoutManager(private val context: Context) {
         try {
             if (isInstalled) {
                 button.text = "REMOVE"
-                button.setBackgroundColor(context.getColor(R.color.remove))
+                button.background = ContextCompat.getDrawable(context, R.drawable.button_rounded_remove)
             } else {
                 button.text = context.getString(R.string.download_button)
-                button.setBackgroundColor(context.getColor(R.color.download))
+                button.background = ContextCompat.getDrawable(context, R.drawable.button_rounded_download)
             }
         } catch (e: Exception) {
             println("❌ Error updating button state: ${e.message}")

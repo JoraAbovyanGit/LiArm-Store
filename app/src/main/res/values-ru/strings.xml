@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">LiApp Store</string>
+    <string name="subtitle">Магазин приложений</string>
+    <string name="version">Версия: anyapp-3.5.0</string>
+
+    <!-- App names -->
+    <string name="app1_name">Yandex Навигатор</string>
+    <string name="app2_name">Yandex Maps</string>
+
+    <string name="download">Скачать</string>
+    <string name="Remove">Удалить</string>
+
+    <string name="btn_eng">Англ</string>
+    <string name="btn_rus">Рус</string>
+    <string name="btn_arm">Арм</string>
+
+    <!-- App action buttons -->
+    <string name="download_button">ЗАГРУЗИТЬ</string>
+    <string name="remove_button">УДАЛИТЬ</string>
+    <string name="cancel">Отмена</string>
+
+    <!-- Dialog titles -->
+    <string name="download_title">Загрузить приложение</string>
+    <string name="remove_title">Удалить приложение</string>
+    
+    <!-- Dialog messages -->
+    <string name="download_message">Скачать и установить %1$s?</string>
+    <string name="remove_message">Удалить %1$s с устройства?</string>
+</resources>

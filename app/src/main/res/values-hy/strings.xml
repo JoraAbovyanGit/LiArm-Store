@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">LiApp Խանութ</string>
+    <string name="subtitle">Հավելվածների խանութ</string>
+    <string name="version">Տարբերակ․ anyapp-3.5.0</string>
+
+    <!-- App names -->
+    <string name="app1_name">Yandex Նավիգատոր</string>
+    <string name="app2_name">Yandex Քարտեզներ</string>
+
+    <string name="download">Ներբեռնել</string>
+    <string name="Remove">Ջնջել</string>
+
+    <string name="btn_eng">Անգլ․</string>
+    <string name="btn_rus">Ռուս․</string>
+    <string name="btn_arm">Հայ․</string>
+
+    <!-- App action buttons -->
+    <string name="download_button">ՆԵՐԲԵՌՆԵԼ</string>
+    <string name="remove_button">ՋՆՋԵԼ</string>
+    <string name="cancel">Չեղարկել</string>
+
+    <!-- Dialog titles -->
+    <string name="download_title">Ներբեռնել հավելված</string>
+    <string name="remove_title">Հեռացնել հավելված</string>
+    
+    <!-- Dialog messages -->
+    <string name="download_message">Ներբեռնե՞լ և տեղադրե՞լ %1$s:</string>
+    <string name="remove_message">Հեռացնե՞լ %1$s սարքից:</string>
+</resources>

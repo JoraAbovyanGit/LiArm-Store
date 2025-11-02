@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">LiApp Store</string>
+    <string name="subtitle">App Store</string>
+    <string name="version">Version: anyapp-3.5.0</string>
+
+    <!-- App names -->
+    <string name="app1_name">Yandex Navigator</string>
+    <string name="app2_name">Yandex Maps</string>
+
+    <string name="download">Download</string>
+    <string name="Remove">Remove</string>
+
+
+    <string name="btn_eng">Eng</string>
+    <string name="btn_rus">Rus</string>
+    <string name="btn_arm">Arm</string>
+
+    <!-- App action buttons -->
+    <string name="download_button">DOWNLOAD</string>
+    <string name="remove_button">REMOVE</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Dialog titles -->
+    <string name="download_title">Download App</string>
+    <string name="remove_title">Remove App</string>
+    
+    <!-- Dialog messages -->
+    <string name="download_message">Download and install %1$s?</string>
+    <string name="remove_message">Remove %1$s from your device?</string>
+</resources>

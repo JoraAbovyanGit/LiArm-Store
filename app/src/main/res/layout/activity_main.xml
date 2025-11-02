@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="#121212">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subtitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subtitle"
+                android:textColor="#BBBBBB"
+                android:layout_marginTop="4dp" />
+
+            <LinearLayout
+                android:id="@+id/langButtons"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnEnglish"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#8b0000"
+                    android:padding="6dp"
+                    android:text="@string/btn_eng"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/btnRussian"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_rus"
+                    android:backgroundTint="#8b0000"
+                    android:textColor="#ffffff"
+                    android:layout_marginEnd="8dp"
+                    android:padding="6dp" />
+
+                <Button
+                    android:id="@+id/btnArmenian"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_arm"
+                    android:backgroundTint="#8b0000"
+                    android:textColor="#ffffff"
+                    android:padding="6dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Dynamic App List -->
+        <GridView
+            android:id="@+id/appContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:numColumns="auto_fit"
+            android:columnWidth="120dp"
+            android:stretchMode="columnWidth"
+            android:horizontalSpacing="8dp"
+            android:verticalSpacing="8dp"
+            android:gravity="center" />
+    </LinearLayout>
+</ScrollView>

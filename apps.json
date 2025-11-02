@@ -4,20 +4,33 @@
       "app_name": "Telegram",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Ftelegram.png?alt=media&token=3ba2809c-7a0c-4853-8b36-c128877705bb",
       "package_name": "org.telegram.messenger",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FTelegram.apk?alt=media&token=ebbf7148-f106-42e7-88cc-b91d40763e36"
-    },
-    {
-      "app_name": "EcoCars",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Feco.png?alt=media&token=97f084eb-98c7-4110-bd27-71a6680ffd66",
-      "package_name": "unknown",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FEcoCars_2.2.56_APKPure.xapk?alt=media&token=e43426f6-94b8-44d3-a40e-98df1183fceb6"
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FTelegram_12.1.1_APKPure.apk?alt=media&token=d7692f6c-1b24-44f5-afb0-7cbec8ba9841",
+      "app_description": "Fast and secure messaging",
+      "app_version": "12.1.1"
     },
     {
       "app_name": "Spotify",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FSpotify.png?alt=media&token=ee20b852-706c-48b9-8176-2ec5a5468ab0",
       "package_name": "com.spotify.music",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fspotify-9-0-92-1259.apk?alt=media&token=4659684d-1d7f-42a1-baf7-e0b87013ae17"
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fspotify-9-0-92-1259.apk?alt=media&token=4659684d-1d7f-42a1-baf7-e0b87013ae17",
+      "app_description": "Music streaming",
+      "app_version": "9.0.28"
+    },
+    {
+      "app_name": "Yandex Navigator",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fnavig.png?alt=media&token=9a80c622-da9c-4173-ac4c-4a0408f8c24c",
+      "package_name": "ru.yandex.yandexnavi",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FYandex%20Navigator_26.2.0_apkcombo.com.apk?alt=media&token=de84a004-17bc-472f-9f03-5067eafdaf82",
+      "app_description": "GPS navigation",
+      "app_version": "26.3.0"
+    },
+    {
+      "app_name": "Avenza Maps",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Favenza.jpg?alt=media&token=565b7b3a-14da-458b-8160-fb6c9ba1eb01",
+      "package_name": "com.Avenza",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fcom-avenza-161-62688316-da27e09f811e1d5ff1f71b53de053ac0.apk?alt=media&token=9f2ed20a-70cb-4a2a-9cd3-a2d2d137d9d6",
+      "app_description": "Offline maps",
+      "app_version": "5.4.3"
     }
   ]
 }
- 

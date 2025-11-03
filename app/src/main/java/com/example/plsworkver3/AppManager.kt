@@ -280,12 +280,22 @@ object AppManager {
         // Check if we have permission to install packages
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (!context.packageManager.canRequestPackageInstalls()) {
-                // Request permission to install packages
-                val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
-                    data = "package:${context.packageName}".toUri()
+                // Check if we've already asked for permission
+                val prefs = context.getSharedPreferences("perm_prefs", Context.MODE_PRIVATE)
+                val alreadyAsked = prefs.getBoolean("asked_unknown_sources", false)
+                
+                if (alreadyAsked) {
+                    // We already asked - just inform the user they need to enable it
+                    Toast.makeText(context, "Please enable 'Install unknown apps' permission in Settings to continue", Toast.LENGTH_LONG).show()
+                } else {
+                    // First time asking - redirect to settings
+                    val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
+                        data = "package:${context.packageName}".toUri()
+                    }
+                    context.startActivity(intent)
+                    Toast.makeText(context, "Please enable 'Install unknown apps' permission and try again", Toast.LENGTH_LONG).show()
+                    prefs.edit().putBoolean("asked_unknown_sources", true).apply()
                 }
-                context.startActivity(intent)
-                Toast.makeText(context, "Please enable 'Install unknown apps' permission and try again", Toast.LENGTH_LONG).show()
                 return
             }
         }

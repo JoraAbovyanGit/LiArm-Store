@@ -99,6 +99,60 @@ class DynamicLayoutManager(private val context: Context) {
         return cardView
     }
 
+    fun updateAppCardView(
+        cardView: View,
+        appInfo: AppInfo,
+        onButtonClick: (AppInfo) -> Unit
+    ) {
+        try {
+            // Find views safely
+            val appIcon = cardView.findViewById<ImageView>(R.id.appIcon)
+            val appName = cardView.findViewById<TextView>(R.id.appName)
+            val appDescription = cardView.findViewById<TextView>(R.id.appDescription)
+            val appVersion = cardView.findViewById<TextView>(R.id.appVersion)
+            val actionButton = cardView.findViewById<Button>(R.id.actionButton)
+
+            // Update app data
+            appName?.text = appInfo.appName ?: "Unknown App"
+            appDescription?.text = appInfo.appDescription ?: "No description available"
+            appVersion?.text = if (!appInfo.appVersion.isNullOrBlank()) "v${appInfo.appVersion}" else ""
+
+            // Load app icon
+            loadAppIconFromFirebase(appIcon, appInfo.appIcon, appInfo.appName)
+
+            // Update button click listener
+            actionButton?.setOnClickListener {
+                try {
+                    onButtonClick(appInfo)
+                } catch (e: Exception) {
+                    println("❌ Error in button click for ${appInfo.appName}: ${e.message}")
+                }
+            }
+
+            // Update button state
+            actionButton?.let {
+                val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
+                updateButtonState(it, isInstalled)
+            }
+
+            // Update icon click listener
+            appIcon?.setOnClickListener {
+                try {
+                    val installed = AppManager.isAppInstalled(context, appInfo.packageName)
+                    if (installed) {
+                        AppManager.launchApp(context, appInfo.packageName)
+                    } else {
+                        android.widget.Toast.makeText(context, "App not installed", android.widget.Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: Exception) {
+                    println("❌ Error on icon click for ${appInfo.appName}: ${e.message}")
+                }
+            }
+        } catch (e: Exception) {
+            println("❌ Error updating app card view: ${e.message}")
+        }
+    }
+
     fun updateButtonState(button: Button, isInstalled: Boolean) {
         try {
             if (isInstalled) {

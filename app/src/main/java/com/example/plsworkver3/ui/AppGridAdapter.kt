@@ -31,12 +31,8 @@ class AppGridAdapter(
             onButtonClick
         )
         
-        // Update button state
-        val button = cardView.findViewById<Button>(R.id.actionButton)
-        button?.let {
-            val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
-            layoutManager.updateButtonState(it, isInstalled)
-        }
+        // Always update the view content to prevent showing stale data when recycling views
+        layoutManager.updateAppCardView(cardView, appInfo, onButtonClick)
         
         return cardView
     }

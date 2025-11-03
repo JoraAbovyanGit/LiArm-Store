@@ -46,6 +46,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ErrorActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LiAppStore" />
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

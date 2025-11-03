@@ -19,6 +19,7 @@ import com.example.plsworkver3.data.AppListResponse
 import com.example.plsworkver3.network.NetworkClient
 import com.example.plsworkver3.ui.DynamicLayoutManager
 import com.example.plsworkver3.ui.AppGridAdapter
+import com.example.plsworkver3.utils.NetworkUtils
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -39,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         println("🚀 MainActivity onCreate() called - activity_main set")
 
         try {
+            // Check internet early; if unavailable, show error page
+            if (!NetworkUtils.isInternetAvailable(this)) {
+                startActivity(Intent(this, ErrorActivity::class.java))
+                finish()
+                return
+            }
             checkAndRequestDownloadPermissions()
             setupLanguageButtons()
             println("✅ Language buttons setup complete")
@@ -88,13 +95,8 @@ class MainActivity : AppCompatActivity() {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 val canInstall = packageManager.canRequestPackageInstalls()
                 if (!canInstall && !askedUnknown) {
-                    // Auto-open settings once on first launch so user grants and won't see later prompts
-                    try {
-                        val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
-                            data = android.net.Uri.parse("package:${packageName}")
-                        }
-                        startActivity(intent)
-                    } catch (_: Exception) {}
+                    // Show dialog explaining why we need the permission, then open settings
+                    showInstallPermissionDialog()
                     prefs.edit().putBoolean("asked_unknown_sources", true).apply()
                 }
             }
@@ -458,6 +460,26 @@ class MainActivity : AppCompatActivity() {
         if (appList.isNotEmpty()) {
             displayDynamicApps()
         }
+    }
+
+    private fun showInstallPermissionDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Permission Required")
+            .setMessage("This app needs permission to install other apps from this store. Please enable 'Install unknown apps' in the settings that will open.")
+            .setPositiveButton("Open Settings") { _, _ ->
+                try {
+                    val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
+                        data = android.net.Uri.parse("package:${packageName}")
+                    }
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    println("❌ Error opening install permission settings: ${e.message}")
+                    Toast.makeText(this, "Could not open settings", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Later", null)
+            .setCancelable(false)
+            .show()
     }
 
     private fun setLocale(languageCode: String) {

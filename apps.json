@@ -39,6 +39,38 @@
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fwhatsapp-messenger-2-25-31-72.apk?alt=media&token=5f9f4479-45ec-4a95-9ced-99bcc68a05ef",
       "app_description": "Messaging and calling",
       "app_version": "2.25.32.70"
+    },
+    {
+      "app_name": "PlugShare",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fplugshare.jpg?alt=media&token=4e79ab1b-def3-423e-a2ac-02fae379881c",
+      "package_name": "com.xatori.Plugshare",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FPlugShare%20-%20EV%20%26%20Tesla%20Map_4.44.0_APKPure.apk?alt=media&token=5f8d19c8-b4ce-40ab-b231-0d7a377dbab1",
+      "app_description": "Global charge map",
+      "app_version": "4.43.0"
+    },
+    {
+      "app_name": "ChargePoint",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fchargepoint.png?alt=media&token=3628c7c6-416a-4e05-b6cb-c7310b7ab8fb",
+      "package_name": "com.coulombtech",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FChargePoint_v5.116.0-1487-12631.apk?alt=media&token=7eaa89c3-deb6-4c91-bf26-64b696c5f4e2",
+      "app_description": "EV charging network",
+      "app_version": "6.19.0"
+    },
+    {
+      "app_name": "EVMap",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fevmap.png?alt=media&token=11e1c94a-0f5a-41c5-b6f7-4c0d210c75fa",
+      "package_name": "evmap",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FEVMap-EV-chargers-v1-9-15.apk?alt=media&token=825f4f3c-55e9-4674-b69b-928bba5e0b3f",
+      "app_description": "Charging map app",
+      "app_version": "2.0.1"
+    },
+    {
+      "app_name": "A Better Route Planner",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fabrp-removebg-preview.png?alt=media&token=74a95190-331e-446f-a346-d6ce96314e6e",
+      "package_name": "com.iternio.abrpapp",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fcom-iternio-abrpapp-3164-69453289-f8672095f18932bb63e64d1cc562cab7.apk?alt=media&token=956c2ff4-fa38-497f-a77d-0ce1accc8a80",
+      "app_description": "EV route planner",
+      "app_version": "6.0"
     }
   ]
 }

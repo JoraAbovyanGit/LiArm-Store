@@ -8,10 +8,12 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
+import android.content.pm.ApplicationInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.Settings
+import android.os.UserManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -352,73 +354,18 @@ object AppManager {
             Toast.makeText(context, "App not installed: $packageName", Toast.LENGTH_SHORT).show()
             return
         }
-        
-        // Try ACTION_UNINSTALL_PACKAGE first (Android 8+) - shows the nice dialog
-        // Note: Some Android versions/devices block programmatic uninstall dialogs
-        // for security. If dialog doesn't appear, it's likely a device restriction.
-        try {
-            @Suppress("DEPRECATION")
-            val uninstall = Intent(Intent.ACTION_UNINSTALL_PACKAGE).apply {
-                data = pkgUri
-                // Don't add FLAG_ACTIVITY_NEW_TASK for Activity context - may block dialog
-            }
-            println("🗑️ Trying ACTION_UNINSTALL_PACKAGE for $packageName")
-            if (uninstall.resolveActivity(context.packageManager) != null) {
-                println("✅ ACTION_UNINSTALL_PACKAGE is resolvable")
-                try {
-                    if (context is android.app.Activity) {
-                        // Direct call from Activity - no flags needed
-                        (context as android.app.Activity).startActivity(uninstall)
-                    } else {
-                        uninstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        context.startActivity(uninstall)
-                    }
-                    println("✅ ACTION_UNINSTALL_PACKAGE started")
-                    return
-                } catch (e: SecurityException) {
-                    println("❌ SecurityException: ${e.message} - Device may block uninstall dialog")
-                } catch (e: Exception) {
-                    println("❌ Exception: ${e.message}")
-                    e.printStackTrace()
-                }
-            } else {
-                println("❌ ACTION_UNINSTALL_PACKAGE not resolvable")
-            }
-        } catch (e: Exception) {
-            println("❌ ACTION_UNINSTALL_PACKAGE failed: ${e.message}")
-            e.printStackTrace()
+
+        // Explain common reasons before opening system UI
+        if (isSystemApp(context, packageName)) {
+            Toast.makeText(context, "System app or preinstalled update; cannot uninstall (you can only disable)", Toast.LENGTH_LONG).show()
+            // Fall through to open details
         }
-        
-        // Fallback to ACTION_DELETE
-        try {
-            val delete = Intent(Intent.ACTION_DELETE).apply {
-                data = pkgUri
-            }
-            println("🗑️ Trying ACTION_DELETE for $packageName")
-            if (delete.resolveActivity(context.packageManager) != null) {
-                println("✅ ACTION_DELETE is resolvable")
-                try {
-                    if (context is android.app.Activity) {
-                        (context as android.app.Activity).startActivity(delete)
-                    } else {
-                        delete.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        context.startActivity(delete)
-                    }
-                    println("✅ ACTION_DELETE started")
-                    return
-                } catch (e: SecurityException) {
-                    println("❌ SecurityException: ${e.message} - Device may block uninstall dialog")
-                } catch (e: Exception) {
-                    println("❌ Exception: ${e.message}")
-                }
-            } else {
-                println("❌ ACTION_DELETE not resolvable")
-            }
-        } catch (e: Exception) {
-            println("❌ ACTION_DELETE failed: ${e.message}")
+
+        if (hasUninstallRestriction(context)) {
+            Toast.makeText(context, "Uninstall is blocked by device policy on this user/profile", Toast.LENGTH_LONG).show()
+            // Fall through to open details so user can see status
         }
-        
-        // Final fallback: open app details settings
+        // Open app details settings directly (single unified flow)
         try {
             val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                 data = pkgUri
@@ -431,5 +378,23 @@ object AppManager {
             println("❌ Failed to open app details: ${e.message}")
             Toast.makeText(context, "Unable to open uninstall screen: ${e.message}", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun isSystemApp(context: Context, packageName: String): Boolean {
+        return try {
+            val ai = context.packageManager.getApplicationInfo(packageName, 0)
+            (ai.flags and ApplicationInfo.FLAG_SYSTEM) != 0 ||
+                (ai.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
+        } catch (_: Exception) { false }
+    }
+
+    private fun hasUninstallRestriction(context: Context): Boolean {
+        return try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                val um = context.getSystemService(Context.USER_SERVICE) as UserManager
+                // DISALLOW_UNINSTALL_APPS is the canonical restriction that blocks uninstall
+                um.hasUserRestriction(UserManager.DISALLOW_UNINSTALL_APPS)
+            } else false
+        } catch (_: Exception) { false }
     }
 }

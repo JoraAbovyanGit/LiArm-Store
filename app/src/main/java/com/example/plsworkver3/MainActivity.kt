@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
     private var appList: List<AppInfo> = emptyList()
     private var appAdapter: AppGridAdapter? = null
 
+    // Uninstall UX
+    private var uninstallingPackage: String? = null
+    private var uninstallDialog: AlertDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
@@ -111,6 +115,16 @@ class MainActivity : AppCompatActivity() {
                 if (intent?.action == android.content.Intent.ACTION_PACKAGE_ADDED ||
                     intent?.action == android.content.Intent.ACTION_PACKAGE_REMOVED ||
                     intent?.action == android.content.Intent.ACTION_PACKAGE_CHANGED) {
+                    // Close uninstall dialog when the targeted package is removed
+                    if (intent.action == android.content.Intent.ACTION_PACKAGE_REMOVED) {
+                        val removedPkg = intent.data?.schemeSpecificPart
+                        if (!removedPkg.isNullOrBlank() && removedPkg == uninstallingPackage) {
+                            uninstallDialog?.dismiss()
+                            uninstallDialog = null
+                            Toast.makeText(this@MainActivity, "Removed ${removedPkg}", Toast.LENGTH_SHORT).show()
+                            uninstallingPackage = null
+                        }
+                    }
                     refreshDynamicApps()
                 }
             } catch (e: Exception) {
@@ -211,6 +225,41 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         // Refresh button states when user returns to the activity
         refreshDynamicApps()
+
+        // If uninstall was canceled, close dialog and notify
+        uninstallingPackage?.let { pkg ->
+            try {
+                val stillInstalled = AppManager.isAppInstalled(this, pkg)
+                if (stillInstalled && uninstallDialog != null) {
+                    uninstallDialog?.dismiss()
+                    uninstallDialog = null
+                    Toast.makeText(this, "Uninstall canceled", Toast.LENGTH_SHORT).show()
+                    // Offer next actions when cancel detected
+                    showUninstallCanceledDialog(pkg)
+                    uninstallingPackage = null
+                }
+            } catch (_: Exception) {}
+        }
+    }
+
+    private fun showUninstallCanceledDialog(packageName: String) {
+        val appDisplayName = appList.firstOrNull { it.packageName == packageName }?.appName ?: packageName
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.remove_title))
+            .setMessage("Uninstall canceled for $appDisplayName. What would you like to do?")
+            .setPositiveButton("Retry") { _, _ ->
+                AppManager.uninstallApp(this, packageName)
+            }
+            .setNeutralButton("Open Settings") { _, _ ->
+                try {
+                    val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                        data = android.net.Uri.parse("package:$packageName")
+                    }
+                    startActivity(intent)
+                } catch (_: Exception) {}
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
     }
 
     override fun onRestart() {
@@ -241,7 +290,7 @@ class MainActivity : AppCompatActivity() {
         val isInstalled = AppManager.isAppInstalled(this, packageName)
 
         if (isInstalled) {
-            // App is installed - directly remove it
+            // Open app details screen directly for manual uninstall
             AppManager.uninstallApp(this, packageName)
         } else {
             // App not installed - download and install
@@ -321,17 +370,17 @@ class MainActivity : AppCompatActivity() {
                     println("❌ Error body: ${response.errorBody()?.string()}")
                     println("❌ Full URL attempted: https://raw.githubusercontent.com/JoraAbovyanGit/LiArm-Store/main/apps.json")
                     Toast.makeText(this@MainActivity, "Failed to load apps: ${response.code()}", Toast.LENGTH_LONG).show()
-                    
-                    // Fallback to test data
-                    loadTestData()
+                    // Navigate to error page instead of loading test data
+                    startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
+                    finish()
                 }
             } catch (e: Exception) {
                 println("💥 Network error: ${e.message}")
                 println("💥 Exception type: ${e.javaClass.simpleName}")
-                Toast.makeText(this@MainActivity, "Network error, using test data", Toast.LENGTH_LONG).show()
-                
-                // Load test data when network fails
-                loadTestData()
+                Toast.makeText(this@MainActivity, "Network error", Toast.LENGTH_LONG).show()
+                // Navigate to error page instead of loading test data
+                startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
+                finish()
                 e.printStackTrace()
             }
         }

@@ -18,7 +18,7 @@
     },
     {
       "app_name": "Yandex Navigator",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fyand_navig.png?alt=media&token=dc0afd87-199f-494f-b955-4caab35d7cab",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fyand_navig-removebg-preview.png?alt=media&token=e680aa0a-e436-43a0-924c-4313383bb066",
       "package_name": "ru.yandex.yandexnavi",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FYandex%20Navigator_26.2.0_apkcombo.com.apk?alt=media&token=de84a004-17bc-472f-9f03-5067eafdaf82",
       "app_description": "GPS navigation",
@@ -42,7 +42,7 @@
     },
     {
       "app_name": "PlugShare",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fplugshare.jpg?alt=media&token=4e79ab1b-def3-423e-a2ac-02fae379881c",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fplugshare-removebg-preview.png?alt=media&token=e1965952-9177-4cf5-ae09-4fbb8a560d7e",
       "package_name": "com.xatori.Plugshare",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FPlugShare%20-%20EV%20%26%20Tesla%20Map_4.44.0_APKPure.apk?alt=media&token=5f8d19c8-b4ce-40ab-b231-0d7a377dbab1",
       "app_description": "Global charge map",
@@ -58,7 +58,7 @@
     },
     {
       "app_name": "EVMap",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fevmap.png?alt=media&token=11e1c94a-0f5a-41c5-b6f7-4c0d210c75fa",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fevmap.png?alt=media&token=3053adeb-2c1d-4229-9aee-3b51a3255c8a",
       "package_name": "evmap",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FEVMap-EV-chargers-v1-9-15.apk?alt=media&token=825f4f3c-55e9-4674-b69b-928bba5e0b3f",
       "app_description": "Charging map app",

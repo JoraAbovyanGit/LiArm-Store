@@ -18,7 +18,7 @@
     },
     {
       "app_name": "Yandex Navigator",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fnavig.png?alt=media&token=9a80c622-da9c-4173-ac4c-4a0408f8c24c",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fyand_navig.png?alt=media&token=dc0afd87-199f-494f-b955-4caab35d7cab",
       "package_name": "ru.yandex.yandexnavi",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FYandex%20Navigator_26.2.0_apkcombo.com.apk?alt=media&token=de84a004-17bc-472f-9f03-5067eafdaf82",
       "app_description": "GPS navigation",
@@ -31,6 +31,14 @@
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fcom-avenza-161-62688316-da27e09f811e1d5ff1f71b53de053ac0.apk?alt=media&token=9f2ed20a-70cb-4a2a-9cd3-a2d2d137d9d6",
       "app_description": "Offline maps",
       "app_version": "5.4.3"
+    },
+    {
+      "app_name": "WhatsApp",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FWhatsapp.jpg?alt=media&token=e67983b3-7b19-478c-900c-fe53933358f0",
+      "package_name": "com.whatsapp.w4b.",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fwhatsapp-messenger-2-25-31-72.apk?alt=media&token=5f9f4479-45ec-4a95-9ced-99bcc68a05ef",
+      "app_description": "Messaging and calling",
+      "app_version": "2.25.32.70"
     }
   ]
 }

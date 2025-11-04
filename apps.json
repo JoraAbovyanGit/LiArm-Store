@@ -35,7 +35,7 @@
     {
       "app_name": "WhatsApp",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FWhatsapp.jpg?alt=media&token=e67983b3-7b19-478c-900c-fe53933358f0",
-      "package_name": "com.whatsapp.w4b.",
+      "package_name": "com.whatsapp",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fwhatsapp-messenger-2-25-31-72.apk?alt=media&token=5f9f4479-45ec-4a95-9ced-99bcc68a05ef",
       "app_description": "Messaging and calling",
       "app_version": "2.25.32.70"

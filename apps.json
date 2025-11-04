@@ -59,7 +59,7 @@
     {
       "app_name": "EVMap",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fevmap.png?alt=media&token=3053adeb-2c1d-4229-9aee-3b51a3255c8a",
-      "package_name": "evmap",
+      "package_name": "net.vonforst.evmap",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FEVMap-EV-chargers-v1-9-15.apk?alt=media&token=825f4f3c-55e9-4674-b69b-928bba5e0b3f",
       "app_description": "Charging map app",
       "app_version": "2.0.1"

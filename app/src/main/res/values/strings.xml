@@ -27,4 +27,10 @@
     <!-- Dialog messages -->
     <string name="download_message">Download and install %1$s?</string>
     <string name="remove_message">Remove %1$s from your device?</string>
+    
+    <!-- Error screen -->
+    <string name="error_title">No Internet Connection</string>
+    <string name="error_description">Please check your connection and try again.</string>
+    <string name="retry">Retry</string>
+    <string name="error_icon">Error icon</string>
 </resources>

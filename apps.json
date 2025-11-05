@@ -25,14 +25,6 @@
       "app_version": "26.3.0"
     },
     {
-      "app_name": "Avenza Maps",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Favenza.jpg?alt=media&token=565b7b3a-14da-458b-8160-fb6c9ba1eb01",
-      "package_name": "com.Avenza",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fcom-avenza-161-62688316-da27e09f811e1d5ff1f71b53de053ac0.apk?alt=media&token=9f2ed20a-70cb-4a2a-9cd3-a2d2d137d9d6",
-      "app_description": "Offline maps",
-      "app_version": "5.4.3"
-    },
-    {
       "app_name": "WhatsApp",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FWhatsapp.jpg?alt=media&token=e67983b3-7b19-478c-900c-fe53933358f0",
       "package_name": "com.whatsapp",
@@ -49,28 +41,44 @@
       "app_version": "4.43.0"
     },
     {
-      "app_name": "ChargePoint",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fchargepoint.png?alt=media&token=3628c7c6-416a-4e05-b6cb-c7310b7ab8fb",
-      "package_name": "com.coulombtech",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FChargePoint_v5.116.0-1487-12631.apk?alt=media&token=7eaa89c3-deb6-4c91-bf26-64b696c5f4e2",
-      "app_description": "EV charging network",
-      "app_version": "6.19.0"
-    },
-    {
-      "app_name": "EVMap",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fevmap.png?alt=media&token=3053adeb-2c1d-4229-9aee-3b51a3255c8a",
-      "package_name": "net.vonforst.evmap",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FEVMap-EV-chargers-v1-9-15.apk?alt=media&token=825f4f3c-55e9-4674-b69b-928bba5e0b3f",
-      "app_description": "Charging map app",
-      "app_version": "2.0.1"
-    },
-    {
       "app_name": "A Better Route Planner",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fabrp-removebg-preview.png?alt=media&token=74a95190-331e-446f-a346-d6ce96314e6e",
       "package_name": "com.iternio.abrpapp",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fcom-iternio-abrpapp-3164-69453289-f8672095f18932bb63e64d1cc562cab7.apk?alt=media&token=956c2ff4-fa38-497f-a77d-0ce1accc8a80",
       "app_description": "EV route planner",
       "app_version": "6.0"
+    },
+    {
+      "app_name": "Avenza Maps",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Favenza.jpg?alt=media&token=565b7b3a-14da-458b-8160-fb6c9ba1eb01",
+      "package_name": "com.Avenza",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fcom-avenza-161-62688316-da27e09f811e1d5ff1f71b53de053ac0.apk?alt=media&token=9f2ed20a-70cb-4a2a-9cd3-a2d2d137d9d6",
+      "app_description": "Offline GPS map viewer",
+      "app_version": "5.4.3"
+    },
+    {
+      "app_name": "Google Maps",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fgoogle%20maps?alt=media&token=1ff84269-8d77-4f73-b4ab-dc49e0ae7d60",
+      "package_name": "com.google.android.apps.maps",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fuptodown-com.google.android.apps.maps%20(1).apk?alt=media&token=55f064c6-c548-40ee-846d-94664c529def",
+      "app_description": "Navigation and traffic maps",
+      "app_version": "25.44.2"
+    },
+    {
+      "app_name": "Yandex Maps",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FYandex_Maps_icon.svg.png?alt=media&token=61beb2f0-8e97-4780-890f-ce72307d4d6c",
+      "package_name": "ru.yandex.yandexmaps",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fyandex-maps-26-2-0.apk?alt=media&token=5097269d-db94-4f7e-a51d-96368bfdb0fc",
+      "app_description": "Detailed local navigation",
+      "app_version": "26.2.0"
+    },
+    {
+      "app_name": "YouTube",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fyoutube.jpg?alt=media&token=8579d6f8-4ea4-48ac-b910-39c58d3c941e",
+      "package_name": "com.google.android.youtube",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fyoutube-20-43-43.apk?alt=media&token=09709118-7a64-40d0-aa1a-04f77fb5d411",
+      "app_description": "Video streaming platform",
+      "app_version": "20.43.43"
     }
   ]
 }

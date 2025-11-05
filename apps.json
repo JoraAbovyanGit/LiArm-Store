@@ -26,7 +26,7 @@
     },
     {
       "app_name": "WhatsApp",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FWhatsapp.jpg?alt=media&token=e67983b3-7b19-478c-900c-fe53933358f0",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fwhatsapp.png?alt=media&token=2539dcbb-e02f-455c-9e8e-f3bf4a1b581c",
       "package_name": "com.whatsapp",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fwhatsapp-messenger-2-25-31-72.apk?alt=media&token=5f9f4479-45ec-4a95-9ced-99bcc68a05ef",
       "app_description": "Messaging and calling",
@@ -74,7 +74,7 @@
     },
     {
       "app_name": "YouTube",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fyoutube.jpg?alt=media&token=8579d6f8-4ea4-48ac-b910-39c58d3c941e",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fyoutube-removebg-preview.png?alt=media&token=7034520f-0632-4c9e-a7e8-1026e565ec72",
       "package_name": "com.google.android.youtube",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fyoutube-20-43-43.apk?alt=media&token=09709118-7a64-40d0-aa1a-04f77fb5d411",
       "app_description": "Video streaming platform",

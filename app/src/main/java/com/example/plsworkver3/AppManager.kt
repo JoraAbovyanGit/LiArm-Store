@@ -1,12 +1,10 @@
 package com.example.plsworkver3
 
 import android.app.DownloadManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
 import android.content.pm.ApplicationInfo
 import android.net.Uri
@@ -24,10 +22,6 @@ import java.io.IOException
 object AppManager {
 
     private var appData: MutableMap<String, com.example.plsworkver3.data.AppInfo> = mutableMapOf()
-    
-    // Legacy constants for backward compatibility
-    const val PACKAGE_YANDEX_NAVIGATOR = "ru.yandex.yandexnavi"
-    const val PACKAGE_YANDEX_MAPS = "ru.yandex.yandexmaps"
     
 
     fun updateAppData(apps: List<com.example.plsworkver3.data.AppInfo>) {

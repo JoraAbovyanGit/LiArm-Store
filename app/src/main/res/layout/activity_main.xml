@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@color/background_dark"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -18,14 +19,14 @@
             android:padding="16dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:background="#121212">
+            android:background="@color/background_dark">
 
             <TextView
                 android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary_dark"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -34,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/subtitle"
-                android:textColor="#BBBBBB"
+                android:textColor="@color/text_secondary_dark"
                 android:layout_marginTop="4dp" />
 
             <LinearLayout
@@ -80,16 +81,11 @@
         </LinearLayout>
 
         <!-- Dynamic App List -->
-        <GridView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/appContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:numColumns="2"
-            android:stretchMode="columnWidth"
-            android:horizontalSpacing="8dp"
-            android:verticalSpacing="8dp"
-            android:gravity="center"
-            android:layout_gravity="fill_horizontal" />
+            android:clipToPadding="false" />
     </LinearLayout>
 </ScrollView>

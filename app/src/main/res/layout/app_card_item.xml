@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="12dp"
-    android:background="#1C1C1C"
+    android:background="@color/surface_dark"
     android:orientation="horizontal"
     android:layout_marginBottom="10dp"
     android:gravity="center_vertical"
@@ -27,7 +27,7 @@
             android:id="@+id/appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary_dark"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
             android:id="@+id/appDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#CCCCCC"
+            android:textColor="@color/text_secondary_dark"
             android:textSize="12sp"
             android:layout_marginTop="2dp"
             android:maxLines="2"
@@ -45,7 +45,7 @@
             android:id="@+id/appVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#AAAAAA"
+            android:textColor="@color/text_tertiary_dark"
             android:textSize="10sp"
             android:layout_marginTop="2dp" />
 

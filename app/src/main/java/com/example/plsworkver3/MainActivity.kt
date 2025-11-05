@@ -5,8 +5,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.GridView
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +18,8 @@ import com.example.plsworkver3.data.AppInfo
 import com.example.plsworkver3.data.AppListResponse
 import com.example.plsworkver3.network.NetworkClient
 import com.example.plsworkver3.ui.DynamicLayoutManager
-import com.example.plsworkver3.ui.AppGridAdapter
+import com.example.plsworkver3.ui.AppRecyclerAdapter
+import com.example.plsworkver3.ui.GridSpacingItemDecoration
 import com.example.plsworkver3.utils.NetworkUtils
 import kotlinx.coroutines.launch
 import java.util.*
@@ -27,10 +28,10 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     // Dynamic layout
-    private lateinit var appContainer: GridView
+    private lateinit var appContainer: RecyclerView
     private lateinit var dynamicLayoutManager: DynamicLayoutManager
     private var appList: List<AppInfo> = emptyList()
-    private var appAdapter: AppGridAdapter? = null
+    private var appAdapter: AppRecyclerAdapter? = null
 
     // Uninstall UX
     private var uninstallingPackage: String? = null
@@ -417,57 +418,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
-    private fun getNumColumns(): Int {
-        // Always use 2 columns regardless of orientation
-        return 2
-    }
-    
     private fun displayDynamicApps() {
         try {
-            println("🧩 Displaying ${appList.size} apps in grid")
-            appAdapter = AppGridAdapter(this, appList) { app ->
+            println("🧩 Displaying ${appList.size} apps in RecyclerView")
+            appAdapter = AppRecyclerAdapter(appList, dynamicLayoutManager) { app ->
                 handleAppButtonClick(app.packageName, app.appName)
             }
+            
+            // Setup GridLayoutManager with 2 columns
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            appContainer.layoutManager = gridLayoutManager
             appContainer.adapter = appAdapter
             
-            // Update number of columns based on orientation
-            val numColumns = getNumColumns()
-            appContainer.numColumns = numColumns
+            // Add item decoration for spacing
+            val spacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
+            appContainer.addItemDecoration(GridSpacingItemDecoration(2, spacing, true))
             
-            // Fix GridView height issue inside ScrollView
-            // GridView with wrap_content inside ScrollView only shows first row
-            // We need to calculate and set explicit height
-            appContainer.post {
-                try {
-                    val numRows = (appList.size + numColumns - 1) / numColumns // Ceiling division
-                    
-                    // Estimate item height based on card layout:
-                    // - Icon: 56dp
-                    // - Padding: 12dp top + 12dp bottom = 24dp
-                    // - Version text: ~20dp
-                    // - Total: ~100-110dp per item
-                    val itemHeightDp = 110
-                    val itemHeightPx = (itemHeightDp * resources.displayMetrics.density).toInt()
-                    
-                    // Vertical spacing (8dp from layout)
-                    val verticalSpacingPx = (8 * resources.displayMetrics.density).toInt()
-                    
-                    // Calculate total height
-                    val calculatedHeight = (numRows * itemHeightPx) + 
-                                          ((numRows - 1) * verticalSpacingPx) + 
-                                          (appContainer.paddingTop + appContainer.paddingBottom)
-                    
-                    val layoutParams = appContainer.layoutParams
-                    layoutParams.height = calculatedHeight
-                    appContainer.layoutParams = layoutParams
-                    
-                    println("✅ Grid height set: ${appList.size} items, $numColumns columns, $numRows rows, height=${calculatedHeight}px")
-                } catch (e: Exception) {
-                    println("⚠️ Error calculating GridView height: ${e.message}")
-                    e.printStackTrace()
-                }
-            }
-            println("✅ Grid adapter set")
+            println("✅ RecyclerView adapter set with ${appList.size} items")
         } catch (e: Exception) {
             println("❌ Error in displayDynamicApps: ${e.message}")
             Toast.makeText(this, "Error displaying apps: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -478,36 +445,14 @@ class MainActivity : AppCompatActivity() {
         if (appList.isNotEmpty()) {
             // Notify adapter that data changed so it refreshes button states
             appAdapter?.notifyDataSetChanged()
-            
-            // Update number of columns based on orientation
-            val numColumns = getNumColumns()
-            appContainer.numColumns = numColumns
-            
-            // Recalculate GridView height after data change
-            appContainer.post {
-                try {
-                    val numRows = (appList.size + numColumns - 1) / numColumns
-                    val itemHeightPx = (110 * resources.displayMetrics.density).toInt()
-                    val verticalSpacingPx = (8 * resources.displayMetrics.density).toInt()
-                    val calculatedHeight = (numRows * itemHeightPx) + 
-                                          ((numRows - 1) * verticalSpacingPx) + 
-                                          (appContainer.paddingTop + appContainer.paddingBottom)
-                    
-                    val layoutParams = appContainer.layoutParams
-                    layoutParams.height = calculatedHeight
-                    appContainer.layoutParams = layoutParams
-                } catch (e: Exception) {
-                    println("⚠️ Error recalculating GridView height: ${e.message}")
-                }
-            }
         }
     }
     
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        // Refresh the grid layout when orientation changes
+        // RecyclerView handles orientation changes automatically
         if (appList.isNotEmpty()) {
-            displayDynamicApps()
+            appAdapter?.notifyDataSetChanged()
         }
     }
 

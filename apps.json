@@ -82,7 +82,7 @@
     },
     {
       "app_name": "VLC",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fvlc.png?alt=media&token=08dbdcb5-4f48-4d26-bbb9-9b0ae1ae8a11",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fvlc-removebg-preview.png?alt=media&token=9fbc2fbf-0e30-4fe4-8988-d8050cca3fd8",
       "package_name": "org.videolan.vlc",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fvlc-3-7-0-beta-1.apk?alt=media&token=60a4252e-882d-4fa1-90e0-8ba3749e8641",
       "app_description": "Media player for all",

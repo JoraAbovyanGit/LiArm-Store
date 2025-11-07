@@ -79,6 +79,14 @@
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fyoutube-20-43-43.apk?alt=media&token=09709118-7a64-40d0-aa1a-04f77fb5d411",
       "app_description": "Video streaming platform",
       "app_version": "20.43.43"
+    },
+    {
+      "app_name": "VLC",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fvlc.png?alt=media&token=08dbdcb5-4f48-4d26-bbb9-9b0ae1ae8a11",
+      "package_name": "org.videolan.vlc",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fvlc-3-7-0-beta-1.apk?alt=media&token=60a4252e-882d-4fa1-90e0-8ba3749e8641",
+      "app_description": "Media player for all",
+      "app_version": "3.7.0"
     }
   ]
 }

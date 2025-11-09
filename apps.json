@@ -111,6 +111,17 @@
       "app_version": "20.43.43"
     },
     {
+      "app_name": "Gmail",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fgmail.png?alt=media&token=cb44e274-ddc2-466e-8489-7c9c706409c0",
+      "package_name": "com.google.android.gm",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fgmail.apk?alt=media&token=ad7ef89a-4d14-4036-9fce-aa12991ec76a",
+      "app_description": "Email & communication service",
+      "app_description_en": "Email & communication service",
+      "app_description_ru": "Почта и сообщения",
+      "app_description_hy": "Էլ․ փոստի ծառայություն",
+      "app_version": "2025.10.13.822279208"
+    },
+    {
       "app_name": "VLC",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fvlc-removebg-preview.png?alt=media&token=9fbc2fbf-0e30-4fe4-8988-d8050cca3fd8",
       "package_name": "org.videolan.vlc",

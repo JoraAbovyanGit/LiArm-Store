@@ -38,6 +38,7 @@
                 android:textColor="@color/text_secondary_dark"
                 android:layout_marginTop="4dp" />
 
+            <!-- Language Selector -->
             <LinearLayout
                 android:id="@+id/langButtons"
                 style="?android:attr/buttonBarStyle"
@@ -46,37 +47,73 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="12dp">
 
-                <Button
-                    android:id="@+id/btnEnglish"
-                    style="?android:attr/buttonBarButtonStyle"
+                <!-- English Button -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="#8b0000"
-                    android:padding="6dp"
-                    android:text="@string/btn_eng"
-                    android:textColor="#ffffff" />
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp">
+                    <Button
+                        android:id="@+id/btnEnglish"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#8b0000"
+                        android:padding="6dp"
+                        android:text="ENG"
+                        android:textColor="#ffffff" />
+                    <View
+                        android:id="@+id/indicatorEnglish"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="#ff0000"
+                        android:visibility="gone" />
+                </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnRussian"
-                    style="?android:attr/buttonBarButtonStyle"
+                <!-- Russian Button -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_rus"
-                    android:backgroundTint="#8b0000"
-                    android:textColor="#ffffff"
-                    android:layout_marginEnd="8dp"
-                    android:padding="6dp" />
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp">
+                    <Button
+                        android:id="@+id/btnRussian"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RUS"
+                        android:backgroundTint="#8b0000"
+                        android:textColor="#ffffff"
+                        android:padding="6dp" />
+                    <View
+                        android:id="@+id/indicatorRussian"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="#ff0000"
+                        android:visibility="gone" />
+                </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnArmenian"
-                    style="?android:attr/buttonBarButtonStyle"
+                <!-- Armenian Button -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_arm"
-                    android:backgroundTint="#8b0000"
-                    android:textColor="#ffffff"
-                    android:padding="6dp" />
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/btnArmenian"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ARM"
+                        android:backgroundTint="#8b0000"
+                        android:textColor="#ffffff"
+                        android:padding="6dp" />
+                    <View
+                        android:id="@+id/indicatorArmenian"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="#ff0000"
+                        android:visibility="gone" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

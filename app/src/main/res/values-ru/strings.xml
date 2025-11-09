@@ -13,6 +13,11 @@
     <string name="btn_eng">Англ</string>
     <string name="btn_rus">Рус</string>
     <string name="btn_arm">Арм</string>
+    
+    <!-- Language names for indicator -->
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_armenian">Հայերեն</string>
 
     <!-- App action buttons -->
     <string name="download_button">ЗАГРУЗИТЬ</string>
@@ -75,8 +80,6 @@
     <string name="apk_file_not_found">Файл APK не найден</string>
     <string name="please_enable_install_permission">Пожалуйста, включите разрешение \'Установка неизвестных приложений\' в настройках для продолжения</string>
     <string name="please_enable_install_permission_and_try">Пожалуйста, включите разрешение \'Установка неизвестных приложений\' и попробуйте снова</string>
-    <string name="installing_please_tap">Установка… Пожалуйста, нажмите \'Установить\' при появлении запроса. Вернитесь в приложение после установки.</string>
-    <string name="installation_failed">Установка не удалась: %1$s</string>
     <string name="unable_to_open_play_store">Не удалось открыть Play Store</string>
     <string name="app_not_installed_with_package">Приложение не установлено: %1$s</string>
     <string name="system_app_cannot_uninstall">Системное приложение или предустановленное обновление; нельзя удалить (можно только отключить)</string>

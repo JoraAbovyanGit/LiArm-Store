@@ -280,9 +280,31 @@ class MainActivity : AppCompatActivity() {
         val btnRussian = findViewById<Button>(R.id.btnRussian)
         val btnArmenian = findViewById<Button>(R.id.btnArmenian)
 
+        // Update active button indicator
+        updateLanguageIndicator()
+
         btnEnglish.setOnClickListener { setLocale("en") }
         btnRussian.setOnClickListener { setLocale("ru") }
         btnArmenian.setOnClickListener { setLocale("hy") }
+    }
+
+    private fun updateLanguageIndicator() {
+        val indicatorEnglish = findViewById<View>(R.id.indicatorEnglish)
+        val indicatorRussian = findViewById<View>(R.id.indicatorRussian)
+        val indicatorArmenian = findViewById<View>(R.id.indicatorArmenian)
+
+        // Hide all indicators first
+        indicatorEnglish.visibility = View.GONE
+        indicatorRussian.visibility = View.GONE
+        indicatorArmenian.visibility = View.GONE
+
+        // Show indicator for current language
+        val currentLang = resources.configuration.locales[0].language
+        when (currentLang) {
+            "ru" -> indicatorRussian.visibility = View.VISIBLE
+            "hy" -> indicatorArmenian.visibility = View.VISIBLE
+            else -> indicatorEnglish.visibility = View.VISIBLE
+        }
     }
 
 

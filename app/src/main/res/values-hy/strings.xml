@@ -13,6 +13,11 @@
     <string name="btn_eng">Անգլ․</string>
     <string name="btn_rus">Ռուս․</string>
     <string name="btn_arm">Հայ․</string>
+    
+    <!-- Language names for indicator -->
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_armenian">Հայերեն</string>
 
     <!-- App action buttons -->
     <string name="download_button">ՆԵՐԲԵՌՆԵԼ</string>
@@ -75,8 +80,6 @@
     <string name="apk_file_not_found">APK ֆայլը չի գտնվել</string>
     <string name="please_enable_install_permission">Խնդրում ենք միացնել \'Անհայտ հավելվածների տեղադրում\' թույլտվությունը կարգավորումներում՝ շարունակելու համար</string>
     <string name="please_enable_install_permission_and_try">Խնդրում ենք միացնել \'Անհայտ հավելվածների տեղադրում\' թույլտվությունը և կրկին փորձել</string>
-    <string name="installing_please_tap">Տեղադրում… Խնդրում ենք սեղմել \'Տեղադրել\' հարցման դեպքում: Վերադարձեք հավելվածին տեղադրումից հետո:</string>
-    <string name="installation_failed">Տեղադրումը ձախողվեց՝ %1$s</string>
     <string name="unable_to_open_play_store">Չհաջողվեց բացել Play Store</string>
     <string name="app_not_installed_with_package">Հավելվածը տեղադրված չէ՝ %1$s</string>
     <string name="system_app_cannot_uninstall">Համակարգային հավելված կամ նախապես տեղադրված թարմացում; չի կարելի հեռացնել (կարող եք միայն անջատել)</string>

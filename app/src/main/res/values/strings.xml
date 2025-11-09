@@ -13,6 +13,11 @@
     <string name="btn_eng">Eng</string>
     <string name="btn_rus">Rus</string>
     <string name="btn_arm">Arm</string>
+    
+    <!-- Language names for indicator -->
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_armenian">Հայերեն</string>
 
     <!-- App action buttons -->
     <string name="download_button">DOWNLOAD</string>
@@ -75,8 +80,6 @@
     <string name="apk_file_not_found">APK file not found</string>
     <string name="please_enable_install_permission">Please enable \'Install unknown apps\' permission in Settings to continue</string>
     <string name="please_enable_install_permission_and_try">Please enable \'Install unknown apps\' permission and try again</string>
-    <string name="installing_please_tap">Installing… Please tap \'Install\' when prompted. Return to app after installation.</string>
-    <string name="installation_failed">Installation failed: %1$s</string>
     <string name="unable_to_open_play_store">Unable to open Play Store</string>
     <string name="app_not_installed_with_package">App not installed: %1$s</string>
     <string name="system_app_cannot_uninstall">System app or preinstalled update; cannot uninstall (you can only disable)</string>

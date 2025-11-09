@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             // Removed temporary loading TextView used for debugging
 
             // Optional: show quick feedback while loading
-            Toast.makeText(this, "App is loading...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.app_loading), Toast.LENGTH_SHORT).show()
 
             loadAppsFromApi()
             println("✅ API loading started")
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                         if (!removedPkg.isNullOrBlank() && removedPkg == uninstallingPackage) {
                             uninstallDialog?.dismiss()
                             uninstallDialog = null
-                            Toast.makeText(this@MainActivity, "Removed ${removedPkg}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, getString(R.string.removed_package, removedPkg), Toast.LENGTH_SHORT).show()
                             uninstallingPackage = null
                         }
                     }
@@ -216,41 +216,9 @@ class MainActivity : AppCompatActivity() {
             try {
                 val status = intent?.getIntExtra(android.content.pm.PackageInstaller.EXTRA_STATUS, -999)
                 val msg = intent?.getStringExtra(android.content.pm.PackageInstaller.EXTRA_STATUS_MESSAGE)
-                
-                when (status) {
-                    android.content.pm.PackageInstaller.STATUS_SUCCESS -> {
-                        Toast.makeText(this@MainActivity, "App installed/updated successfully!", Toast.LENGTH_SHORT).show()
-                        refreshDynamicApps()
-                    }
-                    android.content.pm.PackageInstaller.STATUS_FAILURE_ABORTED -> {
-                        Toast.makeText(this@MainActivity, "Installation cancelled", Toast.LENGTH_SHORT).show()
-                    }
-                    android.content.pm.PackageInstaller.STATUS_FAILURE_BLOCKED -> {
-                        Toast.makeText(this@MainActivity, "Installation blocked: ${msg ?: "Unknown reason"}", Toast.LENGTH_LONG).show()
-                    }
-                    android.content.pm.PackageInstaller.STATUS_FAILURE_CONFLICT -> {
-                        Toast.makeText(this@MainActivity, "Package conflict: ${msg ?: "App may need to be uninstalled first"}", Toast.LENGTH_LONG).show()
-                    }
-                    android.content.pm.PackageInstaller.STATUS_FAILURE_INCOMPATIBLE -> {
-                        Toast.makeText(this@MainActivity, "Incompatible package: ${msg ?: "App may not be compatible with this device"}", Toast.LENGTH_LONG).show()
-                    }
-                    android.content.pm.PackageInstaller.STATUS_FAILURE_INVALID -> {
-                        Toast.makeText(this@MainActivity, "Invalid APK: ${msg ?: "The APK file may be corrupted"}", Toast.LENGTH_LONG).show()
-                    }
-                    android.content.pm.PackageInstaller.STATUS_FAILURE_STORAGE -> {
-                        Toast.makeText(this@MainActivity, "Storage error: ${msg ?: "Not enough storage space"}", Toast.LENGTH_LONG).show()
-                    }
-                    else -> {
-                        if (status != -999) {
-                            Toast.makeText(this@MainActivity, "Install result: $status ${msg ?: ""}", Toast.LENGTH_SHORT).show()
-                        }
-                        refreshDynamicApps()
-                    }
-                }
-            } catch (e: Exception) {
-                println("❌ Error handling install result: ${e.message}")
+                Toast.makeText(this@MainActivity, "Install result: $status ${msg ?: ""}", Toast.LENGTH_SHORT).show()
                 refreshDynamicApps()
-            }
+            } catch (_: Exception) {}
         }
     }
 
@@ -266,7 +234,7 @@ class MainActivity : AppCompatActivity() {
                 if (stillInstalled && uninstallDialog != null) {
                     uninstallDialog?.dismiss()
                     uninstallDialog = null
-                    Toast.makeText(this, "Uninstall canceled", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.uninstall_canceled), Toast.LENGTH_SHORT).show()
                     // Offer next actions when cancel detected
                     showUninstallCanceledDialog(pkg)
                     uninstallingPackage = null
@@ -279,11 +247,11 @@ class MainActivity : AppCompatActivity() {
         val appDisplayName = appList.firstOrNull { it.packageName == packageName }?.appName ?: packageName
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.remove_title))
-            .setMessage("Uninstall canceled for $appDisplayName. What would you like to do?")
-            .setPositiveButton("Retry") { _, _ ->
+            .setMessage(getString(R.string.uninstall_canceled_message, appDisplayName))
+            .setPositiveButton(getString(R.string.retry_uninstall)) { _, _ ->
                 AppManager.uninstallApp(this, packageName)
             }
-            .setNeutralButton("Open Settings") { _, _ ->
+            .setNeutralButton(getString(R.string.open_app_settings)) { _, _ ->
                 try {
                     val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                         data = android.net.Uri.parse("package:$packageName")
@@ -417,16 +385,16 @@ class MainActivity : AppCompatActivity() {
                         displayDynamicApps()
                         
 
-                        Toast.makeText(this@MainActivity, "Loaded ${appResponse.apps.size} apps", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, getString(R.string.loaded_apps, appResponse.apps.size), Toast.LENGTH_SHORT).show()
                     } ?: run {
                         println("❌ Response body is null")
-                        Toast.makeText(this@MainActivity, "No data received from server", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, getString(R.string.no_data_received), Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     println("❌ API call failed: ${response.code()} - ${response.message()}")
                     println("❌ Error body: ${response.errorBody()?.string()}")
                     println("❌ Full URL attempted: https://raw.githubusercontent.com/JoraAbovyanGit/LiArm-Store/main/apps.json")
-                    Toast.makeText(this@MainActivity, "Failed to load apps: ${response.code()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.failed_to_load_apps, response.code().toString()), Toast.LENGTH_LONG).show()
                     // Navigate to error page instead of loading test data
                     startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
                     finish()
@@ -434,7 +402,7 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 println("💥 Network error: ${e.message}")
                 println("💥 Exception type: ${e.javaClass.simpleName}")
-                Toast.makeText(this@MainActivity, "Network error", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, getString(R.string.network_error), Toast.LENGTH_LONG).show()
                 // Navigate to error page instead of loading test data
                 startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
                 finish()
@@ -493,7 +461,7 @@ class MainActivity : AppCompatActivity() {
             println("✅ RecyclerView adapter set with ${appList.size} items")
         } catch (e: Exception) {
             println("❌ Error in displayDynamicApps: ${e.message}")
-            Toast.makeText(this, "Error displaying apps: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_displaying_apps, e.message ?: ""), Toast.LENGTH_SHORT).show()
         }
     }
     
@@ -514,9 +482,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showInstallPermissionDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Permission Required")
-            .setMessage("This app needs permission to install other apps from this store. Please enable 'Install unknown apps' in the settings that will open.")
-            .setPositiveButton("Open Settings") { _, _ ->
+            .setTitle(getString(R.string.permission_required))
+            .setMessage(getString(R.string.install_permission_message))
+            .setPositiveButton(getString(R.string.open_settings)) { _, _ ->
                 try {
                     val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
                         data = android.net.Uri.parse("package:${packageName}")
@@ -524,10 +492,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 } catch (e: Exception) {
                     println("❌ Error opening install permission settings: ${e.message}")
-                    Toast.makeText(this, "Could not open settings", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.could_not_open_settings), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Later", null)
+            .setNegativeButton(getString(R.string.later), null)
             .setCancelable(false)
             .show()
     }

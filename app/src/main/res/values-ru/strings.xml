@@ -3,8 +3,8 @@
     <string name="subtitle">Магазин приложений</string>
     <string name="version">Версия: anyapp-3.5.0</string>
 
-    <!-- App names -->
-    <string name="app1_name">Yandex Навигатор</string>
+    <!-- App names (not translated - keep as is) -->
+    <string name="app1_name">Yandex Navigator</string>
     <string name="app2_name">Yandex Maps</string>
 
     <string name="download">Скачать</string>
@@ -16,14 +16,72 @@
 
     <!-- App action buttons -->
     <string name="download_button">ЗАГРУЗИТЬ</string>
+    <string name="update_button">ОБНОВИТЬ</string>
     <string name="remove_button">УДАЛИТЬ</string>
     <string name="cancel">Отмена</string>
 
     <!-- Dialog titles -->
     <string name="download_title">Загрузить приложение</string>
+    <string name="update_title">Обновить приложение</string>
     <string name="remove_title">Удалить приложение</string>
     
     <!-- Dialog messages -->
     <string name="download_message">Скачать и установить %1$s?</string>
+    <string name="update_message">Обновить %1$s с версии %2$s до %3$s?</string>
     <string name="remove_message">Удалить %1$s с устройства?</string>
+    
+    <!-- Error screen -->
+    <string name="error_title">Нет подключения к интернету</string>
+    <string name="error_description">Пожалуйста, проверьте подключение и попробуйте снова.</string>
+    <string name="retry">Повторить</string>
+    <string name="error_icon">Иконка ошибки</string>
+    
+    <!-- Common messages -->
+    <string name="unknown_app">Неизвестное приложение</string>
+    <string name="no_description_available">Описание недоступно</string>
+    <string name="app_not_installed">Приложение не установлено</string>
+    <string name="app_loading">Приложение загружается…</string>
+    <string name="loaded_apps">Загружено приложений: %1$d</string>
+    <string name="no_data_received">Данные с сервера не получены</string>
+    <string name="failed_to_load_apps">Не удалось загрузить приложения: %1$s</string>
+    <string name="network_error">Ошибка сети</string>
+    <string name="error_displaying_apps">Ошибка отображения приложений: %1$s</string>
+    
+    <!-- Permission messages -->
+    <string name="permission_required">Требуется разрешение</string>
+    <string name="install_permission_message">Это приложение требует разрешения на установку других приложений из этого магазина. Пожалуйста, включите \'Установка неизвестных приложений\' в настройках, которые откроются.</string>
+    <string name="open_settings">Открыть настройки</string>
+    <string name="later">Позже</string>
+    <string name="could_not_open_settings">Не удалось открыть настройки</string>
+    
+    <!-- Install/Update messages -->
+    <string name="installing_please_tap">Установка… Пожалуйста, нажмите \'Установить\' при появлении запроса. Вернитесь в приложение после установки.</string>
+    <string name="updating_please_tap">Обновление… Пожалуйста, нажмите \'Обновить\' при появлении запроса.</string>
+    <string name="installation_failed">Установка не удалась: %1$s</string>
+    
+    <!-- Uninstall messages -->
+    <string name="removed_package">Удалено: %1$s</string>
+    <string name="uninstall_canceled">Удаление отменено</string>
+    <string name="uninstall_canceled_message">Удаление %1$s отменено. Что вы хотите сделать?</string>
+    <string name="retry_uninstall">Повторить</string>
+    <string name="open_app_settings">Открыть настройки</string>
+    <string name="tap_uninstall_in_details">Нажмите \'Удалить\' в деталях приложения</string>
+    
+    <!-- AppManager messages -->
+    <string name="apk_url_not_available">URL APK недоступен</string>
+    <string name="download_started">Загрузка началась…</string>
+    <string name="download_failed">Загрузка не удалась</string>
+    <string name="detected_package">Обнаружен пакет: %1$s</string>
+    <string name="apk_file_not_found">Файл APK не найден</string>
+    <string name="please_enable_install_permission">Пожалуйста, включите разрешение \'Установка неизвестных приложений\' в настройках для продолжения</string>
+    <string name="please_enable_install_permission_and_try">Пожалуйста, включите разрешение \'Установка неизвестных приложений\' и попробуйте снова</string>
+    <string name="installing_please_tap">Установка… Пожалуйста, нажмите \'Установить\' при появлении запроса. Вернитесь в приложение после установки.</string>
+    <string name="installation_failed">Установка не удалась: %1$s</string>
+    <string name="unable_to_open_play_store">Не удалось открыть Play Store</string>
+    <string name="app_not_installed_with_package">Приложение не установлено: %1$s</string>
+    <string name="system_app_cannot_uninstall">Системное приложение или предустановленное обновление; нельзя удалить (можно только отключить)</string>
+    <string name="uninstall_blocked_by_policy">Удаление заблокировано политикой устройства для этого пользователя/профиля</string>
+    <string name="unable_to_open_uninstall_screen">Не удалось открыть экран удаления: %1$s</string>
+    <string name="downloading_app">Загрузка приложения</string>
+    <string name="downloading_application">Загрузка приложения…</string>
 </resources>

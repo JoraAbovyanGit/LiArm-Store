@@ -35,8 +35,8 @@ class DynamicLayoutManager(private val context: Context) {
             val actionButton = cardView.findViewById<Button>(R.id.actionButton)
 
             // Set app data safely
-            appName?.text = appInfo.appName ?: "Unknown App"
-            appDescription?.text = appInfo.appDescription ?: "No description available"
+            appName?.text = appInfo.appName ?: context.getString(R.string.unknown_app)
+            appDescription?.text = getLocalizedDescription(context, appInfo) ?: context.getString(R.string.no_description_available)
             
             // Show version - check if update is available to show both versions
             val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
@@ -82,7 +82,7 @@ class DynamicLayoutManager(private val context: Context) {
                     if (installed) {
                         AppManager.launchApp(context, appInfo.packageName)
                     } else {
-                        android.widget.Toast.makeText(context, "App not installed", android.widget.Toast.LENGTH_SHORT).show()
+                        android.widget.Toast.makeText(context, context.getString(R.string.app_not_installed), android.widget.Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     println("❌ Error on icon click for ${appInfo.appName}: ${e.message}")
@@ -111,10 +111,10 @@ class DynamicLayoutManager(private val context: Context) {
             val appVersion = cardView.findViewById<TextView>(R.id.appVersion)
             val actionButton = cardView.findViewById<Button>(R.id.actionButton)
 
-            appName?.text = appInfo.appName ?: "Unknown App"
-            appDescription?.text = appInfo.appDescription ?: ""
+            appName?.text = appInfo.appName ?: context.getString(R.string.unknown_app)
+            appDescription?.text = getLocalizedDescription(context, appInfo) ?: ""
             appVersion?.text = if (!appInfo.appVersion.isNullOrBlank()) "v${appInfo.appVersion}" else ""
-            actionButton?.text = "DOWNLOAD"
+            actionButton?.text = context.getString(R.string.download_button)
             actionButton?.setOnClickListener { onButtonClick(appInfo) }
         } catch (e: Exception) {
             println("❌ Error creating fallback card: ${e.message}")
@@ -137,8 +137,8 @@ class DynamicLayoutManager(private val context: Context) {
             val actionButton = cardView.findViewById<Button>(R.id.actionButton)
 
             // Update app data
-            appName?.text = appInfo.appName ?: "Unknown App"
-            appDescription?.text = appInfo.appDescription ?: "No description available"
+            appName?.text = appInfo.appName ?: context.getString(R.string.unknown_app)
+            appDescription?.text = getLocalizedDescription(context, appInfo) ?: context.getString(R.string.no_description_available)
             
             // Show version info - display both installed and available versions if update is available
             val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
@@ -182,7 +182,7 @@ class DynamicLayoutManager(private val context: Context) {
                     if (installed) {
                         AppManager.launchApp(context, appInfo.packageName)
                     } else {
-                        android.widget.Toast.makeText(context, "App not installed", android.widget.Toast.LENGTH_SHORT).show()
+                        android.widget.Toast.makeText(context, context.getString(R.string.app_not_installed), android.widget.Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     println("❌ Error on icon click for ${appInfo.appName}: ${e.message}")
@@ -304,6 +304,26 @@ class DynamicLayoutManager(private val context: Context) {
         } catch (e: Exception) {
             "default.png"
         }
+    }
+    
+    /**
+     * Get localized description for an app based on current locale
+     * Supports: app_description_en, app_description_ru, app_description_hy
+     * Falls back to app_description if language-specific not found
+     */
+    private fun getLocalizedDescription(context: Context, appInfo: AppInfo): String? {
+        val locale = context.resources.configuration.locales[0]?.language ?: "en"
+        
+        // Try to get language-specific description from JSON
+        val localizedDesc = when (locale) {
+            "ru" -> appInfo.appDescriptionRu
+            "hy" -> appInfo.appDescriptionHy
+            "en" -> appInfo.appDescriptionEn
+            else -> null
+        }
+        
+        // Fallback to base description if language-specific not available
+        return localizedDesc ?: appInfo.appDescription
     }
     
     private fun isValidUrl(url: String): Boolean {

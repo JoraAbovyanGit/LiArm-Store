@@ -3,13 +3,12 @@
     <string name="subtitle">App Store</string>
     <string name="version">Version: anyapp-3.5.0</string>
 
-    <!-- App names -->
+    <!-- App names (not translated - keep as is) -->
     <string name="app1_name">Yandex Navigator</string>
     <string name="app2_name">Yandex Maps</string>
 
     <string name="download">Download</string>
     <string name="Remove">Remove</string>
-
 
     <string name="btn_eng">Eng</string>
     <string name="btn_rus">Rus</string>
@@ -36,4 +35,53 @@
     <string name="error_description">Please check your connection and try again.</string>
     <string name="retry">Retry</string>
     <string name="error_icon">Error icon</string>
+    
+    <!-- Common messages -->
+    <string name="unknown_app">Unknown App</string>
+    <string name="no_description_available">No description available</string>
+    <string name="app_not_installed">App not installed</string>
+    <string name="app_loading">App is loading…</string>
+    <string name="loaded_apps">Loaded %1$d apps</string>
+    <string name="no_data_received">No data received from server</string>
+    <string name="failed_to_load_apps">Failed to load apps: %1$s</string>
+    <string name="network_error">Network error</string>
+    <string name="error_displaying_apps">Error displaying apps: %1$s</string>
+    
+    <!-- Permission messages -->
+    <string name="permission_required">Permission Required</string>
+    <string name="install_permission_message">This app needs permission to install other apps from this store. Please enable \'Install unknown apps\' in the settings that will open.</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="later">Later</string>
+    <string name="could_not_open_settings">Could not open settings</string>
+    
+    <!-- Install/Update messages -->
+    <string name="installing_please_tap">Installing… Please tap \'Install\' when prompted. Return to app after installation.</string>
+    <string name="updating_please_tap">Updating… Please tap \'Update\' when prompted.</string>
+    <string name="installation_failed">Installation failed: %1$s</string>
+    
+    <!-- Uninstall messages -->
+    <string name="removed_package">Removed %1$s</string>
+    <string name="uninstall_canceled">Uninstall canceled</string>
+    <string name="uninstall_canceled_message">Uninstall canceled for %1$s. What would you like to do?</string>
+    <string name="retry_uninstall">Retry</string>
+    <string name="open_app_settings">Open Settings</string>
+    <string name="tap_uninstall_in_details">Tap \'Uninstall\' in app details</string>
+    
+    <!-- AppManager messages -->
+    <string name="apk_url_not_available">APK URL not available</string>
+    <string name="download_started">Download started…</string>
+    <string name="download_failed">Download failed</string>
+    <string name="detected_package">Detected package: %1$s</string>
+    <string name="apk_file_not_found">APK file not found</string>
+    <string name="please_enable_install_permission">Please enable \'Install unknown apps\' permission in Settings to continue</string>
+    <string name="please_enable_install_permission_and_try">Please enable \'Install unknown apps\' permission and try again</string>
+    <string name="installing_please_tap">Installing… Please tap \'Install\' when prompted. Return to app after installation.</string>
+    <string name="installation_failed">Installation failed: %1$s</string>
+    <string name="unable_to_open_play_store">Unable to open Play Store</string>
+    <string name="app_not_installed_with_package">App not installed: %1$s</string>
+    <string name="system_app_cannot_uninstall">System app or preinstalled update; cannot uninstall (you can only disable)</string>
+    <string name="uninstall_blocked_by_policy">Uninstall is blocked by device policy on this user/profile</string>
+    <string name="unable_to_open_uninstall_screen">Unable to open uninstall screen: %1$s</string>
+    <string name="downloading_app">Downloading App</string>
+    <string name="downloading_application">Downloading application…</string>
 </resources>

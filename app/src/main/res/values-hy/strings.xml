@@ -3,9 +3,9 @@
     <string name="subtitle">Հավելվածների խանութ</string>
     <string name="version">Տարբերակ․ anyapp-3.5.0</string>
 
-    <!-- App names -->
-    <string name="app1_name">Yandex Նավիգատոր</string>
-    <string name="app2_name">Yandex Քարտեզներ</string>
+    <!-- App names (not translated - keep as is) -->
+    <string name="app1_name">Yandex Navigator</string>
+    <string name="app2_name">Yandex Maps</string>
 
     <string name="download">Ներբեռնել</string>
     <string name="Remove">Ջնջել</string>
@@ -16,14 +16,72 @@
 
     <!-- App action buttons -->
     <string name="download_button">ՆԵՐԲԵՌՆԵԼ</string>
+    <string name="update_button">ԹԱՐԳՄԱՆԵԼ</string>
     <string name="remove_button">ՋՆՋԵԼ</string>
     <string name="cancel">Չեղարկել</string>
 
     <!-- Dialog titles -->
     <string name="download_title">Ներբեռնել հավելված</string>
+    <string name="update_title">Թարմացնել հավելված</string>
     <string name="remove_title">Հեռացնել հավելված</string>
     
     <!-- Dialog messages -->
     <string name="download_message">Ներբեռնե՞լ և տեղադրե՞լ %1$s:</string>
+    <string name="update_message">Թարմացնե՞լ %1$s %2$s տարբերակից %3$s տարբերակին:</string>
     <string name="remove_message">Հեռացնե՞լ %1$s սարքից:</string>
+    
+    <!-- Error screen -->
+    <string name="error_title">Ինտերնետային կապ չկա</string>
+    <string name="error_description">Խնդրում ենք ստուգել կապը և կրկին փորձել:</string>
+    <string name="retry">Կրկին փորձել</string>
+    <string name="error_icon">Սխալի պատկերակ</string>
+    
+    <!-- Common messages -->
+    <string name="unknown_app">Անհայտ հավելված</string>
+    <string name="no_description_available">Նկարագրություն հասանելի չէ</string>
+    <string name="app_not_installed">Հավելվածը տեղադրված չէ</string>
+    <string name="app_loading">Հավելվածը բեռնվում է…</string>
+    <string name="loaded_apps">Բեռնված հավելվածներ՝ %1$d</string>
+    <string name="no_data_received">Սերվերից տվյալներ չեն ստացվել</string>
+    <string name="failed_to_load_apps">Հավելվածները բեռնել չհաջողվեց՝ %1$s</string>
+    <string name="network_error">Ցանցի սխալ</string>
+    <string name="error_displaying_apps">Հավելվածները ցուցադրելիս սխալ՝ %1$s</string>
+    
+    <!-- Permission messages -->
+    <string name="permission_required">Թույլտվություն է պահանջվում</string>
+    <string name="install_permission_message">Այս հավելվածը պահանջում է թույլտվություն այս խանութից այլ հավելվածներ տեղադրելու համար: Խնդրում ենք միացնել \'Անհայտ հավելվածների տեղադրում\' բացվող կարգավորումներում:</string>
+    <string name="open_settings">Բացել կարգավորումները</string>
+    <string name="later">Հետո</string>
+    <string name="could_not_open_settings">Չհաջողվեց բացել կարգավորումները</string>
+    
+    <!-- Install/Update messages -->
+    <string name="installing_please_tap">Տեղադրում… Խնդրում ենք սեղմել \'Տեղադրել\' հարցման դեպքում: Վերադարձեք հավելվածին տեղադրումից հետո:</string>
+    <string name="updating_please_tap">Թարմացում… Խնդրում ենք սեղմել \'Թարմացնել\' հարցման դեպքում:</string>
+    <string name="installation_failed">Տեղադրումը ձախողվեց՝ %1$s</string>
+    
+    <!-- Uninstall messages -->
+    <string name="removed_package">Հեռացված՝ %1$s</string>
+    <string name="uninstall_canceled">Հեռացումը չեղարկվեց</string>
+    <string name="uninstall_canceled_message">%1$s-ի հեռացումը չեղարկվեց: Ի՞նչ եք ուզում անել:</string>
+    <string name="retry_uninstall">Կրկին փորձել</string>
+    <string name="open_app_settings">Բացել կարգավորումները</string>
+    <string name="tap_uninstall_in_details">Սեղմեք \'Հեռացնել\' հավելվածի մանրամասներում</string>
+    
+    <!-- AppManager messages -->
+    <string name="apk_url_not_available">APK URL-ը հասանելի չէ</string>
+    <string name="download_started">Ներբեռնումը սկսվեց…</string>
+    <string name="download_failed">Ներբեռնումը ձախողվեց</string>
+    <string name="detected_package">Գտնված փաթեթ՝ %1$s</string>
+    <string name="apk_file_not_found">APK ֆայլը չի գտնվել</string>
+    <string name="please_enable_install_permission">Խնդրում ենք միացնել \'Անհայտ հավելվածների տեղադրում\' թույլտվությունը կարգավորումներում՝ շարունակելու համար</string>
+    <string name="please_enable_install_permission_and_try">Խնդրում ենք միացնել \'Անհայտ հավելվածների տեղադրում\' թույլտվությունը և կրկին փորձել</string>
+    <string name="installing_please_tap">Տեղադրում… Խնդրում ենք սեղմել \'Տեղադրել\' հարցման դեպքում: Վերադարձեք հավելվածին տեղադրումից հետո:</string>
+    <string name="installation_failed">Տեղադրումը ձախողվեց՝ %1$s</string>
+    <string name="unable_to_open_play_store">Չհաջողվեց բացել Play Store</string>
+    <string name="app_not_installed_with_package">Հավելվածը տեղադրված չէ՝ %1$s</string>
+    <string name="system_app_cannot_uninstall">Համակարգային հավելված կամ նախապես տեղադրված թարմացում; չի կարելի հեռացնել (կարող եք միայն անջատել)</string>
+    <string name="uninstall_blocked_by_policy">Հեռացումը արգելափակված է սարքի քաղաքականությամբ այս օգտատիրոջ/պրոֆիլի համար</string>
+    <string name="unable_to_open_uninstall_screen">Չհաջողվեց բացել հեռացման էկրանը՝ %1$s</string>
+    <string name="downloading_app">Հավելվածի ներբեռնում</string>
+    <string name="downloading_application">Հավելվածի ներբեռնում…</string>
 </resources>

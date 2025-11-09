@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInstaller
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -17,11 +16,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import java.io.File
-import java.io.FileInputStream
-import java.io.InputStream
-import java.io.OutputStream
 import androidx.core.net.toUri
-import java.io.IOException
+import com.example.plsworkver3.R
 
 object AppManager {
 
@@ -138,7 +134,7 @@ object AppManager {
 
     fun downloadAndInstallApp(context: Context, packageName: String) {
         val apkUrl = getDownloadUrl(packageName) ?: run {
-            Toast.makeText(context, "APK URL not available", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.apk_url_not_available), Toast.LENGTH_SHORT).show()
             return
         }
         
@@ -163,8 +159,8 @@ object AppManager {
         
         val request = DownloadManager.Request(downloadUri).apply {
             setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-            setTitle("Downloading App")
-            setDescription("Downloading application...")
+            setTitle(context.getString(R.string.downloading_app))
+            setDescription(context.getString(R.string.downloading_application))
             setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
             // Show completion notification from DownloadManager
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
@@ -190,7 +186,7 @@ object AppManager {
         // Setup broadcast receiver to handle download completion
         setupDownloadReceiver(context, packageName, file)
         
-        Toast.makeText(context, "Download started...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context.getString(R.string.download_started), Toast.LENGTH_SHORT).show()
     }
     
 
@@ -220,7 +216,7 @@ object AppManager {
                                 val detectedPkg = extractPackageNameFromApk(ctx, downloadedFile)
                                 if (!detectedPkg.isNullOrBlank() && detectedPkg != packageName) {
                                     println("📦 Detected package from APK: $detectedPkg (requested: $packageName)")
-                                    Toast.makeText(ctx, "Detected package: $detectedPkg", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(ctx, ctx.getString(R.string.detected_package, detectedPkg), Toast.LENGTH_SHORT).show()
                                     // If our data map used a placeholder or wrong package, remap it
                                     getAppInfo(packageName)?.let { info ->
                                         appData.remove(packageName)
@@ -237,7 +233,7 @@ object AppManager {
                                 }
                                 installApk(ctx, downloadedFile, packageName)
                             } else {
-                                Toast.makeText(ctx, "Download failed", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(ctx, ctx.getString(R.string.download_failed), Toast.LENGTH_SHORT).show()
                             }
                         } else {
                             installApk(ctx, apkFile, packageName)
@@ -305,13 +301,9 @@ object AppManager {
 
     fun installApk(context: Context, apkFile: File, packageName: String) {
         if (!apkFile.exists()) {
-            Toast.makeText(context, "APK file not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.apk_file_not_found), Toast.LENGTH_SHORT).show()
             return
         }
-        
-        // Check if app is already installed (update scenario)
-        val isInstalled = isAppInstalled(context, packageName)
-        val isUpdate = isInstalled
         
         // Check if we have permission to install packages
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -322,32 +314,20 @@ object AppManager {
                 
                 if (alreadyAsked) {
                     // We already asked - just inform the user they need to enable it
-                    Toast.makeText(context, "Please enable 'Install unknown apps' permission in Settings to continue", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, context.getString(R.string.please_enable_install_permission), Toast.LENGTH_LONG).show()
                 } else {
                     // First time asking - redirect to settings
                     val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
                         data = "package:${context.packageName}".toUri()
                     }
                     context.startActivity(intent)
-                    Toast.makeText(context, "Please enable 'Install unknown apps' permission and try again", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, context.getString(R.string.please_enable_install_permission_and_try), Toast.LENGTH_LONG).show()
                     prefs.edit().putBoolean("asked_unknown_sources", true).apply()
                 }
                 return
             }
         }
         
-        // Try using PackageInstaller API for better update handling (Android 5.0+)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            try {
-                installApkWithPackageInstaller(context, apkFile, packageName, isUpdate)
-                return
-            } catch (e: Exception) {
-                println("❌ PackageInstaller failed, falling back to ACTION_VIEW: ${e.message}")
-                // Fall through to ACTION_VIEW method
-            }
-        }
-        
-        // Fallback to ACTION_VIEW method
         try {
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
@@ -362,93 +342,13 @@ object AppManager {
             }
             
             context.startActivity(intent)
-            if (isUpdate) {
-                Toast.makeText(context, "Updating app... Please tap 'Update' when prompted.", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(context, "Installing... Please tap 'Install' when prompted. Return to app after installation.", Toast.LENGTH_LONG).show()
-            }
+            Toast.makeText(context, context.getString(R.string.installing_please_tap), Toast.LENGTH_LONG).show()
             
             // Unregister receiver
             context.unregisterReceiver(downloadReceiver)
             downloadReceiver = null
         } catch (e: Exception) {
-            Toast.makeText(context, "Installation failed: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
-    }
-    
-    /**
-     * Install APK using PackageInstaller API (better for updates)
-     * This method allows us to specify REPLACE_EXISTING flag for updates
-     */
-    @Suppress("DEPRECATION")
-    private fun installApkWithPackageInstaller(context: Context, apkFile: File, packageName: String, isUpdate: Boolean) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return
-        
-        val packageInstaller = context.packageManager.packageInstaller
-        val params = PackageInstaller.SessionParams(
-            PackageInstaller.SessionParams.MODE_FULL_INSTALL
-        ).apply {
-            if (isUpdate && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                // Allow replacing existing app for updates
-                setAppPackageName(packageName)
-            }
-        }
-        
-        var sessionId = -1
-        try {
-            sessionId = packageInstaller.createSession(params)
-        } catch (e: Exception) {
-            throw Exception("Failed to create install session: ${e.message}")
-        }
-        
-        val session = packageInstaller.openSession(sessionId)
-        var inputStream: InputStream? = null
-        var outputStream: OutputStream? = null
-        
-        try {
-            inputStream = FileInputStream(apkFile)
-            outputStream = session.openWrite("package", 0, -1)
-            
-            val buffer = ByteArray(65536)
-            var length: Int
-            while (inputStream.read(buffer).also { length = it } != -1) {
-                outputStream.write(buffer, 0, length)
-            }
-            
-            session.fsync(outputStream)
-            outputStream.close()
-            outputStream = null
-            
-            // Create install intent receiver
-            val intent = Intent("com.example.plsworkver3.INSTALL_RESULT").apply {
-                setPackage(context.packageName)
-            }
-            val pendingIntent = android.app.PendingIntent.getBroadcast(
-                context,
-                0,
-                intent,
-                android.app.PendingIntent.FLAG_UPDATE_CURRENT or android.app.PendingIntent.FLAG_IMMUTABLE
-            )
-            
-            // Commit the session
-            session.commit(pendingIntent.intentSender)
-            session.close()
-            
-            if (isUpdate) {
-                Toast.makeText(context, "Updating app...", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "Installing app...", Toast.LENGTH_SHORT).show()
-            }
-            
-            // Unregister receiver
-            context.unregisterReceiver(downloadReceiver)
-            downloadReceiver = null
-        } catch (e: Exception) {
-            session.abandon()
-            throw Exception("Failed to install: ${e.message}")
-        } finally {
-            inputStream?.close()
-            outputStream?.close()
+            Toast.makeText(context, context.getString(R.string.installation_failed, e.message ?: ""), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -466,7 +366,7 @@ object AppManager {
                 }
                 context.startActivity(intent)
             } catch (e2: Exception) {
-                Toast.makeText(context, "Unable to open Play Store", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.unable_to_open_play_store), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -477,18 +377,18 @@ object AppManager {
         
         // Check if package is actually installed first
         if (!isAppInstalled(context, packageName)) {
-            Toast.makeText(context, "App not installed: $packageName", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.app_not_installed_with_package, packageName), Toast.LENGTH_SHORT).show()
             return
         }
 
         // Explain common reasons before opening system UI
         if (isSystemApp(context, packageName)) {
-            Toast.makeText(context, "System app or preinstalled update; cannot uninstall (you can only disable)", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, context.getString(R.string.system_app_cannot_uninstall), Toast.LENGTH_LONG).show()
             // Fall through to open details
         }
 
         if (hasUninstallRestriction(context)) {
-            Toast.makeText(context, "Uninstall is blocked by device policy on this user/profile", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, context.getString(R.string.uninstall_blocked_by_policy), Toast.LENGTH_LONG).show()
             // Fall through to open details so user can see status
         }
         // Open app details settings directly (single unified flow)
@@ -499,10 +399,10 @@ object AppManager {
             }
             println("🗑️ Opening app details settings for $packageName")
             context.startActivity(settingsIntent)
-            Toast.makeText(context, "Tap 'Uninstall' in app details", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.tap_uninstall_in_details), Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             println("❌ Failed to open app details: ${e.message}")
-            Toast.makeText(context, "Unable to open uninstall screen: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.unable_to_open_uninstall_screen, e.message ?: ""), Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -18,6 +18,16 @@ data class AppInfo(
     @SerializedName("app_description")
     val appDescription: String? = null,
     
+    // Optional: Language-specific descriptions
+    @SerializedName("app_description_en")
+    val appDescriptionEn: String? = null,
+    
+    @SerializedName("app_description_ru")
+    val appDescriptionRu: String? = null,
+    
+    @SerializedName("app_description_hy")
+    val appDescriptionHy: String? = null,
+    
     @SerializedName("app_version")
     val appVersion: String? = null
 )

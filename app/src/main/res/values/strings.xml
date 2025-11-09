@@ -17,15 +17,18 @@
 
     <!-- App action buttons -->
     <string name="download_button">DOWNLOAD</string>
+    <string name="update_button">UPDATE</string>
     <string name="remove_button">REMOVE</string>
     <string name="cancel">Cancel</string>
 
     <!-- Dialog titles -->
     <string name="download_title">Download App</string>
+    <string name="update_title">Update App</string>
     <string name="remove_title">Remove App</string>
     
     <!-- Dialog messages -->
     <string name="download_message">Download and install %1$s?</string>
+    <string name="update_message">Update %1$s from version %2$s to %3$s?</string>
     <string name="remove_message">Remove %1$s from your device?</string>
     
     <!-- Error screen -->

@@ -216,9 +216,41 @@ class MainActivity : AppCompatActivity() {
             try {
                 val status = intent?.getIntExtra(android.content.pm.PackageInstaller.EXTRA_STATUS, -999)
                 val msg = intent?.getStringExtra(android.content.pm.PackageInstaller.EXTRA_STATUS_MESSAGE)
-                Toast.makeText(this@MainActivity, "Install result: $status ${msg ?: ""}", Toast.LENGTH_SHORT).show()
+                
+                when (status) {
+                    android.content.pm.PackageInstaller.STATUS_SUCCESS -> {
+                        Toast.makeText(this@MainActivity, "App installed/updated successfully!", Toast.LENGTH_SHORT).show()
+                        refreshDynamicApps()
+                    }
+                    android.content.pm.PackageInstaller.STATUS_FAILURE_ABORTED -> {
+                        Toast.makeText(this@MainActivity, "Installation cancelled", Toast.LENGTH_SHORT).show()
+                    }
+                    android.content.pm.PackageInstaller.STATUS_FAILURE_BLOCKED -> {
+                        Toast.makeText(this@MainActivity, "Installation blocked: ${msg ?: "Unknown reason"}", Toast.LENGTH_LONG).show()
+                    }
+                    android.content.pm.PackageInstaller.STATUS_FAILURE_CONFLICT -> {
+                        Toast.makeText(this@MainActivity, "Package conflict: ${msg ?: "App may need to be uninstalled first"}", Toast.LENGTH_LONG).show()
+                    }
+                    android.content.pm.PackageInstaller.STATUS_FAILURE_INCOMPATIBLE -> {
+                        Toast.makeText(this@MainActivity, "Incompatible package: ${msg ?: "App may not be compatible with this device"}", Toast.LENGTH_LONG).show()
+                    }
+                    android.content.pm.PackageInstaller.STATUS_FAILURE_INVALID -> {
+                        Toast.makeText(this@MainActivity, "Invalid APK: ${msg ?: "The APK file may be corrupted"}", Toast.LENGTH_LONG).show()
+                    }
+                    android.content.pm.PackageInstaller.STATUS_FAILURE_STORAGE -> {
+                        Toast.makeText(this@MainActivity, "Storage error: ${msg ?: "Not enough storage space"}", Toast.LENGTH_LONG).show()
+                    }
+                    else -> {
+                        if (status != -999) {
+                            Toast.makeText(this@MainActivity, "Install result: $status ${msg ?: ""}", Toast.LENGTH_SHORT).show()
+                        }
+                        refreshDynamicApps()
+                    }
+                }
+            } catch (e: Exception) {
+                println("❌ Error handling install result: ${e.message}")
                 refreshDynamicApps()
-            } catch (_: Exception) {}
+            }
         }
     }
 
@@ -289,16 +321,40 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleAppButtonClick(packageName: String, appDisplayName: String) {
         val isInstalled = AppManager.isAppInstalled(this, packageName)
+        val needsUpdate = if (isInstalled) AppManager.needsUpdate(this, packageName) else false
 
-        if (isInstalled) {
-            // Open app details screen directly for manual uninstall
-            AppManager.uninstallApp(this, packageName)
-        } else {
-            // App not installed - download and install
-            showDownloadConfirmationDialog(packageName, appDisplayName)
+        when {
+            needsUpdate -> {
+                // Show update confirmation dialog
+                showUpdateConfirmationDialog(packageName, appDisplayName)
+            }
+            isInstalled -> {
+                // Open app details screen directly for manual uninstall
+                AppManager.uninstallApp(this, packageName)
+            }
+            else -> {
+                // App not installed - download and install
+                showDownloadConfirmationDialog(packageName, appDisplayName)
+            }
         }
     }
 
+
+    private fun showUpdateConfirmationDialog(packageName: String, appName: String) {
+        val appInfo = AppManager.getAppInfo(packageName) ?: return
+        val installedVersion = AppManager.getInstalledVersion(this, packageName) ?: "unknown"
+        val availableVersion = appInfo.appVersion ?: "unknown"
+        
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.update_title))
+            .setMessage(getString(R.string.update_message, appName, installedVersion, availableVersion))
+            .setPositiveButton(getString(R.string.update_button)) { _, _ ->
+                // Download and install updated app
+                AppManager.downloadAndInstallApp(this, packageName)
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
+    }
 
     private fun showDownloadConfirmationDialog(packageName: String, appName: String) {
         AlertDialog.Builder(this)

@@ -6,6 +6,9 @@
       "package_name": "org.telegram.messenger",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FTelegram_12.1.1_APKPure.apk?alt=media&token=1b89bc7a-f9f0-4f1b-9f1e-31df82c57088",
       "app_description": "Fast and secure messaging",
+      "app_description_en": "Fast and secure messaging",
+      "app_description_ru": "Быстрое и безопасное общение",
+      "app_description_hy": "Արագ և անվտանգ հաղորդագրություններ",
       "app_version": "12.0.1"
     },
     {
@@ -14,6 +17,9 @@
       "package_name": "com.spotify.music",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FSpotify_%20Music%20and%20Podcasts_9.0.94.274_APKPure.apk?alt=media&token=b7f17086-ba2e-41b8-83b0-15d8bba612fc",
       "app_description": "Music streaming",
+      "app_description_en": "Music streaming",
+      "app_description_ru": "Музыкальный стриминг",
+      "app_description_hy": "Երաժշտական հոսք",
       "app_version": "9.0.94.274"
     },
     {
@@ -22,6 +28,9 @@
       "package_name": "ru.yandex.yandexnavi",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FYandex%20Navigator_26.2.0_apkcombo.com.apk?alt=media&token=de84a004-17bc-472f-9f03-5067eafdaf82",
       "app_description": "GPS navigation",
+      "app_description_en": "GPS navigation",
+      "app_description_ru": "GPS навигация",
+      "app_description_hy": "GPS նավիգացիա",
       "app_version": "26.3.0"
     },
     {
@@ -30,6 +39,9 @@
       "package_name": "com.whatsapp",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fwhatsapp-messenger-2-25-31-72.apk?alt=media&token=5f9f4479-45ec-4a95-9ced-99bcc68a05ef",
       "app_description": "Messaging and calling",
+      "app_description_en": "Messaging and calling",
+      "app_description_ru": "Обмен сообщениями и звонки",
+      "app_description_hy": "Հաղորդագրություններ և զանգեր",
       "app_version": "2.25.32.70"
     },
     {
@@ -38,6 +50,9 @@
       "package_name": "com.xatori.Plugshare",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FPlugShare%20-%20EV%20%26%20Tesla%20Map_4.44.0_APKPure.apk?alt=media&token=5f8d19c8-b4ce-40ab-b231-0d7a377dbab1",
       "app_description": "Global charge map",
+      "app_description_en": "Global charge map",
+      "app_description_ru": "Глобальная карта зарядных станций",
+      "app_description_hy": "Գլոբալ լիցքավորման քարտեզ",
       "app_version": "4.43.0"
     },
     {
@@ -46,6 +61,9 @@
       "package_name": "com.iternio.abrpapp",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fcom-iternio-abrpapp-3164-69453289-f8672095f18932bb63e64d1cc562cab7.apk?alt=media&token=956c2ff4-fa38-497f-a77d-0ce1accc8a80",
       "app_description": "EV route planner",
+      "app_description_en": "EV route planner",
+      "app_description_ru": "Планировщик маршрутов для электромобилей",
+      "app_description_hy": "Էլեկտրական մեքենաների երթուղու պլանավորիչ",
       "app_version": "6.0"
     },
     {
@@ -54,6 +72,9 @@
       "package_name": "com.Avenza",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fcom-avenza-161-62688316-da27e09f811e1d5ff1f71b53de053ac0.apk?alt=media&token=9f2ed20a-70cb-4a2a-9cd3-a2d2d137d9d6",
       "app_description": "Offline GPS map viewer",
+      "app_description_en": "Offline GPS map viewer",
+      "app_description_ru": "Офлайн просмотрщик GPS карт",
+      "app_description_hy": "Անցանց GPS քարտեզների դիտիչ",
       "app_version": "5.4.3"
     },
     {
@@ -62,6 +83,9 @@
       "package_name": "com.google.android.apps.maps",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fgoogle-maps-25-44-09-824313610.apk?alt=media&token=38bc6a72-7fd2-41fe-b17b-4709af56a1be",
       "app_description": "Navigation and traffic maps",
+      "app_description_en": "Navigation and traffic maps",
+      "app_description_ru": "Навигация и карты дорожного движения",
+      "app_description_hy": "Նավիգացիա և երթևեկության քարտեզներ",
       "app_version": "25.44.2"
     },
     {
@@ -70,6 +94,9 @@
       "package_name": "ru.yandex.yandexmaps",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fyandex-maps-26-2-0.apk?alt=media&token=5097269d-db94-4f7e-a51d-96368bfdb0fc",
       "app_description": "Detailed local navigation",
+      "app_description_en": "Detailed local navigation",
+      "app_description_ru": "Подробная локальная навигация",
+      "app_description_hy": "Մանրամասն տեղական նավիգացիա",
       "app_version": "26.2.0"
     },
     {
@@ -78,6 +105,9 @@
       "package_name": "com.google.android.youtube",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fyoutube-20-43-43.apk?alt=media&token=09709118-7a64-40d0-aa1a-04f77fb5d411",
       "app_description": "Video streaming platform",
+      "app_description_en": "Video streaming platform",
+      "app_description_ru": "Платформа для видеостриминга",
+      "app_description_hy": "Վիդեո հոսքի հարթակ",
       "app_version": "20.43.43"
     },
     {
@@ -86,7 +116,11 @@
       "package_name": "org.videolan.vlc",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fvlc-3-7-0-beta-1.apk?alt=media&token=60a4252e-882d-4fa1-90e0-8ba3749e8641",
       "app_description": "Media player for all",
+      "app_description_en": "Media player for all",
+      "app_description_ru": "Медиаплеер для всего",
+      "app_description_hy": "Մեդիա նվագարկիչ ամենի համար",
       "app_version": "3.7.0"
     }
   ]
 }
+

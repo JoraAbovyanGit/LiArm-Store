@@ -37,7 +37,24 @@ class DynamicLayoutManager(private val context: Context) {
             // Set app data safely
             appName?.text = appInfo.appName ?: "Unknown App"
             appDescription?.text = appInfo.appDescription ?: "No description available"
-            appVersion?.text = if (!appInfo.appVersion.isNullOrBlank()) "v${appInfo.appVersion}" else ""
+            
+            // Show version - check if update is available to show both versions
+            val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
+            val needsUpdate = if (isInstalled) AppManager.needsUpdate(context, appInfo.packageName) else false
+            
+            if (needsUpdate && isInstalled) {
+                val installedVersion = AppManager.getInstalledVersion(context, appInfo.packageName)
+                val availableVersion = appInfo.appVersion ?: ""
+                appVersion?.text = if (!installedVersion.isNullOrBlank() && !availableVersion.isBlank()) {
+                    "v$installedVersion → v$availableVersion"
+                } else if (!availableVersion.isBlank()) {
+                    "v$availableVersion"
+                } else {
+                    ""
+                }
+            } else {
+                appVersion?.text = if (!appInfo.appVersion.isNullOrBlank()) "v${appInfo.appVersion}" else ""
+            }
 
             // Load app icon with Firebase Storage
             loadAppIconFromFirebase(appIcon, appInfo.appIcon, appInfo.appName)
@@ -49,6 +66,13 @@ class DynamicLayoutManager(private val context: Context) {
                 } catch (e: Exception) {
                     println("❌ Error in button click for ${appInfo.appName}: ${e.message}")
                 }
+            }
+
+            // Set initial button state
+            actionButton?.let {
+                val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
+                val needsUpdate = if (isInstalled) AppManager.needsUpdate(context, appInfo.packageName) else false
+                updateButtonState(it, isInstalled, needsUpdate, appInfo)
             }
 
             // Open app when clicking the icon if installed
@@ -115,7 +139,24 @@ class DynamicLayoutManager(private val context: Context) {
             // Update app data
             appName?.text = appInfo.appName ?: "Unknown App"
             appDescription?.text = appInfo.appDescription ?: "No description available"
-            appVersion?.text = if (!appInfo.appVersion.isNullOrBlank()) "v${appInfo.appVersion}" else ""
+            
+            // Show version info - display both installed and available versions if update is available
+            val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
+            val needsUpdate = if (isInstalled) AppManager.needsUpdate(context, appInfo.packageName) else false
+            
+            if (needsUpdate && isInstalled) {
+                val installedVersion = AppManager.getInstalledVersion(context, appInfo.packageName)
+                val availableVersion = appInfo.appVersion ?: ""
+                appVersion?.text = if (!installedVersion.isNullOrBlank() && !availableVersion.isBlank()) {
+                    "v$installedVersion → v$availableVersion"
+                } else if (!availableVersion.isBlank()) {
+                    "v$availableVersion"
+                } else {
+                    ""
+                }
+            } else {
+                appVersion?.text = if (!appInfo.appVersion.isNullOrBlank()) "v${appInfo.appVersion}" else ""
+            }
 
             // Load app icon
             loadAppIconFromFirebase(appIcon, appInfo.appIcon, appInfo.appName)
@@ -129,10 +170,9 @@ class DynamicLayoutManager(private val context: Context) {
                 }
             }
 
-            // Update button state
+            // Update button state based on install status and update availability
             actionButton?.let {
-                val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
-                updateButtonState(it, isInstalled)
+                updateButtonState(it, isInstalled, needsUpdate, appInfo)
             }
 
             // Update icon click listener
@@ -153,18 +193,32 @@ class DynamicLayoutManager(private val context: Context) {
         }
     }
 
-    fun updateButtonState(button: Button, isInstalled: Boolean) {
+    fun updateButtonState(button: Button, isInstalled: Boolean, needsUpdate: Boolean = false, appInfo: AppInfo? = null) {
         try {
-            if (isInstalled) {
-                button.text = "REMOVE"
-                button.background = ContextCompat.getDrawable(context, R.drawable.button_rounded_remove)
-            } else {
-                button.text = context.getString(R.string.download_button)
-                button.background = ContextCompat.getDrawable(context, R.drawable.button_rounded_download)
+            when {
+                needsUpdate && isInstalled -> {
+                    // Show UPDATE button
+                    button.text = context.getString(R.string.update_button)
+                    button.background = ContextCompat.getDrawable(context, R.drawable.button_rounded_update)
+                }
+                isInstalled -> {
+                    // Show REMOVE button
+                    button.text = context.getString(R.string.remove_button)
+                    button.background = ContextCompat.getDrawable(context, R.drawable.button_rounded_remove)
+                }
+                else -> {
+                    // Show DOWNLOAD button
+                    button.text = context.getString(R.string.download_button)
+                    button.background = ContextCompat.getDrawable(context, R.drawable.button_rounded_download)
+                }
             }
         } catch (e: Exception) {
             println("❌ Error updating button state: ${e.message}")
-            button.text = if (isInstalled) "REMOVE" else "DOWNLOAD"
+            button.text = when {
+                needsUpdate && isInstalled -> "UPDATE"
+                isInstalled -> "REMOVE"
+                else -> "DOWNLOAD"
+            }
         }
     }
 
@@ -173,8 +227,10 @@ class DynamicLayoutManager(private val context: Context) {
             appViews.forEachIndexed { index, view ->
                 if (index < appList.size) {
                     val button = view.findViewById<Button>(R.id.actionButton)
-                    val isInstalled = AppManager.isAppInstalled(context, appList[index].packageName)
-                    updateButtonState(button, isInstalled)
+                    val appInfo = appList[index]
+                    val isInstalled = AppManager.isAppInstalled(context, appInfo.packageName)
+                    val needsUpdate = if (isInstalled) AppManager.needsUpdate(context, appInfo.packageName) else false
+                    updateButtonState(button, isInstalled, needsUpdate, appInfo)
                 }
             }
         } catch (e: Exception) {

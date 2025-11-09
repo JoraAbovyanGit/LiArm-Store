@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInstaller
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -16,6 +17,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
+import java.io.OutputStream
 import androidx.core.net.toUri
 import java.io.IOException
 
@@ -62,6 +66,38 @@ object AppManager {
         } catch (e: Exception) {
             false
         }
+    }
+    
+    /**
+     * Get the installed version of an app
+     * @return Version string (e.g., "1.2.3") or null if not installed
+     */
+    fun getInstalledVersion(context: Context, packageName: String): String? {
+        return try {
+            val pm = context.packageManager
+            val packageInfo = if (android.os.Build.VERSION.SDK_INT >= 33) {
+                @Suppress("DEPRECATION")
+                pm.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
+            } else {
+                @Suppress("DEPRECATION")
+                pm.getPackageInfo(packageName, 0)
+            }
+            packageInfo?.versionName
+        } catch (e: Exception) {
+            null
+        }
+    }
+    
+    /**
+     * Check if an app needs an update by comparing installed version with available version
+     * @return true if update is available (available version > installed version)
+     */
+    fun needsUpdate(context: Context, packageName: String): Boolean {
+        val appInfo = getAppInfo(packageName) ?: return false
+        val availableVersion = appInfo.appVersion ?: return false
+        val installedVersion = getInstalledVersion(context, packageName) ?: return false
+        
+        return com.example.plsworkver3.utils.VersionUtils.isNewerVersion(availableVersion, installedVersion)
     }
 
 
@@ -273,6 +309,10 @@ object AppManager {
             return
         }
         
+        // Check if app is already installed (update scenario)
+        val isInstalled = isAppInstalled(context, packageName)
+        val isUpdate = isInstalled
+        
         // Check if we have permission to install packages
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (!context.packageManager.canRequestPackageInstalls()) {
@@ -296,6 +336,18 @@ object AppManager {
             }
         }
         
+        // Try using PackageInstaller API for better update handling (Android 5.0+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            try {
+                installApkWithPackageInstaller(context, apkFile, packageName, isUpdate)
+                return
+            } catch (e: Exception) {
+                println("❌ PackageInstaller failed, falling back to ACTION_VIEW: ${e.message}")
+                // Fall through to ACTION_VIEW method
+            }
+        }
+        
+        // Fallback to ACTION_VIEW method
         try {
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
@@ -310,13 +362,93 @@ object AppManager {
             }
             
             context.startActivity(intent)
-            Toast.makeText(context, "Installing... Please tap 'Install' when prompted. Return to app after installation.", Toast.LENGTH_LONG).show()
+            if (isUpdate) {
+                Toast.makeText(context, "Updating app... Please tap 'Update' when prompted.", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(context, "Installing... Please tap 'Install' when prompted. Return to app after installation.", Toast.LENGTH_LONG).show()
+            }
             
             // Unregister receiver
             context.unregisterReceiver(downloadReceiver)
             downloadReceiver = null
         } catch (e: Exception) {
             Toast.makeText(context, "Installation failed: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    /**
+     * Install APK using PackageInstaller API (better for updates)
+     * This method allows us to specify REPLACE_EXISTING flag for updates
+     */
+    @Suppress("DEPRECATION")
+    private fun installApkWithPackageInstaller(context: Context, apkFile: File, packageName: String, isUpdate: Boolean) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return
+        
+        val packageInstaller = context.packageManager.packageInstaller
+        val params = PackageInstaller.SessionParams(
+            PackageInstaller.SessionParams.MODE_FULL_INSTALL
+        ).apply {
+            if (isUpdate && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // Allow replacing existing app for updates
+                setAppPackageName(packageName)
+            }
+        }
+        
+        var sessionId = -1
+        try {
+            sessionId = packageInstaller.createSession(params)
+        } catch (e: Exception) {
+            throw Exception("Failed to create install session: ${e.message}")
+        }
+        
+        val session = packageInstaller.openSession(sessionId)
+        var inputStream: InputStream? = null
+        var outputStream: OutputStream? = null
+        
+        try {
+            inputStream = FileInputStream(apkFile)
+            outputStream = session.openWrite("package", 0, -1)
+            
+            val buffer = ByteArray(65536)
+            var length: Int
+            while (inputStream.read(buffer).also { length = it } != -1) {
+                outputStream.write(buffer, 0, length)
+            }
+            
+            session.fsync(outputStream)
+            outputStream.close()
+            outputStream = null
+            
+            // Create install intent receiver
+            val intent = Intent("com.example.plsworkver3.INSTALL_RESULT").apply {
+                setPackage(context.packageName)
+            }
+            val pendingIntent = android.app.PendingIntent.getBroadcast(
+                context,
+                0,
+                intent,
+                android.app.PendingIntent.FLAG_UPDATE_CURRENT or android.app.PendingIntent.FLAG_IMMUTABLE
+            )
+            
+            // Commit the session
+            session.commit(pendingIntent.intentSender)
+            session.close()
+            
+            if (isUpdate) {
+                Toast.makeText(context, "Updating app...", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Installing app...", Toast.LENGTH_SHORT).show()
+            }
+            
+            // Unregister receiver
+            context.unregisterReceiver(downloadReceiver)
+            downloadReceiver = null
+        } catch (e: Exception) {
+            session.abandon()
+            throw Exception("Failed to install: ${e.message}")
+        } finally {
+            inputStream?.close()
+            outputStream?.close()
         }
     }
 

@@ -131,7 +131,51 @@
       "app_description_ru": "Медиаплеер для всего",
       "app_description_hy": "Մեդիա նվագարկիչ ամենի համար",
       "app_version": "3.7.0"
-    }
+    },
+    {
+      "app_name": "  Tripadvisor",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Ftripadvisor.png?alt=media&token=de4d9bfa-88c4-497a-bf0f-a679df434660",
+      "package_name": "com.tripadvisor.tripadvisor",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Ftripadvisor.apk?alt=media&token=d8b75a2e-860d-4f1d-ab96-97c7a396fe7d",
+      "app_description": "Travel reviews and guides",
+      "app_description_en": "Travel reviews and guides",
+      "app_description_ru": "Отзывы и советы путешествий",
+      "app_description_hy": "ամփորդական կարծիքներ և ուղեցույցներ",
+      "app_version": "65.3"
+    },
+    {
+      "app_name": "Kinodaran",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fkinodaran.png?alt=media&token=1013c6f7-6c38-4c94-804c-c094a8735d7a",
+      "package_name": "com.techcraeft.kinodaran",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fkinodaran.apk?alt=media&token=236a4be4-1ca4-4fc1-920e-9c7d34dd6853",
+      "app_description": "Armenian movies online",
+      "app_description_en": "Armenian movies online",
+      "app_description_ru": "Армянские фильмы онлайн",
+      "app_description_hy": "Հայկական ֆիլմեր առցանց",
+      "app_version": "2.1.1"
+    },
+    {
+      "app_name": "Apple Music",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fapple_music.png?alt=media&token=1691f450-87ee-4c6f-b9b0-868cbf8b67ca",
+      "package_name": "com.apple.android.music",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fapple%20music.apk?alt=media&token=9c29b434-f9c0-45da-a762-cda96bf9d027",
+      "app_description": "Stream and enjoy music",
+      "app_description_en": "Stream and enjoy music",
+      "app_description_ru": "Слушай музыку онлайн",
+      "app_description_hy": "Լսիր երաժշտություն առցանց",
+      "app_version": "5.0.2"
+    },
+    {
+      "app_name": "Bookmate",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fbookmate.png?alt=media&token=1830517c-dc21-41ed-9661-eb953cb19f5b",
+      "package_name": "com.bookmate",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fbookmate.apk?alt=media&token=176a9496-a884-454a-be35-6985b71a75ff",
+      "app_description": "Read books anywhere",
+      "app_description_en": "Read books anywhere",
+      "app_description_ru": "Читай книги везде",
+      "app_description_hy": "Կարդա գրքեր ամենուր",
+      "app_version": "9.0.1"
+    },
   ]
 }
 

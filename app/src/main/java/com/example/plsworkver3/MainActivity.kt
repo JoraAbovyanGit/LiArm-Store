@@ -3,8 +3,16 @@ package com.example.plsworkver3
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.GridLayoutManager
 import android.widget.Toast
@@ -31,11 +39,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appContainer: RecyclerView
     private lateinit var dynamicLayoutManager: DynamicLayoutManager
     private var appList: List<AppInfo> = emptyList()
+    private var filteredAppList: List<AppInfo> = emptyList()
     private var appAdapter: AppRecyclerAdapter? = null
 
     // Uninstall UX
     private var uninstallingPackage: String? = null
     private var uninstallDialog: AlertDialog? = null
+    
+    // Category and search
+    private lateinit var drawerLayout: DrawerLayout
+    private var currentCategory: String = "main"
+    private var searchQuery: String = ""
+    private val lastVisitedCategories = mutableListOf<String>()
+    private lateinit var navContainer: LinearLayout
+    private lateinit var searchEditText: EditText
+    private var gridLayoutManager: GridLayoutManager? = null
+    private var itemDecoration: GridSpacingItemDecoration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,13 +64,15 @@ class MainActivity : AppCompatActivity() {
         println("🚀 MainActivity onCreate() called - activity_main set")
 
         try {
-            // Check internet early; if unavailable, show error page
-            if (!NetworkUtils.isInternetAvailable(this)) {
-                startActivity(Intent(this, ErrorActivity::class.java))
-                finish()
-                return
+            // Check internet early - but don't block if check fails
+            // Let the API call handle actual network errors
+            val hasNetwork = NetworkUtils.isInternetAvailable(this)
+            if (!hasNetwork) {
+                println("⚠️ Initial network check failed, but proceeding to try API call")
             }
             checkAndRequestDownloadPermissions()
+            loadLastVisitedCategories()
+            setupHeaderElements()
             setupLanguageButtons()
             println("✅ Language buttons setup complete")
 
@@ -275,6 +296,219 @@ class MainActivity : AppCompatActivity() {
         refreshDynamicApps()
     }
 
+    private fun setupHeaderElements() {
+        try {
+            drawerLayout = findViewById(R.id.drawerLayout)
+            navContainer = findViewById(R.id.navContainer)
+            searchEditText = findViewById(R.id.searchEditText)
+            
+            // Menu button - open drawer
+            findViewById<ImageButton>(R.id.menuButton)?.setOnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
+
+            // Setup drawer category items
+            setupDrawerCategories()
+            
+            // Setup navigation bar (Main + last 2 categories)
+            updateNavigationBar()
+            
+            // Search functionality
+            setupSearchFunctionality()
+        } catch (e: Exception) {
+            println("❌ Error setting up header elements: ${e.message}")
+            e.printStackTrace()
+        }
+    }
+    
+    private fun setupDrawerCategories() {
+        val categories = mapOf(
+            "main" to R.id.categoryMain,
+            "maps" to R.id.categoryMaps,
+            "music" to R.id.categoryMusic,
+            "charge_stations" to R.id.categoryChargeStations,
+            "messengers" to R.id.categoryMessengers,
+            "entertainment" to R.id.categoryEntertainment,
+            "navigators" to R.id.categoryNavigators,
+            "other" to R.id.categoryOther
+        )
+        
+        categories.forEach { (category, viewId) ->
+            findViewById<TextView>(viewId)?.setOnClickListener {
+                selectCategory(category)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+        }
+    }
+    
+    private fun selectCategory(category: String) {
+        // Update last visited categories
+        if (category != "main") {
+            lastVisitedCategories.remove(category)
+            lastVisitedCategories.add(0, category)
+            if (lastVisitedCategories.size > 2) {
+                lastVisitedCategories.removeAt(2)
+            }
+            // Save to SharedPreferences
+            getSharedPreferences("app_prefs", MODE_PRIVATE)
+                .edit()
+                .putString("last_categories", lastVisitedCategories.joinToString(","))
+                .apply()
+        }
+        
+        currentCategory = category
+        updateNavigationBar()
+        filterAndDisplayApps()
+    }
+    
+    private fun updateNavigationBar() {
+        navContainer.removeAllViews()
+        
+        // Add Main button
+        val mainButton = createNavButton(getString(R.string.category_main), "main")
+        val mainParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            weight = 1f
+        }
+        mainButton.layoutParams = mainParams
+        navContainer.addView(mainButton)
+        
+        // Add last 2 visited categories
+        val lastCategories = lastVisitedCategories.take(2)
+        lastCategories.forEach { category ->
+            val button = createNavButton(getCategoryName(category), category)
+            navContainer.addView(button)
+        }
+    }
+    
+    private fun createNavButton(text: String, category: String): TextView {
+        val button = TextView(this)
+        button.text = text
+        button.setTextColor(ContextCompat.getColor(this, R.color.text_primary_dark))
+        button.textSize = 14f
+        val padding = (12 * resources.displayMetrics.density).toInt()
+        button.setPadding(padding, padding / 2, padding, padding / 2)
+        button.background = ContextCompat.getDrawable(this, R.drawable.nav_item_background)
+        button.isClickable = true
+        button.isFocusable = true
+        
+        // Highlight current category
+        if (category == currentCategory) {
+            button.setTextColor(ContextCompat.getColor(this, R.color.accent_secondary))
+        }
+        
+        button.setOnClickListener {
+            selectCategory(category)
+        }
+        
+        val params = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            weight = 1f
+            marginStart = (8 * resources.displayMetrics.density).toInt()
+        }
+        button.layoutParams = params
+        
+        return button
+    }
+    
+    private fun getCategoryName(category: String): String {
+        return when (category) {
+            "main" -> getString(R.string.category_main)
+            "maps" -> getString(R.string.category_maps)
+            "music" -> getString(R.string.category_music)
+            "charge_stations" -> getString(R.string.category_charge_stations)
+            "messengers" -> getString(R.string.category_messengers)
+            "entertainment" -> getString(R.string.category_entertainment)
+            "navigators" -> getString(R.string.category_navigators)
+            "other" -> getString(R.string.category_other)
+            else -> category
+        }
+    }
+    
+    private fun setupSearchFunctionality() {
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                searchQuery = s?.toString()?.lowercase() ?: ""
+                filterAndDisplayApps()
+            }
+        })
+        
+        findViewById<ImageButton>(R.id.searchButton)?.setOnClickListener {
+            // Search is handled by TextWatcher
+        }
+    }
+    
+    private fun filterAndDisplayApps() {
+        filteredAppList = appList.filter { app ->
+            // First filter by category (search only within current category)
+            val matchesCategory = if (currentCategory == "main") {
+                // Main shows all categories
+                true
+            } else {
+                // Other categories: only show apps from that category
+                app.category?.lowercase() == currentCategory.lowercase()
+            }
+            
+            // Then filter by search query (only if category matches)
+            val matchesSearch = searchQuery.isEmpty() || 
+                app.appName.lowercase().contains(searchQuery)
+            
+            // Both conditions must be true
+            matchesCategory && matchesSearch
+        }
+        
+        // Update section title
+        val sectionTitle = findViewById<TextView>(R.id.sectionTitle)
+        if (currentCategory == "main") {
+            sectionTitle?.text = getString(R.string.popular_apps)
+        } else {
+            sectionTitle?.text = getCategoryName(currentCategory)
+        }
+        
+        // Show/hide no results message
+        updateNoResultsMessage()
+        
+        displayDynamicApps()
+    }
+    
+    private fun updateNoResultsMessage() {
+        val noResultsMessage = findViewById<TextView>(R.id.noResultsMessage)
+        val appContainer = findViewById<RecyclerView>(R.id.appContainer)
+        
+        if (filteredAppList.isEmpty() && appList.isNotEmpty()) {
+            // Show no results message
+            noResultsMessage?.visibility = View.VISIBLE
+            appContainer?.visibility = View.GONE
+            
+            // Set appropriate message based on search and category
+            val message = if (searchQuery.isNotEmpty()) {
+                // User searched for something
+                if (currentCategory == "main") {
+                    getString(R.string.no_results, searchQuery)
+                } else {
+                    getString(R.string.no_results_in_category, searchQuery)
+                }
+            } else {
+                // No search query, just no apps in category
+                getString(R.string.no_apps_in_category)
+            }
+            noResultsMessage?.text = message
+        } else {
+            // Hide no results message, show app list
+            noResultsMessage?.visibility = View.GONE
+            appContainer?.visibility = View.VISIBLE
+        }
+    }
+    
+    private fun loadLastVisitedCategories() {
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val saved = prefs.getString("last_categories", "") ?: ""
+        if (saved.isNotEmpty()) {
+            lastVisitedCategories.clear()
+            lastVisitedCategories.addAll(saved.split(",").filter { it.isNotEmpty() })
+        }
+    }
+
     private fun setupLanguageButtons() {
         val btnEnglish = findViewById<Button>(R.id.btnEnglish)
         val btnRussian = findViewById<Button>(R.id.btnRussian)
@@ -403,8 +637,9 @@ class MainActivity : AppCompatActivity() {
                         }
                         
                         appList = appResponse.apps
+                        filteredAppList = appList
                         AppManager.updateAppData(appList)
-                        displayDynamicApps()
+                        filterAndDisplayApps()
                         
 
                         Toast.makeText(this@MainActivity, getString(R.string.loaded_apps, appResponse.apps.size), Toast.LENGTH_SHORT).show()
@@ -424,10 +659,30 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 println("💥 Network error: ${e.message}")
                 println("💥 Exception type: ${e.javaClass.simpleName}")
-                Toast.makeText(this@MainActivity, getString(R.string.network_error), Toast.LENGTH_LONG).show()
-                // Navigate to error page instead of loading test data
-                startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
-                finish()
+                println("💥 Stack trace: ${e.stackTraceToString()}")
+                
+                // Provide more specific error message
+                val errorMessage = when {
+                    e.message?.contains("timeout", ignoreCase = true) == true -> 
+                        "Connection timeout. Please check your internet connection."
+                    e.message?.contains("Unable to resolve host", ignoreCase = true) == true -> 
+                        "Cannot reach server. Check your internet connection or DNS settings."
+                    e.message?.contains("SSL", ignoreCase = true) == true -> 
+                        "SSL error. Please check your network security settings."
+                    else -> 
+                        "Network error: ${e.message ?: "Unknown error"}"
+                }
+                
+                Toast.makeText(this@MainActivity, errorMessage, Toast.LENGTH_LONG).show()
+                
+                // Only navigate to error page if it's a real network issue
+                // Don't navigate if it's just a validation issue
+                if (e.message?.contains("timeout") == true || 
+                    e.message?.contains("Unable to resolve") == true ||
+                    e.message?.contains("Failed to connect") == true) {
+                    startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
+                    finish()
+                }
                 e.printStackTrace()
             }
         }
@@ -466,21 +721,27 @@ class MainActivity : AppCompatActivity() {
     
     private fun displayDynamicApps() {
         try {
-            println("🧩 Displaying ${appList.size} apps in RecyclerView")
-            appAdapter = AppRecyclerAdapter(appList, dynamicLayoutManager) { app ->
-                handleAppButtonClick(app.packageName, app.appName)
+            val appsToDisplay = if (filteredAppList.isNotEmpty() || appList.isEmpty()) filteredAppList else appList
+            println("🧩 Displaying ${appsToDisplay.size} apps in RecyclerView (filtered from ${appList.size} total)")
+            
+            // Setup GridLayoutManager only once
+            if (gridLayoutManager == null) {
+                gridLayoutManager = GridLayoutManager(this, 2)
+                appContainer.layoutManager = gridLayoutManager
+                
+                // Add item decoration only once
+                val spacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
+                itemDecoration = GridSpacingItemDecoration(2, spacing, true)
+                appContainer.addItemDecoration(itemDecoration!!)
             }
             
-            // Setup GridLayoutManager with 2 columns
-            val gridLayoutManager = GridLayoutManager(this, 2)
-            appContainer.layoutManager = gridLayoutManager
+            // Create or update adapter
+            appAdapter = AppRecyclerAdapter(appsToDisplay, dynamicLayoutManager) { app ->
+                handleAppButtonClick(app.packageName, app.appName)
+            }
             appContainer.adapter = appAdapter
             
-            // Add item decoration for spacing
-            val spacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
-            appContainer.addItemDecoration(GridSpacingItemDecoration(2, spacing, true))
-            
-            println("✅ RecyclerView adapter set with ${appList.size} items")
+            println("✅ RecyclerView adapter set with ${appsToDisplay.size} items")
         } catch (e: Exception) {
             println("❌ Error in displayDynamicApps: ${e.message}")
             Toast.makeText(this, getString(R.string.error_displaying_apps, e.message ?: ""), Toast.LENGTH_SHORT).show()
@@ -489,8 +750,7 @@ class MainActivity : AppCompatActivity() {
     
     private fun refreshDynamicApps() {
         if (appList.isNotEmpty()) {
-            // Notify adapter that data changed so it refreshes button states
-            appAdapter?.notifyDataSetChanged()
+            filterAndDisplayApps()
         }
     }
     

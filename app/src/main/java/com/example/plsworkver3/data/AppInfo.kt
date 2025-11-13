@@ -29,7 +29,10 @@ data class AppInfo(
     val appDescriptionHy: String? = null,
     
     @SerializedName("app_version")
-    val appVersion: String? = null
+    val appVersion: String? = null,
+    
+    @SerializedName("category")
+    val category: String? = "main"
 )
 
 data class AppListResponse(

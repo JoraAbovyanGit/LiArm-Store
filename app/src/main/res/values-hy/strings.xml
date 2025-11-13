@@ -87,4 +87,21 @@
     <string name="unable_to_open_uninstall_screen">Չհաջողվեց բացել հեռացման էկրանը՝ %1$s</string>
     <string name="downloading_app">Հավելվածի ներբեռնում</string>
     <string name="downloading_application">Հավելվածի ներբեռնում…</string>
+    
+    <!-- Categories -->
+    <string name="categories">Կատեգորիաներ</string>
+    <string name="popular_apps">Հայտնի հավելվածներ</string>
+    <string name="category_main">Գլխավոր</string>
+    <string name="category_maps">Քարտեզներ</string>
+    <string name="category_music">Երաժշտություն</string>
+    <string name="category_charge_stations">Լիցքավորման կայաններ</string>
+    <string name="category_messengers">Հաղորդագրություններ</string>
+    <string name="category_entertainment">Զվարճանք</string>
+    <string name="category_navigators">Նավիգատորներ</string>
+    <string name="category_other">Այլ</string>
+    
+    <!-- No results message -->
+    <string name="no_results">Ոչ մի արդյունք \"%1$s\" համար</string>
+    <string name="no_results_in_category">Ոչ մի արդյունք \"%1$s\" այս կատեգորիայում</string>
+    <string name="no_apps_in_category">Այս կատեգորիայում հավելվածներ չկան</string>
 </resources>

@@ -87,4 +87,21 @@
     <string name="unable_to_open_uninstall_screen">Unable to open uninstall screen: %1$s</string>
     <string name="downloading_app">Downloading App</string>
     <string name="downloading_application">Downloading application…</string>
+    
+    <!-- Categories -->
+    <string name="categories">Categories</string>
+    <string name="popular_apps">Popular apps</string>
+    <string name="category_main">Main</string>
+    <string name="category_maps">Maps</string>
+    <string name="category_music">Music</string>
+    <string name="category_charge_stations">Charge Stations</string>
+    <string name="category_messengers">Messengers</string>
+    <string name="category_entertainment">Entertainment</string>
+    <string name="category_navigators">Navigators</string>
+    <string name="category_other">Other</string>
+    
+    <!-- No results message -->
+    <string name="no_results">No results matching \"%1$s\"</string>
+    <string name="no_results_in_category">No results matching \"%1$s\" in this category</string>
+    <string name="no_apps_in_category">No apps in this category</string>
 </resources>

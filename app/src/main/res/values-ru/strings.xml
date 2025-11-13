@@ -87,4 +87,21 @@
     <string name="unable_to_open_uninstall_screen">Не удалось открыть экран удаления: %1$s</string>
     <string name="downloading_app">Загрузка приложения</string>
     <string name="downloading_application">Загрузка приложения…</string>
+    
+    <!-- Categories -->
+    <string name="categories">Категории</string>
+    <string name="popular_apps">Популярные приложения</string>
+    <string name="category_main">Главная</string>
+    <string name="category_maps">Карты</string>
+    <string name="category_music">Музыка</string>
+    <string name="category_charge_stations">Зарядные станции</string>
+    <string name="category_messengers">Мессенджеры</string>
+    <string name="category_entertainment">Развлечения</string>
+    <string name="category_navigators">Навигаторы</string>
+    <string name="category_other">Другое</string>
+    
+    <!-- No results message -->
+    <string name="no_results">Нет результатов для \"%1$s\"</string>
+    <string name="no_results_in_category">Нет результатов для \"%1$s\" в этой категории</string>
+    <string name="no_apps_in_category">Нет приложений в этой категории</string>
 </resources>

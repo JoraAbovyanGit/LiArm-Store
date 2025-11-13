@@ -9,6 +9,7 @@
       "app_description_en": "Fast and secure messaging",
       "app_description_ru": "Быстрое и безопасное общение",
       "app_description_hy": "Արագ և անվտանգ հաղորդագրություններ",
+      "category": "messengers",
       "app_version": "12.0.1"
     },
     {
@@ -20,6 +21,7 @@
       "app_description_en": "Music streaming",
       "app_description_ru": "Музыкальный стриминг",
       "app_description_hy": "Երաժշտական հոսք",
+      "category": "music",
       "app_version": "9.0.94.274"
     },
     {
@@ -31,6 +33,7 @@
       "app_description_en": "GPS navigation",
       "app_description_ru": "GPS навигация",
       "app_description_hy": "GPS նավիգացիա",
+      "category": "navigators",
       "app_version": "26.3.0"
     },
     {
@@ -42,6 +45,7 @@
       "app_description_en": "Messaging and calling",
       "app_description_ru": "Обмен сообщениями и звонки",
       "app_description_hy": "Հաղորդագրություններ և զանգեր",
+      "category": "messengers",
       "app_version": "2.25.32.70"
     },
     {
@@ -53,6 +57,7 @@
       "app_description_en": "Global charge map",
       "app_description_ru": "Глобальная карта зарядных станций",
       "app_description_hy": "Գլոբալ լիցքավորման քարտեզ",
+      "category": "charge_stations",
       "app_version": "4.43.0"
     },
     {
@@ -64,6 +69,7 @@
       "app_description_en": "EV route planner",
       "app_description_ru": "Планировщик маршрутов для электромобилей",
       "app_description_hy": "Էլեկտրական մեքենաների երթուղու պլանավորիչ",
+      "category": "charge_stations",
       "app_version": "6.0"
     },
     {
@@ -75,6 +81,7 @@
       "app_description_en": "Offline GPS map viewer",
       "app_description_ru": "Офлайн просмотрщик GPS карт",
       "app_description_hy": "Անցանց GPS քարտեզների դիտիչ",
+      "category": "maps",
       "app_version": "5.4.3"
     },
     {
@@ -86,6 +93,7 @@
       "app_description_en": "Navigation and traffic maps",
       "app_description_ru": "Навигация и карты дорожного движения",
       "app_description_hy": "Նավիգացիա և երթևեկության քարտեզներ",
+      "category": "maps",
       "app_version": "25.44.2"
     },
     {
@@ -97,6 +105,7 @@
       "app_description_en": "Detailed local navigation",
       "app_description_ru": "Подробная локальная навигация",
       "app_description_hy": "Մանրամասն տեղական նավիգացիա",
+      "category": "maps",
       "app_version": "26.2.0"
     },
     {
@@ -108,6 +117,7 @@
       "app_description_en": "Video streaming platform",
       "app_description_ru": "Платформа для видеостриминга",
       "app_description_hy": "Վիդեո հոսքի հարթակ",
+      "category": "entertainment",
       "app_version": "20.43.43"
     },
     {
@@ -119,6 +129,7 @@
       "app_description_en": "Email & communication service",
       "app_description_ru": "Почта и сообщения",
       "app_description_hy": "Էլ․ փոստի ծառայություն",
+      "category": "other",
       "app_version": "2025.10.13.822279208"
     },
     {
@@ -130,6 +141,7 @@
       "app_description_en": "Media player for all",
       "app_description_ru": "Медиаплеер для всего",
       "app_description_hy": "Մեդիա նվագարկիչ ամենի համար",
+      "category": "other",
       "app_version": "3.7.0"
     },
     {
@@ -141,6 +153,7 @@
       "app_description_en": "Travel reviews and guides",
       "app_description_ru": "Отзывы и советы путешествий",
       "app_description_hy": "ամփորդական կարծիքներ և ուղեցույցներ",
+      "category": "other",
       "app_version": "65.3"
     },
     {
@@ -152,6 +165,7 @@
       "app_description_en": "Armenian movies online",
       "app_description_ru": "Армянские фильмы онлайн",
       "app_description_hy": "Հայկական ֆիլմեր առցանց",
+      "category": "entertainment",
       "app_version": "2.1.1"
     },
     {
@@ -163,6 +177,7 @@
       "app_description_en": "Stream and enjoy music",
       "app_description_ru": "Слушай музыку онлайн",
       "app_description_hy": "Լսիր երաժշտություն առցանց",
+      "category": "music",
       "app_version": "5.0.2"
     },
     {
@@ -174,6 +189,7 @@
       "app_description_en": "Read books anywhere",
       "app_description_ru": "Читай книги везде",
       "app_description_hy": "Կարդա գրքեր ամենուր",
+      "category": "entertainment",
       "app_version": "9.0.1"
     }
   ]

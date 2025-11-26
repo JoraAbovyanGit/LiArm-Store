@@ -104,4 +104,6 @@
     <string name="no_results">No results matching \"%1$s\"</string>
     <string name="no_results_in_category">No results matching \"%1$s\" in this category</string>
     <string name="no_apps_in_category">No apps in this category</string>
+    <string name="email">Email</string>
+    <string name="car_app_selection_message">%1$s selected. Continue on the Li Auto display for full controls.</string>
 </resources>

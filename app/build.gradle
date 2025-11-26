@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.plsworkver3"
-        minSdk 24
+        minSdk 29
         targetSdk 36
         versionCode 1
         versionName "1.0"
@@ -46,9 +46,10 @@ dependencies {
     implementation libs.androidx.activity.compose
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
+    implementation 'androidx.car.app:app-automotive:1.4.0'
     
     // Firebase
-    implementation platform(libs.firebase.bom)
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
     implementation libs.firebase.analytics
     implementation libs.firebase.storage
     // Network
@@ -56,6 +57,7 @@ dependencies {
     implementation libs.retrofit.gson
     implementation libs.gson
     implementation libs.glide
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
     implementation platform(libs.androidx.compose.bom)
     implementation libs.androidx.compose.ui
     implementation libs.androidx.compose.ui.graphics

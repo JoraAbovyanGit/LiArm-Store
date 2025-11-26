@@ -104,4 +104,5 @@
     <string name="no_results">Ոչ մի արդյունք \"%1$s\" համար</string>
     <string name="no_results_in_category">Ոչ մի արդյունք \"%1$s\" այս կատեգորիայում</string>
     <string name="no_apps_in_category">Այս կատեգորիայում հավելվածներ չկան</string>
+    <string name="car_app_selection_message">%1$s ընտրված է։ Ավարտեք Li Auto էկրանում ամբողջական կառավարման համար։</string>
 </resources>

@@ -20,6 +20,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import android.content.pm.PackageManager
 import android.provider.Settings
 import com.example.plsworkver3.data.AppInfo
@@ -457,14 +459,6 @@ class MainActivity : AppCompatActivity() {
             matchesCategory && matchesSearch
         }
         
-        // Update section title
-        val sectionTitle = findViewById<TextView>(R.id.sectionTitle)
-        if (currentCategory == "main") {
-            sectionTitle?.text = getString(R.string.popular_apps)
-        } else {
-            sectionTitle?.text = getCategoryName(currentCategory)
-        }
-        
         // Show/hide no results message
         updateNoResultsMessage()
         
@@ -553,14 +547,14 @@ class MainActivity : AppCompatActivity() {
                 showUpdateConfirmationDialog(packageName, appDisplayName)
             }
             isInstalled -> {
-                // Open app details screen directly for manual uninstall
-                AppManager.uninstallApp(this, packageName)
+            // Open app details screen directly for manual uninstall
+            AppManager.uninstallApp(this, packageName)
             }
             else -> {
-                // App not installed - download and install
-                showDownloadConfirmationDialog(packageName, appDisplayName)
-            }
+            // App not installed - download and install
+            showDownloadConfirmationDialog(packageName, appDisplayName)
         }
+    }
     }
 
 
@@ -622,13 +616,38 @@ class MainActivity : AppCompatActivity() {
             try {
                 println("🔍 Trying to fetch apps from API...")
                 println("🔗 API URL: https://raw.githubusercontent.com/JoraAbovyanGit/LiArm-Store/main/apps.json")
-                val response = NetworkClient.apiService.getApps(System.currentTimeMillis())
-                println("📡 Response code: ${response.code()}")
-                println("📡 Response message: ${response.message()}")
-                println("📡 Response headers: ${response.headers()}")
+                var appResponse: com.example.plsworkver3.data.AppListResponse? = null
+                var useFallback = false
                 
-                if (response.isSuccessful) {
-                    response.body()?.let { appResponse ->
+                // Try Retrofit/OkHttp first
+                try {
+                    val response = NetworkClient.apiService.getApps(System.currentTimeMillis())
+                    println("📡 Response code: ${response.code()}")
+                    println("📡 Response message: ${response.message()}")
+                    
+                    if (response.isSuccessful) {
+                        appResponse = response.body()
+                        println("✅ Retrofit request successful")
+                    } else {
+                        println("❌ Retrofit request failed, trying fallback...")
+                        useFallback = true
+                    }
+                } catch (e: Exception) {
+                    println("💥 Retrofit error: ${e.message}")
+                    println("💥 Trying fallback HttpURLConnection...")
+                    useFallback = true
+                }
+                
+                // Use fallback if Retrofit failed
+                if (useFallback || appResponse == null) {
+                    println("🔄 Using HttpURLConnection fallback...")
+                    appResponse = withContext(kotlinx.coroutines.Dispatchers.IO) {
+                        NetworkClient.getAppsFallback(System.currentTimeMillis())
+                    }
+                }
+                
+                if (appResponse != null) {
+                    appResponse.let { appResponse ->
                         println("✅ Successfully loaded ${appResponse.apps.size} apps")
                         
                         // Debug: Print app details including icon URLs
@@ -643,16 +662,10 @@ class MainActivity : AppCompatActivity() {
                         
 
                         Toast.makeText(this@MainActivity, getString(R.string.loaded_apps, appResponse.apps.size), Toast.LENGTH_SHORT).show()
-                    } ?: run {
-                        println("❌ Response body is null")
-                        Toast.makeText(this@MainActivity, getString(R.string.no_data_received), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    println("❌ API call failed: ${response.code()} - ${response.message()}")
-                    println("❌ Error body: ${response.errorBody()?.string()}")
-                    println("❌ Full URL attempted: https://raw.githubusercontent.com/JoraAbovyanGit/LiArm-Store/main/apps.json")
-                    Toast.makeText(this@MainActivity, getString(R.string.failed_to_load_apps, response.code().toString()), Toast.LENGTH_LONG).show()
-                    // Navigate to error page instead of loading test data
+                    println("❌ All network methods failed")
+                    Toast.makeText(this@MainActivity, getString(R.string.failed_to_load_apps, "All methods failed"), Toast.LENGTH_LONG).show()
                     startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
                     finish()
                 }
@@ -667,8 +680,10 @@ class MainActivity : AppCompatActivity() {
                         "Connection timeout. Please check your internet connection."
                     e.message?.contains("Unable to resolve host", ignoreCase = true) == true -> 
                         "Cannot reach server. Check your internet connection or DNS settings."
-                    e.message?.contains("SSL", ignoreCase = true) == true -> 
-                        "SSL error. Please check your network security settings."
+                    e.message?.contains("SSL", ignoreCase = true) == true || 
+                    e.message?.contains("certificate", ignoreCase = true) == true ||
+                    e.message?.contains("chain validation", ignoreCase = true) == true -> 
+                        "SSL certificate error. Please check your network security settings."
                     else -> 
                         "Network error: ${e.message ?: "Unknown error"}"
                 }
@@ -680,8 +695,8 @@ class MainActivity : AppCompatActivity() {
                 if (e.message?.contains("timeout") == true || 
                     e.message?.contains("Unable to resolve") == true ||
                     e.message?.contains("Failed to connect") == true) {
-                    startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
-                    finish()
+                startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
+                finish()
                 }
                 e.printStackTrace()
             }

@@ -102,17 +102,6 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp">
 
-            <!-- Popular Apps Section Title -->
-            <TextView
-                android:id="@+id/sectionTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/popular_apps"
-                android:textColor="@color/text_primary_dark"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
-
             <!-- No Results Message -->
             <TextView
                 android:id="@+id/noResultsMessage"
@@ -133,84 +122,6 @@
 
         </LinearLayout>
 
-        <!-- Language Selector (Bottom) -->
-        <LinearLayout
-            android:id="@+id/langButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:padding="12dp"
-            android:background="@color/surface_dark">
-
-            <!-- English Button -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="8dp">
-                <Button
-                    android:id="@+id/btnEnglish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#8b0000"
-                    android:padding="6dp"
-                    android:text="ENG"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp" />
-                <View
-                    android:id="@+id/indicatorEnglish"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:background="#ff0000"
-                    android:visibility="gone" />
-            </LinearLayout>
-
-            <!-- Russian Button -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="8dp">
-                <Button
-                    android:id="@+id/btnRussian"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="RUS"
-                    android:backgroundTint="#8b0000"
-                    android:textColor="#ffffff"
-                    android:padding="6dp"
-                    android:textSize="12sp" />
-                <View
-                    android:id="@+id/indicatorRussian"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:background="#ff0000"
-                    android:visibility="gone" />
-            </LinearLayout>
-
-            <!-- Armenian Button -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:id="@+id/btnArmenian"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ARM"
-                    android:backgroundTint="#8b0000"
-                    android:textColor="#ffffff"
-                    android:padding="6dp"
-                    android:textSize="12sp" />
-                <View
-                    android:id="@+id/indicatorArmenian"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:background="#ff0000"
-                    android:visibility="gone" />
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
     <!-- Drawer Menu (Left Side) -->
@@ -230,6 +141,7 @@
             android:textColor="@color/text_primary_dark"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp" />
 
         <ScrollView
@@ -237,10 +149,10 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
                 <!-- Category items will be added dynamically -->
                 <TextView
@@ -348,5 +260,105 @@
                     android:layout_marginBottom="4dp" />
             </LinearLayout>
         </ScrollView>
+        
+        <!-- Language Selector in Drawer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:background="@color/surface_dark">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Language"
+                android:textColor="@color/text_primary_dark"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:id="@+id/langButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                
+                <!-- English Button -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="4dp">
+                <Button
+                    android:id="@+id/btnEnglish"
+                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#8b0000"
+                        android:padding="8dp"
+                        android:text="ENG"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp" />
+                    <View
+                        android:id="@+id/indicatorEnglish"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="#ff0000"
+                        android:visibility="gone" />
+                </LinearLayout>
+                
+                <!-- Russian Button -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp">
+                <Button
+                    android:id="@+id/btnRussian"
+                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                        android:text="RUS"
+                    android:backgroundTint="#8b0000"
+                    android:textColor="#ffffff"
+                        android:padding="8dp"
+                        android:textSize="12sp" />
+                    <View
+                        android:id="@+id/indicatorRussian"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="#ff0000"
+                        android:visibility="gone" />
+                </LinearLayout>
+                
+                <!-- Armenian Button -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="4dp">
+                <Button
+                    android:id="@+id/btnArmenian"
+                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                        android:text="ARM"
+                    android:backgroundTint="#8b0000"
+                    android:textColor="#ffffff"
+                        android:padding="8dp"
+                        android:textSize="12sp" />
+                    <View
+                        android:id="@+id/indicatorArmenian"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="#ff0000"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

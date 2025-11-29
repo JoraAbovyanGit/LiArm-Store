@@ -191,6 +191,61 @@
       "app_description_hy": "Կարդա գրքեր ամենուր",
       "category": "entertainment",
       "app_version": "9.0.1"
+    },
+    {
+      "app_name": "Waze",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FWaze.png?alt=media&token=1af5548c-007c-4ec6-af60-09b4946541a8",
+      "package_name": "com.waze",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FWaze%20Navigation%20%26%20live%20Traffic_5.13.0.1_APKPure.xapk?alt=media&token=11ea00d3-c4c1-4195-8e52-fb92508d80f2",
+      "app_description": "gps maps traffic alerts live navigation",
+      "app_description_en": "gps maps traffic alerts live navigation",
+      "app_description_ru": "GPS-карты, оповещения о дорожном движении, навигация в режиме реального времени",
+      "app_description_hy": "gps քարտեզի երթեւկության ահազանգեր կենդանի նավիգատիայով",
+      "app_version": "5.13.0.1"
+    },
+    {
+      "app_name": "Zona",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fzona.png?alt=media&token=3ad094b9-98a5-4e79-a6e7-12998c244025",
+      "package_name": "w140.zona.plus",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fzona5.apk?alt=media&token=0a28ebff-1685-4864-97ee-d2a6fa00a5fa",
+      "app_description": "Watch free movies and TV shows in the Zona app",
+      "app_description_en": "Watch free movies and TV shows in the Zona app",
+      "app_description_ru": "Cмотрите бесплатно фильмы и сериалы в приложении Zona",
+      "app_description_hy": "Դիտեք անվճար ֆիլմեր և հեռուստաշոուներ Zona հավելվածում",
+      "app_version": "2.1.61"
+    },
+    {
+      "app_name": "VK music",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fvk%20music.png?alt=media&token=fa396061-6ee8-48d4-9a8f-4c6ffcc50917",
+      "package_name": "com.uma.musicvk",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FVK%20Music_playlists%20%26%20podcasts_0.8_APKPure.xapk?alt=media&token=8daa4867-cf3f-45fb-873e-1587323f283e",
+      "app_description": "Russian music player",
+      "app_description_en": "An app that gives you quick and easy access to millions of tracks",
+      "app_description_ru": "Приложение, с которым вы получите простой и быстрый доступ к миллионам треков",
+      "app_description_hy": "Հավելված, որը ձեզ արագ և հեշտ հասանելիություն է տալիս միլիոնավոր երգերի",
+      "app_version": "8.0"
+    },
+    {
+      "app_name": "Angry Birds 2",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fangry Birds 2.jpg?alt=media&token=9e10fea2-e166-4c28-a55c-2850a85f1b7c",
+      "package_name": "com.rovio.baba",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FAngry Birds 2_3.20.0_APKPure.xapk?alt=media&token=c7e165d3-72dd-4d1d-a07d-f5c198eeeb85",
+      "app_description": "a physics-based puzzle game",
+      "app_description_en": "a physics-based puzzle game",
+      "app_description_ru": "игра-головоломка, основанная на физике",
+      "app_description_hy": "ֆիզիկայի վրա հիմնված հանելուկ խաղ",
+      "app_version": "3.20.0"
+    },
+    {
+      "app_name": "Angry Birds Space",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fangry birds space.jpg?alt=media&token=2b2877c8-6ad1-40ca-aeb0-642dcd94a61d",
+      "package_name": "com.rovio.angrybirdsspace.ads",
+      "download_url": "https://firestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FAngry Birds Space_2.2.14_APKPure.apk?alt=media&token=1fddc2c5-47ed-4fc3-a0a9-4a80f95cf63e",
+      "app_description": "a physics-based puzzle game in space",
+      "app_description_en": "a physics-based puzzle game in space",
+      "app_description_ru": "игра-головоломка в космосе, основанная на физике",
+      "app_description_hy": "ֆիզիկայի վրա հիմնված տիեզերական հանելուկ խաղ",
+      "app_version": "2.2.14"
     }
   ]
 }

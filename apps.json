@@ -145,14 +145,14 @@
       "app_version": "3.7.0"
     },
     {
-      "app_name": "  Tripadvisor",
+      "app_name": "Tripadvisor",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Ftripadvisor.png?alt=media&token=de4d9bfa-88c4-497a-bf0f-a679df434660",
       "package_name": "com.tripadvisor.tripadvisor",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Ftripadvisor.apk?alt=media&token=d8b75a2e-860d-4f1d-ab96-97c7a396fe7d",
       "app_description": "Travel reviews and guides",
       "app_description_en": "Travel reviews and guides",
       "app_description_ru": "Отзывы и советы путешествий",
-      "app_description_hy": "ամփորդական կարծիքներ և ուղեցույցներ",
+      "app_description_hy": "Տուրիստական կարծիքներ և ուղեցույցներ",
       "category": "other",
       "app_version": "65.3"
     },
@@ -192,26 +192,28 @@
       "category": "entertainment",
       "app_version": "9.0.1"
     },
-     {
+    {
       "app_name": "Waze",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FWaze.png?alt=media&token=1af5548c-007c-4ec6-af60-09b4946541a8",
       "package_name": "com.waze",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FWaze Navigation %26 live Traffic_5.13.0.1_APKPure.xapk?alt=media&token=11ea00d3-c4c1-4195-8e52-fb92508d80f2",
       "app_description": "gps maps traffic alerts live navigation",
       "app_description_en": "gps maps traffic alerts live navigation",
-      "app_description_ru": "GPS-карты, дорожные оповещения, навигация в режиме реального времени",
-      "app_description_hy": "GPS Քարտեզներ, Ճանապարհային Զգուշացումներ, Ուղիղ Նավիգացիա ",
+      "app_description_ru": "GPS-карты, дорожные оповещения, навигация в реальном времени",
+      "app_description_hy": "GPS Քարտեզներ, Ճանապարհային Զգուշացումներ, Ուղիղ Նավիգացիա",
+      "category": "navigators",
       "app_version": "5.13.0.1"
     },
     {
       "app_name": "Zona",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fzona.png?alt=media&token=3ad094b9-98a5-4e79-a6e7-12998c244025",
       "package_name": "mobi.zona",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%Fzona5.apk?alt=media&token=0a28ebff-1685-4864-97ee-d2a6fa00a5fa",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fzona5.apk?alt=media&token=0a28ebff-1685-4864-97ee-d2a6fa00a5fa",
       "app_description": "watch movies in zona",
       "app_description_en": "watch movies in zona",
       "app_description_ru": "смотри фильмы в zona",
       "app_description_hy": "Դիտեք ֆիլմեր Zona-ում",
+      "category": "entertainment",
       "app_version": "3.0.23"
     },
     {
@@ -223,6 +225,7 @@
       "app_description_en": "Russian music player",
       "app_description_ru": "Русский музыкальный проигрыватель",
       "app_description_hy": "Ռուս երաժշտական նվագարկիչ",
+      "category": "music",
       "app_version": "8.0"
     },
     {
@@ -234,28 +237,31 @@
       "app_description_en": "russian youtube",
       "app_description_ru": "русский ютуб",
       "app_description_hy": "ռուսական յություբ",
+      "category": "entertainment",
       "app_version": "29.11.1.TV-google"
     },
     {
       "app_name": "Angry Birds 2",
-      "app_icon": "https://firebasestorage.googlealips.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fangry birds 2.jpg?alt=media&token=9e10fea2-e166-4c28-a55c-2850a85f1b7c",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fangry%20Birds%202.jpg?alt=media&token=9e10fea2-e166-4c28-a55c-2850a85f1b7c",
       "package_name": "com.rovio.baba",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FAngry Birds 2_3.20.0_APKPure.xapk?alt=media&token=c7e165d3-72dd-4d1d-a07d-f5c198eeeb85",
       "app_description": "a physics-based puzzle game",
       "app_description_en": "a physics-based puzzle game",
       "app_description_ru": "игра-головоломка, основанная на физике",
       "app_description_hy": "ֆիզիկայի վրա հիմնված հանելուկ խաղ",
+      "category": "entertainment",
       "app_version": "3.20.0"
     },
     {
       "app_name": "Angry Birds Space",
-      "app_icon": "https://firebasestorage.googlealips.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fangry birds space.jpg?alt=media&token=2b2877c8-6da1-40ca-aeb0-642dcd94a61d",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fangry%20birds%20space.jpg?alt=media&token=2b2877c8-6da1-40ca-aeb0-642dcd94a61d",
       "package_name": "com.rovio.angrybirdsspace",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FAngry Birds Space_2.2.14_APKPure.apk?alt=media&token=1fddc2c5-47fc3-a0a9-4a80f95cf63e",
-      "app_description": "a physics-based puzzle game",
-      "app_description_en": "a physics-based puzzle game",
-      "app_description_ru": "игра-головоломка, основанная на физике",
-      "app_description_hy": "ֆիզիկայի վրա հիմնված հանելուկ խաղ",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FAngry Birds Space_2.2.14_APKPure.apk?alt=media&token=1fddc2c5-47fc3-a0a9-4a80f95d",
+      "app_description": "space-themed physics game",
+      "app_description_en": "space-themed physics game",
+      "app_description_ru": "космическая игра на физике",
+      "app_description_hy": "տիեզերական ֆիզիկական խաղ",
+      "category": "entertainment",
       "app_version": "2.2.14"
     },
     {
@@ -267,41 +273,45 @@
       "app_description_en": "a mobile application designed to manage and view photos and videos",
       "app_description_ru": "мобильное приложение, предназначенное для управления и просмотра фотографий и видео",
       "app_description_hy": "բջջային հավելված՝ լուսանկարներ և տեսանյութեր դիտելու և կառավարելու համար",
+      "category": "other",
       "app_version": "2.0.26"
     },
     {
       "app_name": "Microsoft SwiftKey",
-      "app_icon": "https://firebasestorage.googlealips.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fmicrosoft swiftkey.jpg?alt=media&token=1e98226b-d61d-45be-80a8-7b31cda97ecc",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fswiftkey.jpg?alt=media&token=1440f2c0-33f8-4656-add9-f2843bc916c4",
       "package_name": "com.touchtype.swiftkey",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FMicrosoft SwiftKey AI Keyboard_9.12.19.14_APKPure.apk?alt=media&token=50f7d654-6419-4586-a9ab-dc3fe85dfee5",
       "app_description": "an intelligent, customizable keyboard app ",
       "app_description_en": "an intelligent, customizable keyboard app ",
       "app_description_ru": "интеллектуальное, настраиваемое приложение для клавиатуры",
       "app_description_hy": "խելացի, հարմարեցվող ստեղնաշարի հավելված",
+      "category": "other",
       "app_version": "9.12.19.14"
     },
     {
       "app_name": "Chess - Play and Learn Online",
-      "app_icon": "https://firebasestorage.googlealips.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fchess.jpg?alt=media&token=388dbde0-9e9f-4208-8bc5-591afdf63af3",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fchess.jpg?alt=media&token=14035566-3163-4c3b-b94a-61122e35264f",
       "package_name": "com.chess",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FChess - play and Learn Online_4.9.16-googleplay_APKPure.aok?alt=media&token=9692b309-bef2-4a9b-9fa0- 1c56f9bdf3cd",
       "app_description": "Solve chess puzzles online with over 230 million players from around the world!",
       "app_description_en": "Solve chess puzzles online with over 230 million players from around the world!",
       "app_description_ru": "Решайте шахматные задачи онлайн вместе с более 230 миллионами игроков со всего мира!",
       "app_description_hy": "Լուծեք շախմատային հանելուկներ առցանց՝ աշխարհի ավելի քան 230 միլիոն խաղացողների հետ։",
+      "category": "entertainmen",
       "app_version": " 4.9.16"
     },
     {
       "app_name": "Organic maps",
-      "app_icon": "https://firebasestorage.googlealips.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Forganicmaps.png?alt=media&token=7a3da892-1295-4992-9ad3-c1888bd1cd51",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Forganicmaps.png?alt=media&token=a13cd696-2946-4903-9a23-2f6b67f43280",
       "package_name": "app.organicmaps",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FOrganic Maps・Offline Map %26 GPS_2025.11.26-5-Google_APKPure.xapk?alt=media&token=7f0b992d-eec5-4919-89ce-2908999611d3",
       "app_description": "a free, open-source, privacy-focused app for offline maps and GPS navigation",
       "app_description_en": "a free, open-source, privacy-focused app for offline maps and GPS navigation",
       "app_description_ru": "бесплатное приложение с открытым исходным кодом, ориентированное на конфиденциальность, для автономных карт и GPS-навигации.",
       "app_description_hy": "Անվճար, բաց կոդով, գաղտնիության վրա կենտրոնացած հավելված՝ անցանց քարտեզների և GPS նավիգացիայի համար։",
+      "category": "maps",
       "app_version": "2025.11.26-5-Google"
     }
+        
   ]
 }
-

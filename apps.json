@@ -146,7 +146,7 @@
     },
     {
       "app_name": "Tripadvisor",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Ftripadvisor.png?alt=media&token=de4d9bfa-88c4-497a-bf0f-a679df434660",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Ftripadvisor.png?alt=media&token=b0743928-8f4c-4f1b-b0cc-1d3454a8a602",
       "package_name": "com.tripadvisor.tripadvisor",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Ftripadvisor.apk?alt=media&token=d8b75a2e-860d-4f1d-ab96-97c7a396fe7d",
       "app_description": "Travel reviews and guides",
@@ -194,7 +194,7 @@
     },
     {
       "app_name": "Waze",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FWaze.png?alt=media&token=1af5548c-007c-4ec6-af60-09b4946541a8",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2FWaze.png?alt=media&token=a2affac9-fd61-4c76-b987-7a789a28d378",
       "package_name": "com.waze",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FWaze Navigation %26 live Traffic_5.13.0.1_APKPure.xapk?alt=media&token=11ea00d3-c4c1-4195-8e52-fb92508d80f2",
       "app_description": "gps maps traffic alerts live navigation",
@@ -266,7 +266,7 @@
     },
     {
       "app_name": "Gallery",
-      "app_icon": "https://firebasestorage.googlealips.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fgallery.jpg?alt=media&token=aedb1cde-952e4db0-a000-9b3d3277f198",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fgallery.png?alt=media&token=ffa1c236-a51e-4330-bd82-e9e5025059d6",
       "package_name": "com.visky.gallery",
       "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FGallery Vault_2.0.26_APKPure.xapk?alt=media&token=c8a7eadd-df3e-43bc-b067-dc6c39b10451",
       "app_description": "a mobile application designed to manage and view photos and videos",

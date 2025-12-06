@@ -232,13 +232,13 @@
       "app_name": "Rutube",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Frutube.png?alt=media&token=e3d5a107-cef4-436b-8828-70fd01ed56f8",
       "package_name": "ru.rutube.app",
-      "download_url": "http://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2fRUTUBE_ видео%2C трансляции_29.11.1.TV-google_APKPure.xapk?alt&token=2361d83f-4c7d-47c9-a9d1-6783579490b7",
+      "download_url": "http://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2fRutube.release.30.14.4-android.apk?alt=media&token=271df92e-e21b-4234-851e-3bfc1170e906",
       "app_description": "russian youtube",
       "app_description_en": "russian youtube",
       "app_description_ru": "русский ютуб",
       "app_description_hy": "ռուսական յություբ",
       "category": "entertainment",
-      "app_version": "29.11.1.TV-google"
+      "app_version": "30.14.4-android"
     },
     {
       "app_name": "Angry Birds 2",
@@ -292,7 +292,7 @@
       "app_name": "Chess - Play and Learn Online",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fchess.jpg?alt=media&token=14035566-3163-4c3b-b94a-61122e35264f",
       "package_name": "com.chess",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FChess - play and Learn Online_4.9.16-googleplay_APKPure.aok?alt=media&token=9692b309-bef2-4a9b-9fa0- 1c56f9bdf3cd",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FChess - play and Learn Online_4.9.16-googleplay_APKPure.apk?alt=media&token=9692b309-bef2-4a9b-9fa0- 1c56f9bdf3cd",
       "app_description": "Solve chess puzzles online with over 230 million players from around the world!",
       "app_description_en": "Solve chess puzzles online with over 230 million players from around the world!",
       "app_description_ru": "Решайте шахматные задачи онлайн вместе с более 230 миллионами игроков со всего мира!",
@@ -304,7 +304,7 @@
       "app_name": "Organic maps",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Forganicmaps.png?alt=media&token=a13cd696-2946-4903-9a23-2f6b67f43280",
       "package_name": "app.organicmaps",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FOrganic Maps・Offline Map %26 GPS_2025.11.26-5-Google_APKPure.xapk?alt=media&token=7f0b992d-eec5-4919-89ce-2908999611d3",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FOrganicMaps.apk?alt=media&token=5eac2777-f655-44c5-8558-6611c8cd9b21",
       "app_description": "a free, open-source, privacy-focused app for offline maps and GPS navigation",
       "app_description_en": "a free, open-source, privacy-focused app for offline maps and GPS navigation",
       "app_description_ru": "бесплатное приложение с открытым исходным кодом, ориентированное на конфиденциальность, для автономных карт и GPS-навигации.",

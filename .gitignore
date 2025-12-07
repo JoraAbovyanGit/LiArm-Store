@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Firebase service account key - NEVER commit this!
+service-account-key.json
+**/service-account-key.json

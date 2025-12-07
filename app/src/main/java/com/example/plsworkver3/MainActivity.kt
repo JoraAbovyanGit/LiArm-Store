@@ -60,10 +60,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+        setupMainActivity()
+    }
+
+    private fun setupMainActivity() {
         // Set main layout immediately and initialize UI
         setContentView(R.layout.activity_main)
-        println("🚀 MainActivity onCreate() called - activity_main set")
+        println("🚀 MainActivity setupMainActivity() called - activity_main set")
 
         try {
             // Check internet early - but don't block if check fails
@@ -322,7 +325,7 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-    
+
     private fun setupDrawerCategories() {
         val categories = mapOf(
             "main" to R.id.categoryMain,
@@ -611,46 +614,20 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun loadAppsFromApi() {
-        println("🚀 loadAppsFromApi() called!")
+        println("🚀 loadAppsFromFirestore() called!")
         lifecycleScope.launch {
             try {
-                println("🔍 Trying to fetch apps from API...")
-                println("🔗 API URL: https://raw.githubusercontent.com/JoraAbovyanGit/LiArm-Store/main/apps.json")
-                var appResponse: com.example.plsworkver3.data.AppListResponse? = null
-                var useFallback = false
+                println("🔍 Fetching apps from Firebase Firestore...")
                 
-                // Try Retrofit/OkHttp first
-                try {
-                    val response = NetworkClient.apiService.getApps(System.currentTimeMillis())
-                    println("📡 Response code: ${response.code()}")
-                    println("📡 Response message: ${response.message()}")
-                    
-                    if (response.isSuccessful) {
-                        appResponse = response.body()
-                        println("✅ Retrofit request successful")
-                    } else {
-                        println("❌ Retrofit request failed, trying fallback...")
-                        useFallback = true
-                    }
-                } catch (e: Exception) {
-                    println("💥 Retrofit error: ${e.message}")
-                    println("💥 Trying fallback HttpURLConnection...")
-                    useFallback = true
+                val result = withContext(kotlinx.coroutines.Dispatchers.IO) {
+                    com.example.plsworkver3.data.FirestoreAppService.getAppsWithCache()
                 }
                 
-                // Use fallback if Retrofit failed
-                if (useFallback || appResponse == null) {
-                    println("🔄 Using HttpURLConnection fallback...")
-                    appResponse = withContext(kotlinx.coroutines.Dispatchers.IO) {
-                        NetworkClient.getAppsFallback(System.currentTimeMillis())
-                    }
-                }
-                
-                if (appResponse != null) {
-                    appResponse.let { appResponse ->
-                        println("✅ Successfully loaded ${appResponse.apps.size} apps")
+                result.fold(
+                    onSuccess = { appResponse ->
+                        println("✅ Successfully loaded ${appResponse.apps.size} apps from Firestore")
                         
-                        // Debug: Print app details including icon URLs
+                        // Debug: Print app details
                         appResponse.apps.forEach { app ->
                             println("📱 App: ${app.appName} - Icon: ${app.appIcon}")
                         }
@@ -660,15 +637,16 @@ class MainActivity : AppCompatActivity() {
                         AppManager.updateAppData(appList)
                         filterAndDisplayApps()
                         
-
                         Toast.makeText(this@MainActivity, getString(R.string.loaded_apps, appResponse.apps.size), Toast.LENGTH_SHORT).show()
+                    },
+                    onFailure = { error ->
+                        println("❌ Firestore error: ${error.message}")
+                        android.util.Log.e("MainActivity", "Firestore fetch failed", error)
+                        Toast.makeText(this@MainActivity, getString(R.string.failed_to_load_apps, error.localizedMessage ?: "Unknown error"), Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
+                        finish()
                     }
-                } else {
-                    println("❌ All network methods failed")
-                    Toast.makeText(this@MainActivity, getString(R.string.failed_to_load_apps, "All methods failed"), Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this@MainActivity, ErrorActivity::class.java))
-                    finish()
-                }
+                )
             } catch (e: Exception) {
                 println("💥 Network error: ${e.message}")
                 println("💥 Exception type: ${e.javaClass.simpleName}")

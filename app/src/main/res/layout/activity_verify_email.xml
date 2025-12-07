@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="@color/background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:minWidth="320dp"
+        android:maxWidth="480dp">
+
+        <TextView
+            android:id="@+id/titleVerify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_title"
+            android:textColor="@color/text_primary_dark"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/verifyDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_description"
+            android:textColor="@color/text_secondary_dark"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/emailDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/accent_secondary"
+            android:textSize="14sp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/inputCode"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="@string/hint_code"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textColor="@color/text_primary_dark"
+            android:textColorHint="@color/text_secondary_dark"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/buttonVerify"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/verify_button"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="#8b0000"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/linkResend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_resend_link"
+            android:textColor="@color/accent_secondary"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/linkBackToRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back to Registration"
+            android:textColor="@color/text_secondary_dark"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

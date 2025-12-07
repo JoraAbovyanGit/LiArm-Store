@@ -106,4 +106,37 @@
     <string name="no_apps_in_category">No apps in this category</string>
     <string name="email">Email</string>
     <string name="car_app_selection_message">%1$s selected. Continue on the Li Auto display for full controls.</string>
+
+    <!-- Auth / account -->
+    <string name="login_title">Login</string>
+    <string name="login_button">Login</string>
+    <string name="login_register_link">Don\'t have an account? Register</string>
+    <string name="register_title">Register</string>
+    <string name="register_button">Create account</string>
+    <string name="register_login_link">Already have an account? Login</string>
+    <string name="verify_title">Verify email</string>
+    <string name="verify_description">We sent a 6-digit verification code to your email. Enter it below to activate your account.</string>
+    <string name="verify_button">Verify</string>
+    <string name="verify_resend_link">Resend code</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_surname">Surname</string>
+    <string name="hint_code">Verification code</string>
+    <string name="error_empty_fields">Please fill in all fields</string>
+    <string name="error_password_short">Password must be at least 6 characters</string>
+    <string name="error_login_generic">Login failed. Please try again.</string>
+    <string name="error_register_generic">Registration failed. Please try again.</string>
+    <string name="error_verify_generic">Verification failed. Please try again.</string>
+    <string name="error_invalid_code">Invalid code. Please check and try again.</string>
+    <string name="register_success">Account created. Check your email for the code.</string>
+    <string name="verification_success">Your email is verified. Welcome!</string>
+    <string name="code_resent">New code sent to your email.</string>
+    <string name="logout_button">Log out</string>
+    <string name="delete_account_button">Delete account</string>
+    <string name="delete_account_confirm">Are you sure you want to permanently delete your account?</string>
+    <string name="delete_account_done">Your account has been deleted.</string>
+
+    <!-- Backend endpoint for SendGrid email sender (set your URL here) -->
+    <string name="email_verification_endpoint">https://us-central1-liarm-store.cloudfunctions.net/sendVerificationEmail</string>
 </resources>

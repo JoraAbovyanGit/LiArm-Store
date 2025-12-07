@@ -52,6 +52,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.7.0')
     implementation libs.firebase.analytics
     implementation libs.firebase.storage
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
     // Network
     implementation libs.retrofit
     implementation libs.retrofit.gson

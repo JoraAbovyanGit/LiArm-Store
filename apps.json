@@ -268,13 +268,13 @@
       "app_name": "Gallery",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fgallery.png?alt=media&token=ffa1c236-a51e-4330-bd82-e9e5025059d6",
       "package_name": "com.visky.gallery",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FGallery Vault_2.0.26_APKPure.xapk?alt=media&token=c8a7eadd-df3e-43bc-b067-dc6c39b10451",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fgallery-viskysolution.apk?alt=media&token=6b04a94a-e31f-4b25-b06f-ab86f6a6b8ef",
       "app_description": "a mobile application designed to manage and view photos and videos",
       "app_description_en": "a mobile application designed to manage and view photos and videos",
       "app_description_ru": "мобильное приложение, предназначенное для управления и просмотра фотографий и видео",
       "app_description_hy": "բջջային հավելված՝ լուսանկարներ և տեսանյութեր դիտելու և կառավարելու համար",
       "category": "other",
-      "app_version": "2.0.26"
+      "app_version": "2.0.31"
     },
     {
       "app_name": "Microsoft SwiftKey",

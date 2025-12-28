@@ -311,7 +311,18 @@
       "app_description_hy": "Անվճար, բաց կոդով, գաղտնիության վրա կենտրոնացած հավելված՝ անցանց քարտեզների և GPS նավիգացիայի համար։",
       "category": "maps",
       "app_version": "2025.11.26-5-Google"
+    },
+    {
+      "app_name": "Zoom",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Forganicmaps.png?alt=media&token=a13cd696-2946-4903-9a23-2f6b67f43280",
+      "package_name": "us.zoom.videomeetings",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fzoom.apk?alt=media&tokien=e042cc9a-3cc8-46af-c9d361c10171",
+      "app_description": "cloud platform for unified communications",
+      "app_description_en": "cloud platform for unified communications",
+      "app_description_ru": "облачная платформа для унифицированных коммуникаций",
+      "app_description_hy": "ամպային հարթակ միասնական հաղորդակցությունների համար",
+      "category": "messengers",
+      "app_version": "6.7.0"
     }
-        
   ]
 }

@@ -241,16 +241,16 @@
       "app_version": "30.14.4-android"
     },
     {
-      "app_name": "Angry Birds 2",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fangry%20Birds%202.jpg?alt=media&token=9e10fea2-e166-4c28-a55c-2850a85f1b7c",
-      "package_name": "com.rovio.baba",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FAngry Birds 2_3.20.0_APKPure.xapk?alt=media&token=c7e165d3-72dd-4d1d-a07d-f5c198eeeb85",
-      "app_description": "a physics-based puzzle game",
-      "app_description_en": "a physics-based puzzle game",
-      "app_description_ru": "игра-головоломка, основанная на физике",
-      "app_description_hy": "ֆիզիկայի վրա հիմնված հանելուկ խաղ",
+      "app_name": "Zoom Worksplace",
+      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fzoom workspace.png?alt=media&token=f58b0fff-50fe-4b2f-81ae-7743e8afc548",
+      "package_name": "us.zoom.videomeetings",
+      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fzoom-intune.apk?alt=media&token=815e01ad-f213-4913-8f62-0f0f331243a9",
+      "app_description": "A comprehensive AI-powered collaboration platform ",
+      "app_description_en": "A comprehensive AI-powered collaboration platform ",
+      "app_description_ru": "Комплексная платформа для совместной работы на основе искусственного интеллекта.",
+      "app_description_hy": "Համապարփակ արհեստական ​​ինտելեկտով աշխատող համագործակցության հարթակ",
       "category": "entertainment",
-      "app_version": "3.20.0"
+      "app_version": "6.7.0"
     },
     {
       "app_name": "Angry Birds Space",

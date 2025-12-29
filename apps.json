@@ -241,30 +241,6 @@
       "app_version": "30.14.4-android"
     },
     {
-      "app_name": "Zoom Worksplace",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fzoom workspace.png?alt=media&token=f58b0fff-50fe-4b2f-81ae-7743e8afc548",
-      "package_name": "us.zoom.videomeetings",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2Fzoom-intune.apk?alt=media&token=815e01ad-f213-4913-8f62-0f0f331243a9",
-      "app_description": "A comprehensive AI-powered collaboration platform ",
-      "app_description_en": "A comprehensive AI-powered collaboration platform ",
-      "app_description_ru": "Комплексная платформа для совместной работы на основе искусственного интеллекта.",
-      "app_description_hy": "Համապարփակ արհեստական ​​ինտելեկտով աշխատող համագործակցության հարթակ",
-      "category": "entertainment",
-      "app_version": "6.7.0"
-    },
-    {
-      "app_name": "Angry Birds Space",
-      "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fangry%20birds%20space.jpg?alt=media&token=2b2877c8-6da1-40ca-aeb0-642dcd94a61d",
-      "package_name": "com.rovio.angrybirdsspace",
-      "download_url": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/apps%2FAngry Birds Space_2.2.14_APKPure.apk?alt=media&token=1fddc2c5-47fc3-a0a9-4a80f95d",
-      "app_description": "space-themed physics game",
-      "app_description_en": "space-themed physics game",
-      "app_description_ru": "космическая игра на физике",
-      "app_description_hy": "տիեզերական ֆիզիկական խաղ",
-      "category": "entertainment",
-      "app_version": "2.2.14"
-    },
-    {
       "app_name": "Google Gallery",
       "app_icon": "https://firebasestorage.googleapis.com/v0/b/liarm-store.firebasestorage.app/o/icons%2Fgoogle Gallery.jpg?alt=media&token=e6456e48-1b30-4747-912e-e3e5d6088453",
       "package_name": "com.google.android.apps.photosgo",
